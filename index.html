@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>ราชรถ & ช่างภาพงานศพ.com - แคตตาล็อกนำเสนองานถ่ายภาพ วิดีโอ และ Live Streaming</title>
+  
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Embed reusable SVG symbol definitions -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;" aria-hidden="true">
+    <defs>
+      <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#FFF5B8" />
+        <stop offset="45%" stop-color="#D4AF37" />
+        <stop offset="100%" stop-color="#8A6014" />
+      </radialGradient>
+      
+      <!-- Thai Prajam Yam 8-Petal Rosette -->
+      <g id="thai-rosette">
+        <g filter="drop-shadow(0px 1px 3px rgba(0,0,0,0.85))">
+          <!-- 4 cardinal petals -->
+          <path d="M 0 -22 Q 3.5 -8 11 -3.5 Q 3.5 0 0 0 Q -3.5 0 -11 -3.5 Q -3.5 -8 0 -22 Z" fill="url(#goldGlow)" />
+          <path d="M 0 22 Q 3.5 8 11 3.5 Q 3.5 0 0 0 Q -3.5 0 -11 3.5 Q -3.5 8 0 22 Z" fill="url(#goldGlow)" />
+          <path d="M -22 0 Q -8 -3.5 -3.5 -11 Q 0 -3.5 0 0 Q 0 3.5 -3.5 11 Q -8 3.5 -22 0 Z" fill="url(#goldGlow)" />
+          <path d="M 22 0 Q 8 -3.5 3.5 -11 Q 0 -3.5 0 0 Q 0 3.5 3.5 11 Q 8 3.5 22 0 Z" fill="url(#goldGlow)" />
+          <!-- 4 diagonal petals -->
+          <g transform="rotate(45)">
+            <path d="M 0 -18 Q 3 -7 9 -3 Q 3 0 0 0 Q -3 0 -9 -3 Q -3 -7 0 -18 Z" fill="url(#goldGlow)" />
+            <path d="M 0 18 Q 3 7 9 3 Q 3 0 0 0 Q -3 0 -9 3 Q -3 7 0 18 Z" fill="url(#goldGlow)" />
+            <path d="M -18 0 Q -7 -3 -3 -9 Q 0 -3 0 0 Q 0 3 -3 9 Q -7 3 -18 0 Z" fill="url(#goldGlow)" />
+            <path d="M 18 0 Q 7 -3 3 -9 Q 0 -3 0 0 Q 0 3 3 9 Q 7 3 18 0 Z" fill="url(#goldGlow)" />
+          </g>
+          <!-- Center gemstone rings -->
+          <circle cx="0" cy="0" r="7.5" fill="none" stroke="#F3E5AB" stroke-width="1.2" />
+          <circle cx="0" cy="0" r="5" fill="url(#goldGlow)" />
+          <circle cx="0" cy="0" r="2.2" fill="#FFFDF0" />
+        </g>
+      </g>
+    </defs>
+  </svg>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar (Never wraps or collides) -->
+  <header class="catalog-header">
+    <div class="brand-badge" onclick="updateSlideView(0)" title="กลับสู่หน้าแรก">
+      <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png" alt="ราชรถ Logo">
+      <div class="brand-names">
+        <span class="brand-title">ราชรถ & ช่างภาพงานศพ</span>
+        <span class="brand-sub">ภาพนิ่ง • วิดีโอ • Live Streaming 24 ชม.</span>
+      </div>
+    </div>
+
+    <!-- Golden Vertical Divider (Strict boundary between Brand & Nav) -->
+    <div class="header-divider"></div>
+
+    <!-- Center Jump Nav Pills -->
+    <nav class="header-center-nav">
+      <button class="nav-pill active" data-slide="0">00 หน้าแรก</button>
+      <button class="nav-pill" data-slide="1">★ Live Streaming</button>
+      <button class="nav-pill" data-slide="2">01 พิธีหลวง</button>
+      <button class="nav-pill" data-slide="3">02 พิธีจีน</button>
+      <button class="nav-pill" data-slide="4">03 สวดอภิธรรม</button>
+      <button class="nav-pill" data-slide="5">04 วันฌาปนกิจ</button>
+      <button class="nav-pill" data-slide="6">05 ลอยอังคาร</button>
+      <button class="nav-pill" data-slide="7">06 ทีมงาน</button>
+      <button class="nav-pill" data-slide="8">07 ติดต่อเรา</button>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button class="btn-icon btn-icon-gold btn-header-qr" id="btnOpenQr" title="สแกนเว็บไซต์ / LINE">
+        📱 <span>สแกน QR</span>
+      </button>
+
+      <!-- Hamburger Menu Button (Mobile & Tablet) -->
+      <button class="btn-hamburger" id="btnHamburger" aria-label="เปิดเมนูนำทาง" title="เปิดเมนู">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Presentation Viewport (Canva-Style Centered Container) -->
+  <main class="viewport-container">
+    <div class="presentation-stage">
+
+      <!-- ====================================================================
+           SLIDE 0: หน้าปกทรงเกียรติ & แนะนำบริการ
+           ==================================================================== -->
+      <section class="slide active" data-slide-index="0" data-category-id="profile">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+        <div class="slide-watermark-center" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022150_0.png');"></div>
+
+        <!-- 1440x810 Frame -->
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner slide-cover-layout">
+          <div class="cover-logos">
+            <img class="cover-logo-item" src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png" alt="ราชรถ">
+            <div style="width: 1px; height: 64px; background: rgba(212,175,55,0.4);"></div>
+            <img class="cover-logo-item" src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022150_0.png" alt="ช่างภาพงานศพ.com">
+          </div>
+
+          <h1 class="cover-heading">ราชรถ & ช่างภาพงานศพ.com</h1>
+          <p class="cover-tagline">
+            บริการช่างภาพภาพนิ่ง วิดีโอซีนีม่า และ <strong>Live Streaming ถ่ายทอดสดงานพิธีศพครบวงจร</strong><br>
+            ดูแลด้วยมาตรฐานระดับมืออาชีพ สำรวม รู้กาลเทศะ และแม่นยำทุกลำดับพิธีการตลอด 24 ชั่วโมง
+          </p>
+
+          <div class="ornate-divider" style="max-width: 440px; margin: 0 auto 18px auto;">
+            <div class="ornate-line"></div>
+            <span class="ornate-diamond">◇</span>
+            <div class="ornate-line"></div>
+          </div>
+
+          <!-- 3 Selling Pillars Highlight Cards -->
+          <div class="cover-features-grid">
+            <div class="cover-feature-card">
+              <div class="card-icon">👑</div>
+              <div class="card-title">1. ถ่ายภาพพิธีหลวง</div>
+              <div class="card-desc">แม่นยำระเบียบสำนักพระราชวัง ทรงเกียรติยศสูงสุดแก่ผู้วายชนม์และวงศ์ตระกูล</div>
+            </div>
+            <div class="cover-feature-card">
+              <div class="card-icon">🏮</div>
+              <div class="card-title">2. ถ่ายภาพพิธีจีน</div>
+              <div class="card-desc">รู้จริงเรื่องพิธีกงเต็ก ไม่พลาดช็อตสำคัญ บันทึกสายใยความกตัญญูของลูกหลาน</div>
+            </div>
+            <div class="cover-feature-card">
+              <div class="card-icon">📺</div>
+              <div class="card-title">★ Live Streaming 65-75"</div>
+              <div class="card-desc">ถ่ายทอดสดคมชัดสูง จอใหญ่รอบศาลา พร้อมทีมงานมืออาชีพดูแลฟรีตลอดงาน</div>
+            </div>
+          </div>
+
+          <!-- Cover Footer Row with Actions & Integrated QR (Never Overlaps) -->
+          <div class="cover-footer-row">
+            <div class="cover-actions">
+              <button class="btn-icon btn-icon-gold" onclick="updateSlideView(1)" style="padding: 10px 24px; font-size: 0.95rem;">
+                ▶ เริ่มรับชมแคตตาล็อก
+              </button>
+              <button class="btn-icon" onclick="openGalleryModal('all')" style="padding: 10px 20px; font-size: 0.95rem;">
+                🖼️ เปิดคลังภาพผลงาน (191 ภาพ)
+              </button>
+            </div>
+            <div class="cover-qr-slot" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
+              <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR Code">
+              <div class="cover-qr-text">
+                <div class="cover-qr-text-top">สแกนเยี่ยมชมผลงาน</div>
+                <div class="cover-qr-text-sub">www.ช่างภาพงานศพ.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 1: SPECIAL HIGHLIGHT - Live Streaming & จอ 65-75 นิ้ว
+           ==================================================================== -->
+      <section class="slide" data-slide-index="1" data-category-id="streaming">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">★ SPECIAL HIGHLIGHT : PROFESSIONAL BROADCAST</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral slide-numeral-star">★</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">บริการ Live Streaming & จอถ่ายทอดสด 65–75 นิ้ว</h2>
+                <p class="slide-subtitle">คมชัดระดับ High-Definition พร้อมทีมงานควบคุมฟรีตลอดงาน</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">ทำไมต้องใช้บริการ Live Streaming กับเรา :</span>
+            <ul class="why-us-list">
+              <li><strong>ฟรี! ทีมงานมืออาชีพดูแลระบบตลอดงาน:</strong> มีวิศวกร Switcher/OB ควบคุมการตัดสลับกล้องและดูแลระบบสัญญาณให้ฟรีตลอดพิธี เจ้าภาพไม่ต้องกังวล</li>
+              <li><strong>ติดตั้งจอคมชัดขนาดใหญ่ 65 - 75 นิ้ว รอบศาลา:</strong> แขกที่นั่งด้านนอกหรือผู้ร่วมงานจำนวนมาก มองเห็นพิธีการด้านในได้อย่างชัดเจนทุกมุมมอง</li>
+              <li><strong>ถ่ายทอดสดออนไลน์สัญญาณเสถียร:</strong> รองรับญาติสนิทมิตรสหายทั่วโลกที่อยู่ต่างประเทศหรือต่างจังหวัด ให้ร่วมไว้อาลัยแบบ Real-Time</li>
+              <li><strong>บันทึกวิดีโอ Full HD / 4K ส่งมอบ:</strong> ได้รับไฟล์วิดีโอบันทึกพิธีการฉบับสมบูรณ์สำหรับเก็บไว้เป็นเกียรติประวัติครอบครัว</li>
+            </ul>
+
+            <div class="info-accent-box">
+              <div class="box-title">ระบบถ่ายทอดสดระดับมืออาชีพ</div>
+              <div>ใช้อุปกรณ์ระดับสตูดิโอ พร้อมระบบสัญญาณอินเทอร์เน็ตสำรองหลายโครงข่าย มั่นใจได้ว่าภาพนิ่ง ไหลลื่น ไม่สะดุด</div>
+            </div>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img" src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046734_0.jpg" alt="Live Streaming Setup">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <!-- Integrated Visual Footer Bar: Thumbnails Left, QR Right (NEVER Overlaps) -->
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046734_0.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046734_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046735_0.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046735_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046736_0.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046736_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246030381.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246030381.jpg"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">คลังภาพบริการนี้: 13 ภาพ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
+                </div>
+              </div>
+
+              <!-- Dedicated QR Slot (Cannot collide) -->
+              <div class="slide-qr-badge" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
+                <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR Code">
+                <span class="qr-label">www.ช่างภาพงานศพ.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: MAIN PILLAR 1 - การถ่ายภาพงานพิธีหลวง
+           ==================================================================== -->
+      <section class="slide" data-slide-index="2" data-category-id="royal">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">MAIN PILLAR 01 : ROYAL CEREMONY</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral">1</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">การถ่ายภาพงานพิธีหลวง</h2>
+                <p class="slide-subtitle">พระราชทานน้ำหลวงอาบศพ / พระราชทานเพลิงศพ / เครื่องเกียรติยศ</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">ทำไมต้องใช้ช่างภาพมืออาชีพแบบเรา :</span>
+            <ul class="why-us-list">
+              <li><strong>แม่นยำทุกลำดับพิธีการ:</strong> เข้าใจขั้นตอนพิธีการของสำนักพระราชวังอย่างถูกต้อง ทั้งการรับน้ำหลวงอาบศพ หีบเพลิงพระราชทาน และริ้วขบวนอิสริยยศ</li>
+              <li><strong>รู้มุมกล้องและกาลเทศะสูงสุด:</strong> ทราบตำแหน่งยืนที่เหมาะสม ไม่เดินตัดหน้าขบวน ไม่บังสายตาประธาน และไม่ล้ำเขตพิธี</li>
+              <li><strong>บันทึกความสง่างามสมเกียรติยศ:</strong> ถ่ายทอดภาพโกศ ลองใน หีบทองลายสลัก พวงมาลาพระราชทาน และริ้วขบวนได้อย่างวิจิตรงดงาม</li>
+            </ul>
+
+            <div class="info-accent-box">
+              <div class="box-title">มาตรฐานเกียรติยศสูงสุด</div>
+              <div>ทีมงานแต่งกายชุดสูทสากลสีดำสุภาพ มีบัตรสื่อมวลชนพระราชพิธี และปฏิบัติงานด้วยความสำรวมสูงสุด</div>
+            </div>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img" src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022154_0.jpg" alt="พิธีหลวง">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022154_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022154_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022153_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022153_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022155_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022155_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022156_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022156_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246030340_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246030340_0.jpg"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">คลังภาพหมวดนี้: 43 ภาพ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
+                </div>
+              </div>
+
+              <div class="slide-qr-badge" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
+                <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR Code">
+                <span class="qr-label">www.ช่างภาพงานศพ.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: MAIN PILLAR 2 - การถ่ายภาพพิธีจีน และธรรมเนียมปฏิบัติ
+           ==================================================================== -->
+      <section class="slide" data-slide-index="3" data-category-id="chinese">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">MAIN PILLAR 02 : CHINESE CEREMONY & KONG TEK</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral">2</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">การถ่ายภาพพิธีจีน และธรรมเนียมปฏิบัติ</h2>
+                <p class="slide-subtitle">พิธีกงเต็ก / ข้ามสะพานโอฆสงสาร / พิธีเคลื่อนย้าย / พิธีฝัง-เผา</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">ทำไมต้องใช้ช่างภาพมืออาชีพแบบเรา :</span>
+            <ul class="why-us-list">
+              <li><strong>รู้จริงเรื่องธรรมเนียมจีน:</strong> เข้าใจลำดับพิธีกงเต็ก การเดินข้ามสะพานโอฆสงสาร การจุดไฟนำทาง และการไหว้ตามลำดับอาวุโส</li>
+              <li><strong>ไม่พลาดช็อตสำคัญที่มีเพียงเสี้ยววินาที:</strong> พิธีกรรมจีนมีความรวดเร็วและต่อเนื่อง ช่างภาพผู้เชี่ยวชาญจะดักตำแหน่งล่วงหน้าได้ทันที</li>
+              <li><strong>เก็บครบทั้งความขลังและสายใยครอบครัว:</strong> ถ่ายทอดรายละเอียดวิจิตรของเครื่องกระดาษ หีบไม้สักทอง และความกตัญญูของลูกหลาน</li>
+            </ul>
+
+            <div class="info-accent-box">
+              <div class="box-title">ความต่อเนื่องของพิธีกรรม</div>
+              <div>ดูแลบันทึกภาพตลอดพิธีสวดกงเต็กจนถึงการส่งดวงวิญญาณและพิธีเผากระดาษเงินกระดาษทองอย่างสมบูรณ์แบบ</div>
+            </div>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img" src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030361.jpg" alt="พิธีจีน">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030361.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030361.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022288_0.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022288_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022295_0.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022295_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030353_0.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030353_0.jpg"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">คลังภาพหมวดนี้: 27 ภาพ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
+                </div>
+              </div>
+
+              <div class="slide-qr-badge" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
+                <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR Code">
+                <span class="qr-label">www.ช่างภาพงานศพ.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: MAIN PILLAR 3.1 - การถ่ายภาพพิธีสวดพระอภิธรรม
+           ==================================================================== -->
+      <section class="slide" data-slide-index="4" data-category-id="chanting">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">MAIN PILLAR 03 : EVENING CHANTING</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral">3</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">การถ่ายภาพพิธีสวดพระอภิธรรม</h2>
+                <p class="slide-subtitle">บันทึกทุกบรรยากาศ ให้ครบทุกองค์ประกอบของการจัดงาน</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">ทำไมต้องใช้ช่างภาพมืออาชีพแบบเรา :</span>
+            <ul class="why-us-list">
+              <li><strong>เก็บครบทุกรายละเอียดการจัดงาน:</strong> ถ่ายภาพพวงหรีดจากบุคคลสำคัญ ดอกไม้หน้าหีบ ป้ายงาน และของชำร่วย เพื่อเป็นหลักฐานและทำหนังสืออนุสรณ์</li>
+              <li><strong>บันทึกภาพแขกผู้มีเกียรติทุกท่าน:</strong> บันทึกภาพแขกผู้ใหญ่และผู้มาร่วมงานทุกคนด้วยความเคารพ เพื่อให้เจ้าภาพนำไปใช้ส่งคำขอบคุณได้อย่างสมบูรณ์</li>
+              <li><strong>ทำงานเงียบ สำรวม แสงแฟลชนุ่มนวล:</strong> ใช้อุปกรณ์ที่ไม่รบกวนสมาธิระหว่างการฟังสวดพระอภิธรรม และคงบรรยากาศอันสงบงาม</li>
+            </ul>
+
+            <div class="info-accent-box">
+              <div class="box-title">เก็บครบทุกองค์ประกอบ</div>
+              <div>ถ่ายภาพบรรยากาศศาลาตั้งแต่ก่อนเริ่มพิธี ระหว่างฟังสวด จนถึงการต้อนรับแขกคนสำคัญอย่างทั่วถึง</div>
+            </div>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img" src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022191_0.jpg" alt="สวดอภิธรรม">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022191_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022191_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022192_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022192_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022193_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022193_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022201_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022201_0.jpg"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">คลังภาพหมวดนี้: 56 ภาพ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
+                </div>
+              </div>
+
+              <div class="slide-qr-badge" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
+                <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR Code">
+                <span class="qr-label">www.ช่างภาพงานศพ.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: MAIN PILLAR 3.2 - ความทรงจำวันสุดท้าย (วันฌาปนกิจ)
+           ==================================================================== -->
+      <section class="slide" data-slide-index="5" data-category-id="cremation">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">MAIN PILLAR 03 : CREMATION DAY</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral">4</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">เก็บทุกความทรงจำในวันสุดท้าย</h2>
+                <p class="slide-subtitle">วันฌาปนกิจ / วันแห่งการระลึกถึงและการกราบลาครั้งสุดท้าย</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">ทำไมต้องใช้ช่างภาพมืออาชีพแบบเรา :</span>
+            <ul class="why-us-list">
+              <li><strong>ถ่ายทอดอารมณ์ด้วยความเคารพ (Candid & Emotion):</strong> เก็บรอยยิ้ม ความอบอุ่น คำปลอบโยน และหยดน้ำตาแห่งความอาลัยอย่างนุ่มนวลเป็นธรรมชาติ</li>
+              <li><strong>เก็บทุกลำดับพิธีวันฌาปนกิจ:</strong> ขบวนเวียนเมรุ 3 รอบ การทอดผ้าไตรบังสุกุล การอ่านประวัติ และการวางดอกไม้จันทน์</li>
+              <li><strong>ทีมงานประจำจุดสำคัญทุกทิศทาง:</strong> บันทึกทั้งภาพมุมกว้างของงาน และภาพมุมใกล้ที่เต็มไปด้วยอารมณ์ความรู้สึก</li>
+            </ul>
+
+            <div class="info-accent-box">
+              <div class="box-title">ภาพความทรงจำที่ย้อนกลับมาไม่ได้</div>
+              <div>บันทึกทุกสัมผัสและวินาทีแห่งความกตัญญู เพื่อให้ครอบครัวเก็บไว้เป็นสมบัติทรงคุณค่าตลอดไป</div>
+            </div>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img" src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022253_0.jpg" alt="วันฌาปนกิจ">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022253_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022253_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022254_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022254_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022255_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022255_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022260_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022260_0.jpg"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">คลังภาพหมวดนี้: 37 ภาพ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
+                </div>
+              </div>
+
+              <div class="slide-qr-badge" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
+                <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR Code">
+                <span class="qr-label">www.ช่างภาพงานศพ.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: MAIN PILLAR 3.3 - พิธีลอยอังคารส่งดวงวิญญาณสู่สุคติ
+           ==================================================================== -->
+      <section class="slide" data-slide-index="6" data-category-id="floating">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">MAIN PILLAR 03 : ASHES SCATTERING</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral">5</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">พิธีลอยอังคารส่งดวงวิญญาณ</h2>
+                <p class="slide-subtitle">ดูแลต่อเนื่องจนเสร็จสิ้นพิธีการทั้งหมด ส่งดวงวิญญาณอันเป็นที่รัก</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">ทำไมต้องใช้ช่างภาพมืออาชีพแบบเรา :</span>
+            <ul class="why-us-list">
+              <li><strong>บริการติดตามบันทึกภาพถึงเรือลอยอังคาร:</strong> บันทึกภาพพิธีการกลางแม่น้ำหรือท้องทะเลอย่างใกล้ชิด ปลอดภัย และนอบน้อม</li>
+              <li><strong>บันทึกความสงบสุขและความทรงจำสุดท้าย:</strong> ถ่ายทอดภาพกรอบรูป ผอบอัฐิ ดอกไม้ลอยอังคาร และสายน้ำที่นำพาสู่สุคติภพ</li>
+              <li><strong>ส่งมอบงานไว ไฟล์ครบถ้วนสมบูรณ์:</strong> ครอบครัวได้รับภาพถ่ายความละเอียดสูง พร้อมอัปโหลดหรือจัดเก็บเป็นมรดกความทรงจำ</li>
+            </ul>
+
+            <div class="info-accent-box">
+              <div class="box-title">บริการสมบูรณ์แบบครบวงจร</div>
+              <div>ให้ความดูแลครอบคลุมตั้งแต่เคลื่อนย้ายร่าง วันสวดอภิธรรม วันฌาปนกิจ จนถึงพิธีลอยอังคาร</div>
+            </div>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img" src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022306_0.jpg" alt="ลอยอังคาร">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022306_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022306_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022307_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022307_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022308_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022308_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022312_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022312_0.jpg"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">คลังภาพหมวดนี้: 10 ภาพ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
+                </div>
+              </div>
+
+              <div class="slide-qr-badge" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
+                <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR Code">
+                <span class="qr-label">www.ช่างภาพงานศพ.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: มาตรฐานทีมช่างภาพ & จรรยาบรรณวิชาชีพ
+           ==================================================================== -->
+      <section class="slide" data-slide-index="7" data-category-id="profile">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">PROFESSIONAL TEAM & ETHICS</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral">6</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">มาตรฐานทีมช่างภาพ & จรรยาบรรณ</h2>
+                <p class="slide-subtitle">เบื้องหลังความไว้วางใจจากครอบครัวชั้นนำและองค์กรระดับประเทศ</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">ทำไมต้องไว้วางใจทีมช่างภาพเรา :</span>
+            <ul class="why-us-list">
+              <li><strong>แต่งกายชุดสูทสากลสีดำ สำรวม 100%:</strong> สุภาพ เรียบร้อย อบรมมารยาทการไหว้และการประสานงานกับเจ้าหน้าที่พิธีการทุกฝ่าย</li>
+              <li><strong>อุปกรณ์เกรด Professional Dual-Slot:</strong> ใช้กล้องระดับโปร บันทึกไฟล์สำรองคู่ขนาน ป้องกันเหตุสุดวิสัย มั่นใจได้ 100%</li>
+              <li><strong>ส่งมอบไฟล์ภาพรวดเร็ว ปรับแต่งแสงสีนุ่มนวล:</strong> คุมโทนสีให้สมเกียรติ คลาสสิก คงคุณค่าแห่งความทรงจำไปตลอดกาล</li>
+            </ul>
+
+            <div class="info-accent-box">
+              <div class="box-title">ความสบายใจสูงสุดของเจ้าภาพ</div>
+              <div>ไม่ต้องกังวลเรื่องการแต่งกาย มารยาท หรือจังหวะการบันทึกภาพ ให้ครอบครัวได้ต้อนรับแขกอย่างเต็มที่</div>
+            </div>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img" src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246030375_0.jpg" alt="ช่างภาพมืออาชีพ">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246030375_0.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246030375_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246030374_0.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246030374_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246030377_0.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246030377_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246046733_0.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/S__246046733_0.jpg"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">คลังภาพทีมงาน: 5 ภาพ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
+                </div>
+              </div>
+
+              <div class="slide-qr-badge" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
+                <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR Code">
+                <span class="qr-label">www.ช่างภาพงานศพ.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: CLOSING SLIDE & CONTACT (Exact Match to Reference Image)
+           ==================================================================== -->
+      <section class="slide" data-slide-index="8" data-category-id="closing">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner slide-contact-layout">
+          <!-- Logo ราชรถ -->
+          <img class="contact-logo" src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png" alt="ราชรถ">
+          <h2 class="contact-brand-title">ราชรถ</h2>
+          
+          <div class="ornate-divider" style="max-width: 280px; margin: 4px auto 8px auto;">
+            <div class="ornate-line"></div>
+            <span class="ornate-diamond">◇</span>
+            <div class="ornate-line"></div>
+          </div>
+
+          <!-- Services List (Exact text from reference image) -->
+          <ul class="contact-services-list">
+            <li>บริการในงานศพทั่วประเทศ 24 ชั่วโมง</li>
+            <li>หีบศพมาตรฐาน</li>
+            <li>เคลื่อนย้ายศพทั่วประเทศ</li>
+            <li>ออแกไนซ์งานศพครบวงจร</li>
+            <li>ให้บริการครบทุกขั้นตอน</li>
+            <li>ทั้งไทย-จีน โดยทีมงานมืออาชีพ</li>
+            <li>ดูแลตั้งแต่เคลื่อนย้ายร่าง</li>
+            <li>ถึงลอยอังคาร</li>
+            <li>จัดดอกไม้หน้าหีบศพ /วันฌาปนกิจ</li>
+            <li>แพคเกจหีบศพพร้อมดอกไม้ครบวงจร พร้อมอุปกรณ์</li>
+            <li style="color: var(--gold-light); font-weight: 500; margin-top: 4px;">บริการถ่ายภาพนิ่ง วิดีโอซีนีม่า และ Live Streaming ถ่ายทอดสด</li>
+          </ul>
+
+          <!-- 3 QR Codes Hub -->
+          <div class="contact-qr-hub">
+            <div class="contact-qr-card" onclick="window.open('https://www.ช่างภาพงานศพ.com', '_blank')">
+              <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="QR ช่างภาพงานศพ.com">
+              <span class="contact-qr-title">ผลงานช่างภาพ</span>
+              <span class="contact-qr-desc">ช่างภาพงานศพ.com</span>
+            </div>
+
+            <div class="contact-qr-card" onclick="window.open('https://www.rathcharot.com', '_blank')">
+              <img src="qr_rathcharot.svg" alt="QR ราชรถ.com">
+              <span class="contact-qr-title">เว็บไซต์ราชรถ</span>
+              <span class="contact-qr-desc">www.ราชรถ.com</span>
+            </div>
+
+            <div class="contact-qr-card" onclick="window.open('https://line.me/ti/p/~Rathcharot', '_blank')">
+              <img src="qr_line.svg" alt="QR LINE">
+              <span class="contact-qr-title">แอดไลน์ 24 ชม.</span>
+              <span class="contact-qr-desc">LINE : Rathcharot</span>
+            </div>
+          </div>
+
+          <!-- Contact Footer Row -->
+          <div class="contact-footer-info">
+            <div class="contact-footer-row">
+              <span>📞 <strong>โทร: 085-999-2396</strong></span>
+              <span>💬 LINE : Rathcharot</span>
+              <span>🎵 Tiktok : Rathcharot</span>
+              <span>📷 IG : Rathcharot</span>
+            </div>
+            <div class="contact-footer-row" style="color: var(--gold-light); font-size: 0.82rem; margin-top: 4px;">
+              <a href="https://www.ช่างภาพงานศพ.com" target="_blank">www.ช่างภาพงานศพ.com</a>
+              <span>•</span>
+              <a href="https://www.rathcharot.com" target="_blank">www.ราชรถ.com</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Bottom Floating Presentation Controls Bar -->
+  <footer class="catalog-controls">
+    <div class="controls-left">
+      <button class="btn-ctrl btn-ctrl-edge" id="btnFirst" title="ไปหน้าแรก">⏮</button>
+      <button class="btn-ctrl" id="btnPrev" title="หน้าก่อนหน้า (ลูกศรซ้าย)">◀</button>
+      <span class="slide-counter" id="slideCounter">01 / 09</span>
+      <button class="btn-ctrl" id="btnNext" title="หน้าถัดไป (ลูกศรขวา)">▶</button>
+      <button class="btn-ctrl btn-ctrl-edge" id="btnLast" title="ไปหน้าสุดท้าย">⏭</button>
+    </div>
+
+    <div class="controls-center">
+      <span class="controls-hint">
+        เคล็ดลับ: สไลด์ถูกปรับขนาดอัตโนมัติแบบ Canva • ใช้ปุ่ม ◀ ▶ หรือแตะเลื่อนสไลด์ • กด F เต็มจอ
+      </span>
+    </div>
+
+    <div class="controls-right">
+      <button class="btn-icon" id="btnFullscreen" title="เปิดเต็มหน้าจอ (F)">
+        ⛶ <span>เต็มจอ</span>
+      </button>
+      <a class="btn-icon btn-icon-gold btn-call-cta" href="tel:0859992396" style="text-decoration: none;">
+        📞 <span>085-999-2396</span>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Mobile & Tablet Slide-in Navigation Drawer -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay">
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="drawer-header">
+        <div class="drawer-brand">
+          <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png" alt="ราชรถ Logo">
+          <div>
+            <div class="drawer-title">ราชรถ & ช่างภาพงานศพ</div>
+            <div class="drawer-sub">สารบัญบริการและพิธีกรรม</div>
+          </div>
+        </div>
+        <button class="drawer-close-btn" id="btnDrawerClose" aria-label="ปิดเมนู">✕</button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="drawer-section-title">เลือกหน้าพิธีกรรม (สไลด์)</div>
+        <nav class="drawer-nav-list">
+          <button class="drawer-nav-item active" data-slide="0">
+            <span class="drawer-num">00</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">หน้าแรก & บริการครบวงจร</span>
+              <span class="drawer-item-desc">แนะนำภาพนิ่ง ซีนีม่า และ Live Streaming</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="1">
+            <span class="drawer-num highlight">★</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">Live Streaming & จอ 65-75"</span>
+              <span class="drawer-item-desc">ฟรี! ทีมงานมืออาชีพดูแลตลอดงาน</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="2">
+            <span class="drawer-num">01</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">การถ่ายภาพงานพิธีหลวง</span>
+              <span class="drawer-item-desc">พระราชทานน้ำหลวง / พระราชทานเพลิง</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="3">
+            <span class="drawer-num">02</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">การถ่ายภาพพิธีจีน & กงเต็ก</span>
+              <span class="drawer-item-desc">พิธีกรรมข้ามสะพาน / ส่งดวงวิญญาณ</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="4">
+            <span class="drawer-num">03</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">พิธีสวดพระอภิธรรม</span>
+              <span class="drawer-item-desc">เกียรติยศแห่งการระลึกถึง และบรรยากาศ</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="5">
+            <span class="drawer-num">04</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">ความทรงจำวันสุดท้าย (ฌาปนกิจ)</span>
+              <span class="drawer-item-desc">ริ้วขบวนส่งร่าง และพิธีประชุมเพลิง</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="6">
+            <span class="drawer-num">05</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">พิธีลอยอังคารสู่สุคติ</span>
+              <span class="drawer-item-desc">ส่งดวงวิญญาณสู่สรวงสวรรค์</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="7">
+            <span class="drawer-num">06</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">มาตรฐานทีมงาน & จรรยาบรรณ</span>
+              <span class="drawer-item-desc">สูทสากล สำรวม อุปกรณ์ Dual-Slot</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="8">
+            <span class="drawer-num">07</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">ติดต่อเรา & ข้อมูลบริการ</span>
+              <span class="drawer-item-desc">โทร 24 ชม. • เว็บไซต์ • สแกน LINE</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+        </nav>
+
+        <div class="drawer-quick-actions">
+          <button class="drawer-action-btn" id="btnDrawerGallery">
+            🖼️ เปิดคลังภาพผลงาน (191 ภาพ)
+          </button>
+          <button class="drawer-action-btn btn-gold" id="btnDrawerQr">
+            📱 สแกน QR / เว็บไซต์
+          </button>
+          <a class="drawer-action-btn btn-call" href="tel:0859992396">
+            📞 โทรด่วน: 085-999-2396 (24 ชม.)
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Single Image Modal -->
+  <div class="modal-overlay" id="lightboxModal">
+    <button class="modal-close-btn" onclick="closeLightbox()" title="ปิด (ESC)">✕</button>
+    <button class="lightbox-btn-prev" onclick="prevLightboxImage()" title="ภาพก่อนหน้า">◀</button>
+    <button class="lightbox-btn-next" onclick="nextLightboxImage()" title="ภาพถัดไป">▶</button>
+    
+    <div class="lightbox-body" onclick="closeLightbox()">
+      <div class="lightbox-img-wrap" onclick="event.stopPropagation()">
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Photo Gallery Modal (All 191+ images organized by Folder) -->
+  <div class="modal-overlay" id="galleryModal">
+    <div class="gallery-modal-content">
+      <div class="gallery-modal-header">
+        <div class="gallery-modal-title">🖼️ คลังภาพผลงานทั้งหมด (แยกตามโฟลเดอร์)</div>
+        <button class="modal-close-btn" style="position: static;" onclick="closeGalleryModal()" title="ปิด (ESC)">✕</button>
+      </div>
+      <div class="gallery-tabs-bar" id="galleryTabs"></div>
+      <div class="gallery-grid-container" id="galleryGrid"></div>
+    </div>
+  </div>
+
+  <!-- QR Code Quick Scan Modal -->
+  <div class="modal-overlay" id="qrModal">
+    <div class="gallery-modal-content" style="max-width: 680px; height: auto; max-height: 90vh;">
+      <div class="gallery-modal-header">
+        <div class="gallery-modal-title">📱 สแกน QR Code ติดต่อทีมงาน</div>
+        <button class="modal-close-btn" style="position: static;" onclick="closeQrModal()" title="ปิด (ESC)">✕</button>
+      </div>
+      <div style="padding: 26px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; width: 100%;">
+          <!-- QR 1 -->
+          <div class="contact-qr-card" style="padding: 16px;" onclick="window.open('https://www.ช่างภาพงานศพ.com', '_blank')">
+            <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg" alt="ช่างภาพงานศพ.com" style="width: 120px; height: 120px;">
+            <span class="contact-qr-title" style="font-size: 0.85rem; margin-top: 8px;">ช่างภาพงานศพ</span>
+            <span class="contact-qr-desc">www.ช่างภาพงานศพ.com</span>
+          </div>
+          <!-- QR 2 -->
+          <div class="contact-qr-card" style="padding: 16px;" onclick="window.open('https://www.rathcharot.com', '_blank')">
+            <img src="qr_rathcharot.svg" alt="ราชรถ.com" style="width: 120px; height: 120px;">
+            <span class="contact-qr-title" style="font-size: 0.85rem; margin-top: 8px;">เว็บไซต์ราชรถ</span>
+            <span class="contact-qr-desc">www.ราชรถ.com</span>
+          </div>
+          <!-- QR 3 -->
+          <div class="contact-qr-card" style="padding: 16px;" onclick="window.open('https://line.me/ti/p/~Rathcharot', '_blank')">
+            <img src="qr_line.svg" alt="LINE" style="width: 120px; height: 120px;">
+            <span class="contact-qr-title" style="font-size: 0.85rem; margin-top: 8px;">LINE ปรึกษา 24 ชม.</span>
+            <span class="contact-qr-desc">LINE : Rathcharot</span>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+          <p>📞 โทรติดต่อด่วน: <strong style="color: var(--gold-light);">085-999-2396</strong></p>
+          <p>พร้อมให้บริการและคำปรึกษาตลอด 24 ชั่วโมง ทั่วประเทศ</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="catalog_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
