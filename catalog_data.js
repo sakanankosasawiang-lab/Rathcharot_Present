@@ -63,56 +63,6 @@ const CATALOG_CATEGORIES = [
         "encoded_path": "Photographer/S__246399020.jpg"
       },
       {
-        "filename": "S__3252234_0.jpg",
-        "rel_path": "Photographer/S__3252234_0.jpg",
-        "encoded_path": "Photographer/S__3252234_0.jpg"
-      },
-      {
-        "filename": "S__3252235_0.jpg",
-        "rel_path": "Photographer/S__3252235_0.jpg",
-        "encoded_path": "Photographer/S__3252235_0.jpg"
-      },
-      {
-        "filename": "S__3252236_0.jpg",
-        "rel_path": "Photographer/S__3252236_0.jpg",
-        "encoded_path": "Photographer/S__3252236_0.jpg"
-      },
-      {
-        "filename": "S__3252237_0.jpg",
-        "rel_path": "Photographer/S__3252237_0.jpg",
-        "encoded_path": "Photographer/S__3252237_0.jpg"
-      },
-      {
-        "filename": "S__3252238_0.jpg",
-        "rel_path": "Photographer/S__3252238_0.jpg",
-        "encoded_path": "Photographer/S__3252238_0.jpg"
-      },
-      {
-        "filename": "S__3252239_0.jpg",
-        "rel_path": "Photographer/S__3252239_0.jpg",
-        "encoded_path": "Photographer/S__3252239_0.jpg"
-      },
-      {
-        "filename": "S__3252240_0.jpg",
-        "rel_path": "Photographer/S__3252240_0.jpg",
-        "encoded_path": "Photographer/S__3252240_0.jpg"
-      },
-      {
-        "filename": "S__3252241_0.jpg",
-        "rel_path": "Photographer/S__3252241_0.jpg",
-        "encoded_path": "Photographer/S__3252241_0.jpg"
-      },
-      {
-        "filename": "S__3252242_0.jpg",
-        "rel_path": "Photographer/S__3252242_0.jpg",
-        "encoded_path": "Photographer/S__3252242_0.jpg"
-      },
-      {
-        "filename": "S__3252243_0.jpg",
-        "rel_path": "Photographer/S__3252243_0.jpg",
-        "encoded_path": "Photographer/S__3252243_0.jpg"
-      },
-      {
         "filename": "S__914374661.jpg",
         "rel_path": "Photographer/S__914374661.jpg",
         "encoded_path": "Photographer/S__914374661.jpg"

@@ -65,7 +65,8 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 56px;
+  height: 60px;
+  min-height: 60px;
   background: rgba(12, 12, 14, 0.98);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(197, 160, 89, 0.35);
@@ -76,6 +77,7 @@ body {
   padding: 0 16px;
   gap: 8px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .brand-badge {
@@ -85,11 +87,12 @@ body {
   cursor: pointer;
   flex-shrink: 0;
   white-space: nowrap;
-  margin-right: 4px;
+  margin-right: 8px;
+  user-select: none;
 }
 
 .brand-badge img {
-  height: 38px;
+  height: 40px;
   width: auto;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
   flex-shrink: 0;
@@ -98,15 +101,15 @@ body {
 .brand-names {
   display: flex;
   flex-direction: column;
-  line-height: 1.15;
+  line-height: 1.2;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .brand-title {
   font-family: var(--font-display);
-  font-size: 0.94rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -115,7 +118,7 @@ body {
 }
 
 .brand-sub {
-  font-size: 0.67rem;
+  font-size: 0.70rem;
   color: var(--text-muted);
   letter-spacing: 0.2px;
   white-space: nowrap;
@@ -124,10 +127,10 @@ body {
 /* Golden Vertical Divider to strictly isolate brand from nav */
 .header-divider {
   width: 1px;
-  height: 26px;
-  background: rgba(212, 175, 55, 0.4);
+  height: 28px;
+  background: rgba(212, 175, 55, 0.35);
   flex-shrink: 0;
-  margin: 0 6px;
+  margin: 0 8px;
 }
 
 .header-center-nav {
@@ -141,7 +144,7 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
   white-space: nowrap;
-  padding: 0 4px;
+  padding: 0 2px;
 }
 .header-center-nav::-webkit-scrollbar { display: none; }
 
@@ -149,9 +152,9 @@ body {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(212, 175, 55, 0.22);
   color: var(--text-secondary);
-  padding: 4px 9px;
-  border-radius: 16px;
-  font-size: 0.74rem;
+  padding: 4px 8px;
+  border-radius: 14px;
+  font-size: 0.72rem;
   font-family: var(--font-main);
   white-space: nowrap;
   cursor: pointer;
@@ -304,36 +307,10 @@ body {
   z-index: 10;
 }
 
-/* Watermark background motif */
-.slide-watermark {
-  position: absolute;
-  bottom: -30px;
-  left: -20px;
-  width: 380px;
-  height: 500px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: 1;
-  filter: grayscale(100%) brightness(150%);
-}
-
+/* Watermark background motif - Strictly hidden per client feedback ("Logo ไม่เอา") */
+.slide-watermark,
 .slide-watermark-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 560px;
-  height: 640px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.045;
-  pointer-events: none;
-  z-index: 1;
-  filter: grayscale(100%) brightness(180%);
+  display: none !important;
 }
 
 /* SVG Ornate Frame Overlay (Fixed to 1440x810 viewBox) */
@@ -349,7 +326,7 @@ body {
 
 /* Slide Content Container:
    Guaranteed Luxury Safe Zone:
-   Padding 0 104px (104px inset from left/right borders) and align-items: center
+   Padding 46px 110px (110px inset from left/right borders) and align-items: center
    guarantees ALL content stays strictly inside the gold frame and NEVER
    touches or crosses the corner scooped arcs or rosettes! */
 .slide-inner {
@@ -357,7 +334,7 @@ body {
   z-index: 10;
   width: 1440px;
   height: 810px;
-  padding: 0 104px;
+  padding: 46px 110px;
   display: flex;
   align-items: center; /* Crucial: Vertically center columns! Prevents stretching into corners! */
   justify-content: space-between;
@@ -375,7 +352,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -386,26 +363,26 @@ body {
   background: rgba(212, 175, 55, 0.12);
   border: 1px solid rgba(212, 175, 55, 0.35);
   color: var(--gold-light);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 4px;
   width: fit-content;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: 500;
 }
 
 .slide-heading-row {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 8px;
+  gap: 14px;
+  margin-bottom: 6px;
 }
 
 .slide-numeral {
   font-family: var(--font-display);
-  font-size: 3.8rem;
+  font-size: 3.4rem;
   font-weight: 700;
   line-height: 0.88;
   background: var(--gold-gradient);
@@ -416,7 +393,7 @@ body {
 }
 
 .slide-numeral-star {
-  font-size: 3.4rem;
+  font-size: 3.0rem;
 }
 
 .slide-title-wrap {
@@ -426,17 +403,17 @@ body {
 
 .slide-title {
   font-family: var(--font-display);
-  font-size: 1.8rem;
+  font-size: 1.65rem;
   font-weight: 600;
   line-height: 1.25;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .slide-subtitle {
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.35;
@@ -447,8 +424,8 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
-  margin: 10px 0 14px 0;
-  gap: 10px;
+  margin: 8px 0 10px 0;
+  gap: 8px;
 }
 
 .ornate-line {
@@ -459,16 +436,16 @@ body {
 
 .ornate-diamond {
   color: var(--gold-light);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
 }
 
 /* Selling Hook & Scannable Bullets */
 .selling-section-label {
-  font-size: 0.94rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: #FFF;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -478,7 +455,7 @@ body {
   content: '';
   display: inline-block;
   width: 3px;
-  height: 15px;
+  height: 14px;
   background: var(--gold-primary);
   border-radius: 2px;
 }
@@ -487,15 +464,15 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 7px;
+  margin-bottom: 10px;
 }
 
 .why-us-list li {
   position: relative;
-  padding-left: 20px;
-  font-size: 0.94rem;
-  line-height: 1.48;
+  padding-left: 18px;
+  font-size: 0.86rem;
+  line-height: 1.42;
   color: #FFFFFF;
   font-weight: 400;
 }
@@ -503,11 +480,11 @@ body {
 .why-us-list li::before {
   content: '-';
   position: absolute;
-  left: 4px;
+  left: 2px;
   top: 0;
   color: var(--gold-light);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 
 .why-us-list li strong {
@@ -520,18 +497,18 @@ body {
   background: rgba(20, 18, 16, 0.75);
   border-left: 3px solid var(--gold-primary);
   border-radius: 0 6px 6px 0;
-  padding: 10px 14px;
-  font-size: 0.84rem;
+  padding: 8px 12px;
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  line-height: 1.42;
-  margin-top: 14px;
+  line-height: 1.4;
+  margin-top: 10px;
 }
 
 .info-accent-box .box-title {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--gold-light);
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 /* ==========================================================================
@@ -550,7 +527,7 @@ body {
 .hero-image-frame {
   position: relative;
   width: 100%;
-  height: 440px;
+  height: 420px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.9);
@@ -752,24 +729,46 @@ body {
   align-items: center;
   justify-content: center;
   gap: 32px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .cover-logo-item {
-  height: 90px;
+  height: 92px;
   width: auto;
   filter: drop-shadow(0 4px 14px rgba(0,0,0,0.75));
 }
 
 .cover-heading {
   font-family: var(--font-display);
-  font-size: 2.7rem;
+  font-size: 2.8rem;
   font-weight: 700;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   letter-spacing: 0.5px;
+}
+
+.cover-sub-brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.cover-by-rathcharot {
+  position: absolute;
+  bottom: 42px;
+  right: 70px;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  color: rgba(212, 175, 55, 0.45);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 
 .cover-tagline {
@@ -893,7 +892,7 @@ body {
 }
 
 .contact-logo {
-  height: 86px;
+  height: 96px;
   width: auto;
   filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8));
   margin-bottom: 6px;
@@ -901,7 +900,7 @@ body {
 
 .contact-brand-title {
   font-family: var(--font-display);
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: 600;
   color: var(--gold-primary);
   margin-bottom: 2px;
@@ -911,11 +910,11 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  margin: 8px 0 14px 0;
+  gap: 4px;
+  margin: 10px 0 16px 0;
   color: #FFFFFF;
-  font-size: 0.94rem;
-  line-height: 1.45;
+  font-size: 1.05rem;
+  line-height: 1.6;
   font-weight: 400;
 }
 
@@ -927,8 +926,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
-  margin: 10px 0 14px 0;
+  gap: 28px;
+  margin: 12px 0 16px 0;
 }
 
 .contact-qr-card {
@@ -936,8 +935,8 @@ body {
   flex-direction: column;
   align-items: center;
   background: rgba(18, 16, 14, 0.85);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  padding: 8px 12px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -951,22 +950,22 @@ body {
 
 .contact-qr-card img,
 .contact-qr-card svg {
-  width: 82px;
-  height: 82px;
+  width: 95px;
+  height: 95px;
   background: #FFF;
   border-radius: 4px;
   padding: 3px;
 }
 
 .contact-qr-title {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   color: var(--gold-light);
   font-weight: 500;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 .contact-qr-desc {
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   color: #FFF;
 }
 
@@ -1012,18 +1011,33 @@ body {
   justify-content: space-between;
   padding: 0 20px;
   z-index: 1000;
+  box-sizing: border-box;
 }
 
 .controls-left, .controls-right {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .controls-center {
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 12px;
+  overflow: hidden;
+}
+
+.controls-hint {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .btn-ctrl {
@@ -1582,10 +1596,11 @@ body.catalog-mode .slide {
 /* ==========================================================================
    Responsive Adaptations: Mobile, Tablet & Portrait (UX/UI Polish)
    ========================================================================== */
-@media (max-width: 992px), (orientation: portrait) {
+@media (max-width: 1100px), (orientation: portrait) {
   /* Header in Mobile / Tablet / Portrait */
   .catalog-header {
-    height: 52px;
+    height: 54px;
+    min-height: 54px;
     padding: 0 12px;
     gap: 8px;
   }
@@ -1600,20 +1615,20 @@ body.catalog-mode .slide {
   }
 
   .brand-badge img {
-    height: 32px;
+    height: 34px;
   }
 
   .brand-title {
-    font-size: 0.86rem;
+    font-size: 0.92rem;
   }
 
   .brand-sub {
-    font-size: 0.62rem;
+    font-size: 0.64rem;
   }
 
   /* Bottom Controls in Mobile / Tablet / Portrait */
   .catalog-controls {
-    height: 50px;
+    height: 48px;
     padding: 0 12px;
     padding-bottom: max(0px, env(safe-area-inset-bottom));
   }
@@ -1637,8 +1652,8 @@ body.catalog-mode .slide {
   }
 
   .viewport-container {
-    top: 52px;
-    bottom: 50px;
+    top: 54px;
+    bottom: 48px;
     padding: 6px;
   }
 }

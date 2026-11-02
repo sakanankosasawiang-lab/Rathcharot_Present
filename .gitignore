@@ -13,3 +13,6 @@ __pycache__/
 # Temporary / Scratch
 *.tmp
 *.log
+
+# Office lock files
+~$*

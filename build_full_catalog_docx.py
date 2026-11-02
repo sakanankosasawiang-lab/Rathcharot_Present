@@ -818,18 +818,8 @@ def generate_full_catalog():
         folder_total_count=len(cat7_files)
     )
 
-    # Captions for all remaining 14 images in Photographer folder
+    # Captions for remaining 4 images in Photographer folder
     photo_captions_map = {
-        'S__3252234_0.jpg': "ทีมช่างภาพมืออาชีพ ราชรถ & ช่างภาพงานศพ.com",
-        'S__3252235_0.jpg': "ทีมช่างภาพมืออาชีพ ผู้ผ่านงานพิธีสำคัญระดับประเทศ",
-        'S__3252236_0.jpg': "ช่างภาพมากประสบการณ์ ชำนาญลำดับขั้นตอนพิธีการ",
-        'S__3252237_0.jpg': "ช่างภาพมืออาชีพ บันทึกภาพด้วยความสำรวมและสมเกียรติ",
-        'S__3252238_0.jpg': "ทีมงานช่างภาพประจำจุดสำคัญ เก็บครบทุกมิติแห่งความอาลัย",
-        'S__3252239_0.jpg': "ช่างภาพมืออาชีพ ผู้ผ่านงานพิธีหลวงและพระราชทานเพลิงศพ",
-        'S__3252240_0.jpg': "ทีมช่างภาพสายพิธีกรรม ชำนาญพิธีจีนและกงเต็กโบราณ",
-        'S__3252241_0.jpg': "ช่างภาพมืออาชีพ ดูแลภาพนิ่งและวิดีโอคุณภาพสูง",
-        'S__3252242_0.jpg': "ทีมงานผู้เชี่ยวชาญการจัดองค์ประกอบภาพและแสงสีสมเกียรติ",
-        'S__3252243_0.jpg': "ทีมช่างภาพมืออาชีพ พร้อมสแตนด์บายดูแลงานตลอด 24 ชั่วโมง",
         'S__246399006_0.jpg': "ระบบส่งสัญญาณไร้สายมาตรฐานสากล คมชัด เสถียร ไม่สะดุดตลอดพิธีการ",
         'S__246399020.jpg': "การบันทึกวิดีโอคุณภาพสูงด้วยอุปกรณ์กันสั่นระดับสตูดิโอ",
         'F264F5C7-D51A-42F1-ACA3-2B9EBD5D7F95.jpg': "ทีมงานช่างภาพประสบการณ์สูงพร้อมดูแลความทรงจำของครอบครัว",
@@ -953,8 +943,13 @@ def generate_full_catalog():
 
     # Save document
     output_filename = "Rathcharot_Funeral_Catalog_A4.docx"
-    doc.save(output_filename)
-    print(f"Full Comprehensive Catalog generated successfully: {output_filename}")
+    try:
+        doc.save(output_filename)
+        print(f"Full Comprehensive Catalog generated successfully: {output_filename}")
+    except PermissionError:
+        alt_filename = "Rathcharot_Funeral_Catalog_A4_updated.docx"
+        doc.save(alt_filename)
+        print(f"File {output_filename} is currently open in Word. Saved to: {alt_filename}")
     print(f"Total Pages Generated: {current_page_num}")
 
 if __name__ == "__main__":
