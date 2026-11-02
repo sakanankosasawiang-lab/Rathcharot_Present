@@ -16,7 +16,11 @@ import re
 import shutil
 import base64
 import urllib.parse
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+try:
+    from http.server import ThreadingHTTPServer as HTTPServerClass
+except ImportError:
+    from http.server import HTTPServer as HTTPServerClass
+from http.server import SimpleHTTPRequestHandler
 
 PORT = 8080
 if len(sys.argv) > 1:
@@ -456,7 +460,8 @@ class RathcharotServerHandler(SimpleHTTPRequestHandler):
 
 def run_server():
     server_address = ('', PORT)
-    httpd = HTTPServer(server_address, RathcharotServerHandler)
+    httpd = HTTPServerClass(server_address, RathcharotServerHandler)
+    httpd.daemon_threads = True
     print(f"==================================================")
     print(f" Rathcharot Web Server Running on port {PORT}")
     print(f" Main Presentation:  http://localhost:{PORT}")
