@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | ราชรถ & ช่างภาพงานศพ.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0d0c0b;
+      --bg-card: rgba(26, 23, 20, 0.95);
+      --bg-card-hover: rgba(38, 33, 28, 0.98);
+      --gold-primary: #d4af37;
+      --gold-light: #f7e089;
+      --gold-dark: #aa820a;
+      --gold-border: rgba(212, 175, 55, 0.35);
+      --text-main: #f5f2eb;
+      --text-muted: #bdae93;
+      --danger: #e63946;
+      --danger-hover: #c1121f;
+      --success: #2a9d8f;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Prompt', 'Kanit', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+    }
+
+    /* Top Banner / Toast Notification */
+    #toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast {
+      pointer-events: auto;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(20, 18, 16, 0.95);
+      border: 1px solid var(--gold-primary);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.2);
+      color: #fff;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastIn 0.3s ease-out;
+      max-width: 400px;
+    }
+    .toast.success { border-color: #2a9d8f; }
+    .toast.error { border-color: var(--danger); }
+    @keyframes toastIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Login Screen */
+    #login-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .login-box {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 30px rgba(212, 175, 55, 0.15);
+      text-align: center;
+      position: relative;
+    }
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+    .login-logo {
+      width: 68px;
+      height: auto;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+    }
+    .login-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+    .login-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(10, 9, 8, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .form-input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+      background: rgba(15, 14, 12, 0.95);
+    }
+    .btn-login {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary), var(--gold-light));
+      color: #12100e;
+      font-weight: 600;
+      font-size: 1rem;
+      font-family: 'Kanit', sans-serif;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+    }
+    .login-hint {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(212, 175, 55, 0.08);
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      border: 1px dashed rgba(212, 175, 55, 0.25);
+    }
+
+    /* Admin App Layout */
+    #admin-app {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .admin-header {
+      background: rgba(18, 16, 14, 0.95);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .header-logo {
+      width: 40px;
+      height: auto;
+    }
+    .header-title-wrap h1 {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(42, 157, 143, 0.2);
+      border: 1px solid rgba(42, 157, 143, 0.5);
+      color: #48cae4;
+      font-weight: 500;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(30, 27, 23, 0.8);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-header:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-primary);
+      color: #fff;
+    }
+    .btn-logout {
+      background: rgba(230, 57, 70, 0.15);
+      border-color: rgba(230, 57, 70, 0.4);
+      color: #ffb4a2;
+    }
+    .btn-logout:hover {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #fff;
+    }
+
+    /* Navigation Tabs */
+    .admin-nav {
+      background: rgba(14, 12, 10, 0.9);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 0 28px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+    }
+    .nav-tab-btn {
+      padding: 14px 20px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.96rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .nav-tab-btn:hover {
+      color: var(--gold-light);
+    }
+    .nav-tab-btn.active {
+      color: var(--gold-light);
+      border-bottom-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    /* Main Container */
+    .admin-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Slide Showcase Manager */
+    .section-header {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .section-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--gold-light);
+    }
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .slide-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .slide-admin-card {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 280px 1fr 220px;
+      gap: 24px;
+      align-items: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      transition: all 0.25s ease;
+    }
+    .slide-admin-card:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.1);
+    }
+    .slide-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .slide-badge-num {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .slide-admin-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .slide-cat-badge {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.05);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      display: inline-block;
+      width: fit-content;
+    }
+
+    /* Slide Visuals Preview on Admin Card */
+    .slide-visuals-col {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .slide-hero-preview-box {
+      width: 220px;
+      height: 135px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gold-primary);
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .slide-hero-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .slide-hero-preview-box:hover img {
+      transform: scale(1.05);
+    }
+    .tag-hero-main {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(18, 16, 14, 0.85);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .slide-thumbs-preview-group {
+      display: grid;
+      grid-template-columns: repeat(2, 85px);
+      gap: 8px;
+    }
+    .thumb-preview-box {
+      width: 85px;
+      height: 60px;
+      border-radius: 4px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      cursor: pointer;
+    }
+    .thumb-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .thumb-num-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: rgba(0,0,0,0.8);
+      color: var(--gold-light);
+      font-size: 0.65rem;
+      padding: 1px 4px;
+      border-radius: 2px;
+    }
+
+    .slide-actions-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .btn-slide-action {
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.86rem;
+      font-family: 'Prompt', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border: 1px solid var(--gold-border);
+      background: rgba(30, 26, 22, 0.8);
+      color: #fff;
+    }
+    .btn-slide-action:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-primary);
+    }
+    .btn-slide-save {
+      background: linear-gradient(135deg, #8a6c0c, var(--gold-primary));
+      border: none;
+      color: #0d0c0b;
+      font-weight: 600;
+    }
+    .btn-slide-save:hover {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+      transform: translateY(-2px);
+    }
+
+    /* Gallery Tab */
+    .gallery-filter-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      background: var(--bg-card);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gold-border);
+    }
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+    .pill-btn {
+      padding: 7px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 20px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pill-btn:hover {
+      border-color: var(--gold-primary);
+      color: #fff;
+    }
+    .pill-btn.active {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+    .gallery-search-wrap {
+      min-width: 260px;
+    }
+    .gallery-search-input {
+      width: 100%;
+      padding: 8px 12px;
+      background: rgba(10, 9, 8, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    /* Photo Cards Grid */
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .photo-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: all 0.2s ease;
+    }
+    .photo-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.8), 0 0 10px rgba(212, 175, 55, 0.2);
+    }
+    .photo-card-img-wrap {
+      width: 100%;
+      height: 180px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .photo-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .photo-card-img-wrap:hover img {
+      transform: scale(1.06);
+    }
+    .card-cat-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(12, 11, 10, 0.85);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+    }
+    .photo-card-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .photo-name {
+      font-size: 0.82rem;
+      color: #fff;
+      word-break: break-all;
+      font-family: monospace;
+      max-height: 38px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .photo-card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .btn-card-action {
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .btn-card-action:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-primary);
+      color: #fff;
+    }
+    .btn-set-hero {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+    .btn-set-hero:hover {
+      background: var(--gold-primary);
+      color: #000;
+    }
+    .btn-delete-photo {
+      background: rgba(230, 57, 70, 0.1);
+      border-color: rgba(230, 57, 70, 0.3);
+      color: #ffb4a2;
+    }
+    .btn-delete-photo:hover {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #fff;
+    }
+
+    /* Upload Tab */
+    .upload-box {
+      background: var(--bg-card);
+      border: 2px dashed rgba(212, 175, 55, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 48px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 24px;
+    }
+    .upload-box:hover, .upload-box.dragover {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .upload-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      color: var(--gold-primary);
+    }
+    .upload-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .upload-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal Styling */
+    .admin-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .admin-modal-overlay.active {
+      display: flex;
+    }
+    .admin-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      max-width: 900px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+      overflow: hidden;
+    }
+    .admin-modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-modal-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.2rem;
+      color: var(--gold-light);
+    }
+    .btn-modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .btn-modal-close:hover {
+      color: #fff;
+    }
+    .admin-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-gallery-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+    }
+    .selector-item {
+      height: 95px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      position: relative;
+      background: #000;
+    }
+    .selector-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .selector-item.selected {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+    }
+    .selector-item.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: var(--gold-primary);
+      color: #000;
+      font-weight: bold;
+      font-size: 0.75rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .admin-modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--gold-border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    /* Lightbox Modal */
+    #image-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+    #image-lightbox.active {
+      display: flex;
+    }
+    #image-lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gold-primary);
+      box-shadow: 0 0 30px rgba(0,0,0,0.9);
+      object-fit: contain;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .slide-admin-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .slide-visuals-col {
+        flex-wrap: wrap;
+      }
+    }
+    @media (max-width: 640px) {
+      .admin-header {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .admin-nav {
+        padding: 0 16px;
+      }
+      .admin-container {
+        padding: 16px;
+      }
+      .slide-visuals-col {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .slide-hero-preview-box {
+        width: 100%;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- 1. LOGIN SECTION -->
+  <section id="login-section">
+    <div class="login-box">
+      <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png" alt="Rathcharot Logo" class="login-logo">
+      <h2 class="login-title">ระบบจัดการหลังบ้าน (Admin)</h2>
+      <p class="login-subtitle">ราชรถ & ช่างภาพงานศพ.com</p>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="username">ชื่อผู้ใช้งาน (Username)</label>
+          <input type="text" id="username" class="form-input" placeholder="admin" required autofocus autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">รหัสผ่าน (Password)</label>
+          <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-login">เข้าสู่ระบบ (Sign In)</button>
+      </form>
+
+      <div class="login-hint">
+        🔑 ข้อมูลเข้าสู่ระบบ: <strong>admin</strong> / <strong>admin1234</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ADMIN DASHBOARD APP -->
+  <div id="admin-app">
+    <!-- Header -->
+    <header class="admin-header">
+      <div class="header-brand">
+        <img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png" alt="Logo" class="header-logo">
+        <div class="header-title-wrap">
+          <h1>
+            <span>ราชรถ Admin Dashboard</span>
+            <span class="header-badge">Online • Port 8080</span>
+          </h1>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="/" target="_blank" class="btn-header" title="เปิดหน้าเว็บแคตตาล็อก">
+          <span>👁️ ดูหน้าเว็บจริง</span>
+        </a>
+        <button class="btn-header" id="btn-sync-all" title="สแกนโฟลเดอร์ไฟล์ภาพใหม่">
+          <span>🔄 ซิงค์โฟลเดอร์</span>
+        </button>
+        <button class="btn-header btn-logout" id="btn-logout" title="ออกจากระบบ">
+          <span>🚪 ออกจากระบบ</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="admin-nav">
+      <button class="nav-tab-btn active" data-tab="tab-slides">
+        <span>🖥️ จัดการสไลด์แคตตาล็อก</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-gallery">
+        <span id="tab-gallery-label">📸 คลังภาพทั้งหมด (194 ภาพ)</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-upload">
+        <span>📤 อัปโหลดภาพใหม่</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-trash">
+        <span id="tab-trash-label">🗑️ ถังขยะ / ภาพที่ถูกลบ</span>
+      </button>
+    </nav>
+
+    <!-- Admin Content Area -->
+    <main class="admin-container">
+      
+      <!-- TAB 1: SLIDE MANAGER -->
+      <section id="tab-slides" class="tab-content active">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">จัดการภาพในหน้าสไลด์แคตตาล็อก</h2>
+            <p class="section-desc">สามารถเลือกเปลี่ยนภาพหลัก (Hero Image) และปรับเปลี่ยน 4 ภาพตัวอย่าง (Thumbnails) ในแต่ละพิธีการได้ทันที</p>
+          </div>
+        </div>
+
+        <div class="slide-cards-list" id="slides-list-container">
+          <!-- Dynamically populated from /api/catalog-data -->
+        </div>
+      </section>
+
+      <!-- TAB 2: GALLERY MANAGER -->
+      <section id="tab-gallery" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">คลังภาพผลงานทั้งหมด</h2>
+            <p class="section-desc">ลบภาพ, แก้ไข, ตั้งเป็นภาพหลักของสไลด์, หรือขยายดูภาพคมชัดได้โดยตรง</p>
+          </div>
+          <button class="btn-header" style="background: rgba(212,175,55,0.2); border-color: var(--gold-primary);" onclick="switchTab('tab-upload')">
+            <span>➕ อัปโหลดภาพใหม่</span>
+          </button>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="gallery-filter-bar">
+          <div class="filter-pills" id="gallery-category-pills">
+            <!-- Dynamically populated -->
+          </div>
+          <div class="gallery-search-wrap">
+            <input type="text" id="gallery-search-input" class="gallery-search-input" placeholder="🔍 ค้นหาชื่อไฟล์ภาพ...">
+          </div>
+        </div>
+
+        <!-- Photo Grid -->
+        <div class="photos-grid" id="gallery-photos-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- TAB 3: UPLOAD MANAGER -->
+      <section id="tab-upload" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">อัปโหลดภาพเข้าสู่หมวดหมู่</h2>
+            <p class="section-desc">อัปโหลดไฟล์ภาพเข้าโฟลเดอร์โดยตรง ภาพจะปรากฏในคลังภาพและสามารถเลือกไปใช้ในสไลด์ได้ทันที</p>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--gold-border); border-radius: var(--radius-md); padding: 28px; max-width: 700px; margin: 0 auto;">
+          <div class="form-group">
+            <label class="form-label" for="upload-category-select">เลือกหมวดหมู่ที่ต้องการนำภาพเข้า:</label>
+            <select id="upload-category-select" class="form-input">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+
+          <div class="upload-box" id="dropzone" onclick="document.getElementById('file-input').click()">
+            <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+            <div class="upload-icon">📁</div>
+            <h3 class="upload-title">ลากไฟล์ภาพมาวางที่นี่ หรือคลิกเพื่อเลือกไฟล์</h3>
+            <p class="upload-desc">รองรับไฟล์ .JPG, .JPEG, .PNG, .WEBP ความละเอียดสูง</p>
+          </div>
+
+          <div id="upload-preview-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;"></div>
+
+          <button id="btn-submit-upload" class="btn-login" style="display: none;">
+            <span>🚀 เริ่มอัปโหลดภาพ</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TAB 4: TRASH / DELETED ARCHIVE -->
+      <section id="tab-trash" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">ถังขยะและคลังสำรองภาพที่ถูกลบ (.deleted_photos)</h2>
+            <p class="section-desc">เมื่อลบภาพจากระบบ ภาพจะถูกย้ายมาเก็บไว้ที่นี่อย่างปลอดภัย คุณสามารถกด "กู้คืน" ได้ตลอดเวลา</p>
+          </div>
+        </div>
+
+        <div class="photos-grid" id="trash-photos-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- SELECTOR MODAL (Used for selecting Hero or Thumbnails) -->
+  <div class="admin-modal-overlay" id="selector-modal">
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="selector-modal-title">เลือกภาพสำหรับสไลด์</h3>
+        <button class="btn-modal-close" onclick="closeSelectorModal()">✕</button>
+      </div>
+      <div class="admin-modal-body">
+        <div class="modal-gallery-selector" id="modal-selector-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+      <div class="admin-modal-footer">
+        <button class="btn-header" onclick="closeSelectorModal()">ยกเลิก</button>
+        <button class="btn-header" style="background: var(--gold-primary); color: #000; font-weight: 600;" id="btn-confirm-selector">ยืนยันเลือกภาพ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN LIGHTBOX -->
+  <div id="image-lightbox" onclick="this.classList.remove('active')">
+    <img id="lightbox-img" src="" alt="Fullscreen Preview">
+  </div>
+
+  <script>
+    // State
+    let catalogData = { categories: [], slides: [], branding: {} };
+    let currentCategoryFilter = 'all';
+    let currentSearchTerm = '';
+    let pendingUploadFiles = [];
+
+    // Modal selection state
+    let activeModalContext = null; // { slideIdx, type: 'hero' | 'thumbs', selected: [] }
+
+    // Check existing auth
+    const token = sessionStorage.getItem('rathcharot_admin_token');
+    if (token) {
+      showAdminApp();
+    }
+
+    // Login Form Handler
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          sessionStorage.setItem('rathcharot_admin_token', data.token);
+          showToast('เข้าสู่ระบบสำเร็จ ยินดีต้อนรับครับ', 'success');
+          showAdminApp();
+        } else {
+          showToast(data.message || 'รหัสผ่านไม่ถูกต้อง', 'error');
+        }
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์', 'error');
+      }
+    });
+
+    // Logout
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('rathcharot_admin_token');
+      document.getElementById('admin-app').style.display = 'none';
+      document.getElementById('login-section').style.display = 'flex';
+      showToast('ออกจากระบบเรียบร้อยแล้ว', 'info');
+    });
+
+    // Sync All
+    document.getElementById('btn-sync-all').addEventListener('click', async () => {
+      showToast('กำลังสแกนและซิงค์โฟลเดอร์ภาพ...', 'info');
+      try {
+        const res = await fetch('/api/resync', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+        const data = await res.json();
+        showToast(data.message, 'success');
+        await loadCatalogData();
+      } catch (e) {
+        showToast('เกิดข้อผิดพลาดในการซิงค์ข้อมูล', 'error');
+      }
+    });
+
+    function showAdminApp() {
+      document.getElementById('login-section').style.display = 'none';
+      document.getElementById('admin-app').style.display = 'flex';
+      loadCatalogData();
+      loadDeletedPhotos();
+    }
+
+    // Tab Navigation
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.getAttribute('data-tab');
+        switchTab(targetTab);
+      });
+    });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.nav-tab-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-tab') === tabId);
+      });
+      document.querySelectorAll('.tab-content').forEach(c => {
+        c.classList.toggle('active', c.id === tabId);
+      });
+      if (tabId === 'tab-trash') {
+        loadDeletedPhotos();
+      }
+    }
+
+    // Load Data from Server
+    async function loadCatalogData() {
+      try {
+        const res = await fetch('/api/catalog-data');
+        catalogData = await res.json();
+        renderSlidesList();
+        renderGalleryCategoryPills();
+        renderGalleryPhotos();
+        renderUploadCategoryOptions();
+        updateGalleryCountLabel();
+      } catch (err) {
+        showToast('โหลดข้อมูลแคตตาล็อกล้มเหลว', 'error');
+      }
+    }
+
+    function updateGalleryCountLabel() {
+      const totalPhotos = catalogData.categories.reduce((acc, c) => acc + (c.images ? c.images.length : 0), 0);
+      document.getElementById('tab-gallery-label').textContent = `📸 คลังภาพทั้งหมด (${totalPhotos} ภาพ)`;
+    }
+
+    // 1. Render Slides Manager
+    function renderSlidesList() {
+      const container = document.getElementById('slides-list-container');
+      container.innerHTML = '';
+
+      if (!catalogData.slides || catalogData.slides.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); text-align: center;">ไม่พบข้อมูลสไลด์</p>';
+        return;
+      }
+
+      // Filter slides that have visual presentation (Slides 1 to 7)
+      const visualSlides = catalogData.slides.filter(s => s.slide_index >= 1 && s.slide_index <= 7);
+
+      visualSlides.forEach(slide => {
+        const cat = catalogData.categories.find(c => c.id === slide.category_id) || {};
+        const catTitle = cat.title || slide.category_id;
+        const totalCatImages = cat.images ? cat.images.length : 0;
+
+        const card = document.createElement('div');
+        card.className = 'slide-admin-card';
+        card.innerHTML = `
+          <div class="slide-info-col">
+            <span class="slide-badge-num">✨ สไลด์ที่ 0${slide.slide_index}</span>
+            <h3 class="slide-admin-title">${slide.title}</h3>
+            <span class="slide-cat-badge">📂 ${catTitle} (${totalCatImages} ภาพ)</span>
+          </div>
+
+          <div class="slide-visuals-col">
+            <div class="slide-hero-preview-box" title="คลิกดูภาพขนาดใหญ่" onclick="openLightbox('${slide.hero_src}')">
+              <span class="tag-hero-main">⭐ ภาพหลัก Hero</span>
+              <img src="${slide.hero_src}" alt="Hero Image" onerror="this.src='%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg'">
+            </div>
+
+            <div class="slide-thumbs-preview-group">
+              ${(slide.thumbs || []).map((t, idx) => `
+                <div class="thumb-preview-box" onclick="openLightbox('${t}')" title="ภาพตัวอย่างลำดับที่ ${idx+1}">
+                  <img src="${t}" alt="Thumb ${idx+1}">
+                  <span class="thumb-num-badge">#${idx+1}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="slide-actions-col">
+            <button class="btn-slide-action" onclick="openHeroSelector(${slide.slide_index})">
+              <span>🖼️ เปลี่ยนภาพหลัก</span>
+            </button>
+            <button class="btn-slide-action" onclick="openThumbsSelector(${slide.slide_index})">
+              <span>🎞️ เลือก 4 ภาพตัวอย่าง</span>
+            </button>
+            <button class="btn-slide-action btn-slide-save" onclick="saveSlideVisualDirect(${slide.slide_index})">
+              <span>💾 บันทึกสไลด์นี้</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // 2. Render Gallery
+    function renderGalleryCategoryPills() {
+      const container = document.getElementById('gallery-category-pills');
+      const totalPhotos = catalogData.categories.reduce((acc, c) => acc + (c.images ? c.images.length : 0), 0);
+
+      let html = `<button class="pill-btn ${currentCategoryFilter === 'all' ? 'active' : ''}" onclick="filterCategory('all')">ทั้งหมด (${totalPhotos})</button>`;
+      catalogData.categories.forEach(cat => {
+        const count = cat.images ? cat.images.length : 0;
+        const shortName = cat.title.split('&')[0].split(':')[0].trim();
+        html += `<button class="pill-btn ${currentCategoryFilter === cat.id ? 'active' : ''}" onclick="filterCategory('${cat.id}')">${shortName} (${count})</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function filterCategory(catId) {
+      currentCategoryFilter = catId;
+      renderGalleryCategoryPills();
+      renderGalleryPhotos();
+    }
+
+    document.getElementById('gallery-search-input').addEventListener('input', (e) => {
+      currentSearchTerm = e.target.value.toLowerCase().trim();
+      renderGalleryPhotos();
+    });
+
+    function renderGalleryPhotos() {
+      const grid = document.getElementById('gallery-photos-grid');
+      grid.innerHTML = '';
+
+      let photosToDisplay = [];
+      catalogData.categories.forEach(cat => {
+        if (currentCategoryFilter === 'all' || currentCategoryFilter === cat.id) {
+          if (cat.images) {
+            cat.images.forEach(img => {
+              photosToDisplay.push({
+                ...img,
+                categoryId: cat.id,
+                categoryTitle: cat.title
+              });
+            });
+          }
+        }
+      });
+
+      if (currentSearchTerm) {
+        photosToDisplay = photosToDisplay.filter(p => p.filename.toLowerCase().includes(currentSearchTerm));
+      }
+
+      if (photosToDisplay.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">ไม่พบภาพที่ตรงกับเงื่อนไข</p>';
+        return;
+      }
+
+      photosToDisplay.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
+        card.innerHTML = `
+          <div class="photo-card-img-wrap" onclick="openLightbox('${p.encoded_path}')">
+            <span class="card-cat-tag">${p.categoryTitle.split(':')[0].split('&')[0].trim()}</span>
+            <img src="${p.encoded_path}" alt="${p.filename}" loading="lazy">
+          </div>
+          <div class="photo-card-body">
+            <span class="photo-name" title="${p.filename}">${p.filename}</span>
+            <div class="photo-card-actions">
+              <button class="btn-card-action btn-set-hero" onclick="setAsSlideHero('${p.categoryId}', '${p.encoded_path}')" title="ตั้งเป็นภาพหลักของสไลด์ในหมวดนี้">
+                <span>⭐ ตั้งเป็นภาพหลักสไลด์</span>
+              </button>
+              <button class="btn-card-action" onclick="addToSlideThumbs('${p.categoryId}', '${p.encoded_path}')" title="เพิ่มเข้า 4 ภาพตัวอย่างในสไลด์">
+                <span>🎞️ ใส่ใน Thumbnails</span>
+              </button>
+              <button class="btn-card-action btn-delete-photo" onclick="deletePhoto('${p.categoryId}', '${p.filename}')">
+                <span>🗑️ ลบภาพนี้</span>
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Modal Selector Handlers
+    function openHeroSelector(slideIdx) {
+      const slide = catalogData.slides.find(s => s.slide_index === slideIdx);
+      if (!slide) return;
+      const cat = catalogData.categories.find(c => c.id === slide.category_id);
+      if (!cat) return;
+
+      activeModalContext = {
+        slideIdx: slideIdx,
+        type: 'hero',
+        selected: [slide.hero_src]
+      };
+
+      document.getElementById('selector-modal-title').textContent = `เลือกภาพหลักสำหรับสไลด์ที่ ${slideIdx} (${cat.title.split('&')[0]})`;
+      const grid = document.getElementById('modal-selector-grid');
+      grid.innerHTML = '';
+
+      cat.images.forEach(img => {
+        const item = document.createElement('div');
+        const isSelected = img.encoded_path === slide.hero_src;
+        item.className = `selector-item ${isSelected ? 'selected' : ''}`;
+        item.innerHTML = `<img src="${img.encoded_path}" alt="${img.filename}">`;
+        item.onclick = () => {
+          document.querySelectorAll('.selector-item').forEach(el => el.classList.remove('selected'));
+          item.classList.add('selected');
+          activeModalContext.selected = [img.encoded_path];
+        };
+        grid.appendChild(item);
+      });
+
+      document.getElementById('selector-modal').classList.add('active');
+    }
+
+    function openThumbsSelector(slideIdx) {
+      const slide = catalogData.slides.find(s => s.slide_index === slideIdx);
+      if (!slide) return;
+      const cat = catalogData.categories.find(c => c.id === slide.category_id);
+      if (!cat) return;
+
+      activeModalContext = {
+        slideIdx: slideIdx,
+        type: 'thumbs',
+        selected: [...(slide.thumbs || [])]
+      };
+
+      document.getElementById('selector-modal-title').textContent = `เลือก 4 ภาพตัวอย่างสำหรับสไลด์ที่ ${slideIdx} (เลือกได้สูงสุด 4 ภาพ)`;
+      const grid = document.getElementById('modal-selector-grid');
+      grid.innerHTML = '';
+
+      cat.images.forEach(img => {
+        const item = document.createElement('div');
+        const isSelected = activeModalContext.selected.includes(img.encoded_path);
+        item.className = `selector-item ${isSelected ? 'selected' : ''}`;
+        item.innerHTML = `<img src="${img.encoded_path}" alt="${img.filename}">`;
+        item.onclick = () => {
+          if (activeModalContext.selected.includes(img.encoded_path)) {
+            activeModalContext.selected = activeModalContext.selected.filter(p => p !== img.encoded_path);
+            item.classList.remove('selected');
+          } else {
+            if (activeModalContext.selected.length >= 4) {
+              showToast('สามารถเลือกภาพตัวอย่างได้สูงสุด 4 ภาพครับ', 'error');
+              return;
+            }
+            activeModalContext.selected.push(img.encoded_path);
+            item.classList.add('selected');
+          }
+        };
+        grid.appendChild(item);
+      });
+
+      document.getElementById('selector-modal').classList.add('active');
+    }
+
+    function closeSelectorModal() {
+      document.getElementById('selector-modal').classList.remove('active');
+      activeModalContext = null;
+    }
+
+    document.getElementById('btn-confirm-selector').addEventListener('click', async () => {
+      if (!activeModalContext) return;
+      const slide = catalogData.slides.find(s => s.slide_index === activeModalContext.slideIdx);
+      if (!slide) return;
+
+      if (activeModalContext.type === 'hero') {
+        if (!activeModalContext.selected.length) {
+          showToast('กรุณาเลือกภาพอย่างน้อย 1 ภาพครับ', 'error');
+          return;
+        }
+        slide.hero_src = activeModalContext.selected[0];
+      } else if (activeModalContext.type === 'thumbs') {
+        slide.thumbs = [...activeModalContext.selected];
+      }
+
+      closeSelectorModal();
+      renderSlidesList();
+      await saveSlideVisualDirect(slide.slide_index);
+    });
+
+    async function saveSlideVisualDirect(slideIdx) {
+      const slide = catalogData.slides.find(s => s.slide_index === slideIdx);
+      if (!slide) return;
+      const cat = catalogData.categories.find(c => c.id === slide.category_id);
+      const totalCount = cat && cat.images ? cat.images.length : null;
+
+      try {
+        const res = await fetch('/api/save-slide', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            slide_index: slideIdx,
+            hero_src: slide.hero_src,
+            hero_alt: slide.hero_alt || 'ภาพบรรยากาศพิธีการ',
+            thumbs: slide.thumbs || [],
+            total_count: totalCount
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`บันทึกสไลด์ที่ ${slideIdx} เรียบร้อยแล้ว`, 'success');
+        } else {
+          showToast(data.message || 'บันทึกล้มเหลว', 'error');
+        }
+      } catch (e) {
+        showToast('เกิดข้อผิดพลาดในการบันทึกสไลด์', 'error');
+      }
+    }
+
+    // Set Hero Directly from Gallery Card
+    async function setAsSlideHero(catId, encodedPath) {
+      const slide = catalogData.slides.find(s => s.category_id === catId);
+      if (!slide) {
+        showToast('ไม่พบสไลด์ที่เชื่อมกับหมวดนี้', 'error');
+        return;
+      }
+      slide.hero_src = encodedPath;
+      renderSlidesList();
+      await saveSlideVisualDirect(slide.slide_index);
+      showToast(`ตั้งเป็นภาพหลักของสไลด์ที่ ${slide.slide_index} สำเร็จ`, 'success');
+    }
+
+    // Add to Thumbs Directly from Gallery Card
+    async function addToSlideThumbs(catId, encodedPath) {
+      const slide = catalogData.slides.find(s => s.category_id === catId);
+      if (!slide) {
+        showToast('ไม่พบสไลด์ที่เชื่อมกับหมวดนี้', 'error');
+        return;
+      }
+      if (!slide.thumbs) slide.thumbs = [];
+      if (slide.thumbs.includes(encodedPath)) {
+        showToast('ภาพนี้มีอยู่ในภาพตัวอย่างของสไลด์อยู่แล้วครับ', 'info');
+        return;
+      }
+      if (slide.thumbs.length >= 4) {
+        slide.thumbs.shift(); // remove oldest to keep 4
+      }
+      slide.thumbs.push(encodedPath);
+      renderSlidesList();
+      await saveSlideVisualDirect(slide.slide_index);
+      showToast(`เพิ่มเข้าภาพตัวอย่างของสไลด์ที่ ${slide.slide_index} สำเร็จ`, 'success');
+    }
+
+    // Delete Photo
+    async function deletePhoto(catId, filename) {
+      if (!confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบภาพ "${filename}" ?\n(ภาพจะถูกย้ายไปเก็บที่ .deleted_photos เพื่อความปลอดภัย)`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/delete-photo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ category_id: catId, filename: filename })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(data.message, 'success');
+          await loadCatalogData();
+          loadDeletedPhotos();
+        } else {
+          showToast(data.message || 'ลบภาพไม่สำเร็จ', 'error');
+        }
+      } catch (e) {
+        showToast('เกิดข้อผิดพลาดในการลบภาพ', 'error');
+      }
+    }
+
+    // 3. Upload Manager
+    function renderUploadCategoryOptions() {
+      const select = document.getElementById('upload-category-select');
+      select.innerHTML = '';
+      catalogData.categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.id;
+        opt.textContent = `${cat.title} (${cat.folder})`;
+        select.appendChild(opt);
+      });
+    }
+
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file-input');
+
+    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      handleFilesSelected(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', (e) => {
+      handleFilesSelected(e.target.files);
+    });
+
+    function handleFilesSelected(files) {
+      pendingUploadFiles = Array.from(files);
+      const list = document.getElementById('upload-preview-list');
+      list.innerHTML = '';
+      if (pendingUploadFiles.length > 0) {
+        pendingUploadFiles.forEach((file, idx) => {
+          const item = document.createElement('div');
+          item.style.cssText = 'display: flex; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 4px; font-size: 0.85rem;';
+          item.innerHTML = `<span>📷 ${file.name}</span><span style="color: var(--text-muted);">${(file.size / 1024).toFixed(1)} KB</span>`;
+          list.appendChild(item);
+        });
+        document.getElementById('btn-submit-upload').style.display = 'block';
+      } else {
+        document.getElementById('btn-submit-upload').style.display = 'none';
+      }
+    }
+
+    document.getElementById('btn-submit-upload').addEventListener('click', async () => {
+      const catId = document.getElementById('upload-category-select').value;
+      if (!catId || pendingUploadFiles.length === 0) return;
+
+      const btn = document.getElementById('btn-submit-upload');
+      btn.disabled = true;
+      btn.textContent = '⏳ กำลังอัปโหลด...';
+
+      let successCount = 0;
+      for (const file of pendingUploadFiles) {
+        try {
+          const base64 = await readFileAsBase64(file);
+          const res = await fetch('/api/upload-photo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              category_id: catId,
+              filename: file.name,
+              data_base64: base64
+            })
+          });
+          const data = await res.json();
+          if (data.success) successCount++;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      btn.disabled = false;
+      btn.textContent = '🚀 เริ่มอัปโหลดภาพ';
+      pendingUploadFiles = [];
+      document.getElementById('upload-preview-list').innerHTML = '';
+      btn.style.display = 'none';
+
+      showToast(`อัปโหลดสำเร็จทั้งหมด ${successCount} ภาพ`, 'success');
+      await loadCatalogData();
+      switchTab('tab-gallery');
+    });
+
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // 4. Trash Manager (Restore Deleted Photos)
+    async function loadDeletedPhotos() {
+      const grid = document.getElementById('trash-photos-grid');
+      try {
+        const res = await fetch('/api/deleted-photos');
+        const data = await res.json();
+        const photos = data.deleted_photos || [];
+        document.getElementById('tab-trash-label').textContent = `🗑️ ถังขยะ (${photos.length} ภาพ)`;
+
+        grid.innerHTML = '';
+        if (photos.length === 0) {
+          grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">ถังขยะว่างเปล่า ไม่มีภาพที่ถูกลบ</p>';
+          return;
+        }
+
+        photos.forEach(p => {
+          const card = document.createElement('div');
+          card.className = 'photo-card';
+          card.innerHTML = `
+            <div class="photo-card-img-wrap" onclick="openLightbox('${p.deleted_path}')">
+              <span class="card-cat-tag" style="border-color: var(--danger); color: #ffb4a2;">หมวด: ${p.category_id}</span>
+              <img src="${p.deleted_path}" alt="${p.filename}">
+            </div>
+            <div class="photo-card-body">
+              <span class="photo-name">${p.filename}</span>
+              <button class="btn-card-action" style="background: rgba(42,157,143,0.2); border-color: #2a9d8f; color: #fff; font-weight: 500;" onclick="restorePhoto('${p.category_id}', '${p.filename}')">
+                <span>♻️ กู้คืนภาพนี้</span>
+              </button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (e) {
+        console.error("Error loading deleted photos:", e);
+      }
+    }
+
+    async function restorePhoto(catId, filename) {
+      try {
+        const res = await fetch('/api/restore-photo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ category_id: catId, filename: filename })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(data.message, 'success');
+          await loadCatalogData();
+          loadDeletedPhotos();
+        } else {
+          showToast(data.message || 'กู้คืนไม่สำเร็จ', 'error');
+        }
+      } catch (e) {
+        showToast('เกิดข้อผิดพลาดในการกู้คืน', 'error');
+      }
+    }
+
+    // Lightbox
+    function openLightbox(src) {
+      if (!src) return;
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('image-lightbox').classList.add('active');
+    }
+
+    // Toast Utility
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      const icon = type === 'success' ? '✓' : type === 'error' ? '⚠' : 'ℹ';
+      toast.innerHTML = `<span style="font-weight: bold;">${icon}</span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
