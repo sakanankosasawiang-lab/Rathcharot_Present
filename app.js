@@ -42,7 +42,7 @@ function initApp() {
 }
 
 // --------------------------------------------------------------------------
-// Canva-Style Fixed Aspect Ratio Auto-Scaling Engine
+// Canva-Style Fixed Aspect Ratio Auto-Scaling Engine (with Mobile Native Mode)
 // --------------------------------------------------------------------------
 function fitStageToScreen() {
   const stage = document.querySelector('.presentation-stage');
@@ -58,7 +58,20 @@ function fitStageToScreen() {
     return;
   }
 
-  // Base canvas dimension (16:9 ratio)
+  // Mobile check: If screen is phone/tablet portrait (<= 900px or portrait), use 100% native mobile card layout
+  const isMobile = window.innerWidth <= 900 || window.matchMedia('(orientation: portrait)').matches;
+  if (isMobile) {
+    document.body.classList.add('mobile-layout');
+    stage.style.transform = 'none';
+    stage.style.width = '100%';
+    stage.style.height = '100%';
+    stage.style.maxWidth = '100%';
+    return;
+  } else {
+    document.body.classList.remove('mobile-layout');
+  }
+
+  // Base canvas dimension (16:9 ratio) for Desktop Widescreen
   const baseWidth = 1440;
   const baseHeight = 810;
 
@@ -431,12 +444,15 @@ function prevLightboxImage() {
 }
 
 // --------------------------------------------------------------------------
-// Full Photo Gallery Modal (Organized by Folder)
+// Full Photo Gallery Modal (Organized by Folder & Crash-Proof Chunked Engine)
 // --------------------------------------------------------------------------
+let currentGalleryCat = 'all';
+let currentGalleryPage = 1;
+const GALLERY_PAGE_SIZE = 16; // 16 images per chunk protects iOS/Mobile WebKit from Jetsam OOM crashes!
+
 function buildGalleryModal() {
   const tabsContainer = document.getElementById('galleryTabs');
-  const gridContainer = document.getElementById('galleryGrid');
-  if (!tabsContainer || !gridContainer) return;
+  if (!tabsContainer) return;
 
   let tabsHtml = `<button class="gallery-tab-btn active" data-cat="all">ทั้งหมด (${CATALOG_CATEGORIES.reduce((acc, c) => acc + c.images.length, 0)} ภาพ)</button>`;
   CATALOG_CATEGORIES.forEach(cat => {
@@ -448,45 +464,83 @@ function buildGalleryModal() {
     btn.addEventListener('click', () => {
       tabsContainer.querySelectorAll('.gallery-tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderGalleryGrid(btn.dataset.cat);
+      renderGalleryGrid(btn.dataset.cat, false);
     });
   });
 
-  renderGalleryGrid('all');
+  // Note: We deliberately DO NOT render images into the DOM on page load!
+  // This keeps initial page weight feather-light on mobile and prevents memory bloat.
 }
 
-function renderGalleryGrid(selectedCatId) {
+function renderGalleryGrid(selectedCatId, isAppend = false) {
   const gridContainer = document.getElementById('galleryGrid');
   if (!gridContainer) return;
 
-  let displayImages = [];
+  if (!isAppend) {
+    currentGalleryCat = selectedCatId;
+    currentGalleryPage = 1;
+    gridContainer.innerHTML = '';
+  }
+
+  let allImagesForCat = [];
   if (selectedCatId === 'all') {
     CATALOG_CATEGORIES.forEach(cat => {
       cat.images.forEach(img => {
-        displayImages.push({ ...img, catTitle: cat.title });
+        allImagesForCat.push({ ...img, catTitle: cat.title });
       });
     });
   } else {
     const cat = CATALOG_CATEGORIES.find(c => c.id === selectedCatId);
     if (cat) {
-      displayImages = cat.images.map(img => ({ ...img, catTitle: cat.title }));
+      allImagesForCat = cat.images.map(img => ({ ...img, catTitle: cat.title }));
     }
   }
 
-  gridContainer.innerHTML = displayImages.map((img, idx) => `
-    <div class="gallery-card" data-idx="${idx}" title="${img.filename}">
-      <img src="${img.encoded_path}" alt="${img.filename}" loading="lazy" />
-      <span class="gallery-card-zoom-icon">🔍</span>
-      <div class="gallery-card-badge">${img.catTitle || ''} • ภาพที่ ${idx + 1}</div>
-    </div>
-  `).join('');
+  // Remove existing Load More button if present
+  const existingLoadMore = document.getElementById('btnGalleryLoadMoreWrap');
+  if (existingLoadMore) existingLoadMore.remove();
 
-  gridContainer.querySelectorAll('.gallery-card').forEach(card => {
+  const total = allImagesForCat.length;
+  const startIndex = isAppend ? (currentGalleryPage - 1) * GALLERY_PAGE_SIZE : 0;
+  const endIndex = Math.min(total, currentGalleryPage * GALLERY_PAGE_SIZE);
+
+  const newCards = allImagesForCat.slice(startIndex, endIndex);
+
+  newCards.forEach((img, idxOffset) => {
+    const globalIdx = startIndex + idxOffset;
+    const card = document.createElement('div');
+    card.className = 'gallery-card';
+    card.dataset.idx = globalIdx;
+    card.title = img.filename;
+    card.innerHTML = `
+      <img src="${img.encoded_path}" alt="${img.filename}" loading="lazy" decoding="async" />
+      <span class="gallery-card-zoom-icon">🔍</span>
+      <div class="gallery-card-badge">${img.catTitle || ''} • ภาพที่ ${globalIdx + 1}</div>
+    `;
     card.addEventListener('click', () => {
-      const idx = parseInt(card.dataset.idx, 10);
-      openLightbox(displayImages, idx, displayImages[idx]?.catTitle || 'คลังภาพผลงาน');
+      openLightbox(allImagesForCat, globalIdx, allImagesForCat[globalIdx]?.catTitle || 'คลังภาพผลงาน');
     });
+    gridContainer.appendChild(card);
   });
+
+  // If more photos remain in this category, show luxury "Load More" button
+  if (endIndex < total) {
+    const remaining = total - endIndex;
+    const loadMoreWrap = document.createElement('div');
+    loadMoreWrap.id = 'btnGalleryLoadMoreWrap';
+    loadMoreWrap.style.cssText = 'grid-column: 1 / -1; text-align: center; padding: 24px 0 32px 0;';
+    loadMoreWrap.innerHTML = `
+      <button class="btn-icon btn-icon-gold" id="btnGalleryLoadMore" style="padding: 12px 28px; font-size: 0.95rem; margin: 0 auto; box-shadow: 0 6px 20px rgba(0,0,0,0.8); cursor: pointer;">
+        📥 โหลดภาพเพิ่มเติม (แสดงแล้ว ${endIndex}/${total} ภาพ • เหลืออีก ${remaining} ภาพ)
+      </button>
+    `;
+    gridContainer.appendChild(loadMoreWrap);
+
+    document.getElementById('btnGalleryLoadMore')?.addEventListener('click', () => {
+      currentGalleryPage++;
+      renderGalleryGrid(selectedCatId, true);
+    });
+  }
 }
 
 function openGalleryModal(catId = 'all') {
@@ -496,16 +550,28 @@ function openGalleryModal(catId = 'all') {
 
   const tabs = document.querySelectorAll('.gallery-tab-btn');
   tabs.forEach(tab => {
-    if (tab.dataset.cat === catId) {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      renderGalleryGrid(catId);
+    const isTarget = tab.dataset.cat === catId;
+    tab.classList.toggle('active', isTarget);
+    if (isTarget) {
+      tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
   });
+
+  renderGalleryGrid(catId, false);
 }
 
 function closeGalleryModal() {
-  document.getElementById('galleryModal')?.classList.remove('active');
+  const modal = document.getElementById('galleryModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+
+  // Immediately release heavy images from memory to free mobile WebKit RAM!
+  setTimeout(() => {
+    const gridContainer = document.getElementById('galleryGrid');
+    if (gridContainer && !modal.classList.contains('active')) {
+      gridContainer.innerHTML = '';
+    }
+  }, 350);
 }
 
 // --------------------------------------------------------------------------
