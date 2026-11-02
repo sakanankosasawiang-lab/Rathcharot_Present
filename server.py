@@ -118,20 +118,21 @@ def update_slide_in_html(slide_idx, hero_src, hero_alt, thumbs, total_count=None
     suffix = m.group(3)
 
     if hero_src:
-        hero_pattern = r'(<img class="hero-img"\s+src=")[^"]*("\s+alt=")[^"]*(")'
+        hero_pattern = r'(<img class="[^"]*hero-img[^"]*"\s+src=")[^"]*("\s+alt=")[^"]*(")'
         def hero_repl(match):
             alt_text = hero_alt if hero_alt is not None else "ภาพบรรยากาศพิธีการ"
             return f'{match.group(1)}{hero_src}{match.group(2)}{alt_text}{match.group(3)}'
         slide_body = re.sub(hero_pattern, hero_repl, slide_body, count=1)
 
     if thumbs is not None:
-        thumbs_html = '<div class="slide-thumb-strip">\n'
+        strip_class = 'slide-thumb-strip slide-thumb-strip-portrait' if slide_idx == 7 else 'slide-thumb-strip'
+        thumbs_html = f'<div class="{strip_class}">\n'
         for i, t in enumerate(thumbs):
             active_cls = ' active' if i == 0 else ''
             thumbs_html += f'                  <div class="slide-thumb-item{active_cls}" data-src="{t}"><img src="{t}"></div>\n'
         thumbs_html += '                </div>'
         
-        strip_pattern = r'<div class="slide-thumb-strip">[\s\S]*?</div>(?=\s*<div class="visual-actions-row">)'
+        strip_pattern = r'<div class="slide-thumb-strip[^"]*">[\s\S]*?</div>(?=\s*<div class="visual-actions-row">)'
         slide_body = re.sub(strip_pattern, thumbs_html, slide_body, count=1)
 
     if total_count is not None:

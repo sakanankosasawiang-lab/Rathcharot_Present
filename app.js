@@ -14,7 +14,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initApp() {
   slides = Array.from(document.querySelectorAll('.slide'));
-  updateSlideView(0);
+  
+  // Support direct slide linking via ?slide=X or #slide=X
+  const params = new URLSearchParams(window.location.search);
+  const slideParam = params.get('slide');
+  const hashMatch = window.location.hash.match(/slide[=-]?(\d+)/i);
+  let initialSlide = 0;
+  if (slideParam !== null) {
+    initialSlide = parseInt(slideParam, 10);
+  } else if (hashMatch) {
+    initialSlide = parseInt(hashMatch[1], 10);
+  }
+  updateSlideView(isNaN(initialSlide) ? 0 : Math.max(0, Math.min(initialSlide, slides.length - 1)));
+  
   setupEventListeners();
   setupKeyboardNav();
   setupTouchNav();

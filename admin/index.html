@@ -1161,6 +1161,7 @@
         const cat = catalogData.categories.find(c => c.id === slide.category_id) || {};
         const catTitle = cat.title || slide.category_id;
         const totalCatImages = cat.images ? cat.images.length : 0;
+        const isPortrait = slide.slide_index === 7;
 
         const card = document.createElement('div');
         card.className = 'slide-admin-card';
@@ -1169,18 +1170,19 @@
             <span class="slide-badge-num">✨ สไลด์ที่ 0${slide.slide_index}</span>
             <h3 class="slide-admin-title">${slide.title}</h3>
             <span class="slide-cat-badge">📂 ${catTitle} (${totalCatImages} ภาพ)</span>
+            ${isPortrait ? '<span style="font-size:0.75rem; color:var(--gold-primary); margin-top:4px;">📐 แสดงผลแบบแนวตั้ง (Portrait)</span>' : ''}
           </div>
 
           <div class="slide-visuals-col">
-            <div class="slide-hero-preview-box" title="คลิกดูภาพขนาดใหญ่" onclick="openLightbox('${slide.hero_src}')">
+            <div class="slide-hero-preview-box" style="${isPortrait ? 'width: 150px; height: 195px;' : 'width: 220px; height: 135px;'}" title="คลิกดูภาพขนาดใหญ่" onclick="openLightbox('${slide.hero_src}')">
               <span class="tag-hero-main">⭐ ภาพหลัก Hero</span>
-              <img src="${slide.hero_src}" alt="Hero Image" onerror="this.src='%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg'">
+              <img src="${slide.hero_src}" alt="Hero Image" style="${isPortrait ? 'object-position: top center;' : ''}" onerror="this.src='%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022147.jpg'">
             </div>
 
-            <div class="slide-thumbs-preview-group">
+            <div class="slide-thumbs-preview-group" style="${isPortrait ? 'grid-template-columns: repeat(2, 75px);' : ''}">
               ${(slide.thumbs || []).map((t, idx) => `
-                <div class="thumb-preview-box" onclick="openLightbox('${t}')" title="ภาพตัวอย่างลำดับที่ ${idx+1}">
-                  <img src="${t}" alt="Thumb ${idx+1}">
+                <div class="thumb-preview-box" style="${isPortrait ? 'width: 75px; height: 92px;' : ''}" onclick="openLightbox('${t}')" title="ภาพตัวอย่างลำดับที่ ${idx+1}">
+                  <img src="${t}" alt="Thumb ${idx+1}" style="${isPortrait ? 'object-position: top center;' : ''}">
                   <span class="thumb-num-badge">#${idx+1}</span>
                 </div>
               `).join('')}
