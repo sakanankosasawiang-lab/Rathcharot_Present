@@ -464,6 +464,8 @@ function renderGalleryGrid(selectedCatId) {
   gridContainer.innerHTML = displayImages.map((img, idx) => `
     <div class="gallery-card" data-idx="${idx}" title="${img.filename}">
       <img src="${img.encoded_path}" alt="${img.filename}" loading="lazy" />
+      <span class="gallery-card-zoom-icon">🔍</span>
+      <div class="gallery-card-badge">${img.catTitle || ''} • ภาพที่ ${idx + 1}</div>
     </div>
   `).join('');
 
