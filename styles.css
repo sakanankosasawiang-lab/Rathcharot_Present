@@ -136,7 +136,7 @@ body {
 .header-center-nav {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   flex: 1 1 auto;
   min-width: 0;
   justify-content: flex-start;
@@ -152,9 +152,9 @@ body {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(212, 175, 55, 0.22);
   color: var(--text-secondary);
-  padding: 4px 8px;
+  padding: 4px 7px;
   border-radius: 14px;
-  font-size: 0.72rem;
+  font-size: 0.71rem;
   font-family: var(--font-main);
   white-space: nowrap;
   cursor: pointer;
@@ -347,8 +347,8 @@ body {
    (Centered vertically in the safe zone: NEVER reaches corner arcs!)
    ========================================================================== */
 .slide-col-info {
-  flex: 0 0 520px;
-  max-width: 520px;
+  flex: 0 0 435px;
+  max-width: 435px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -516,8 +516,8 @@ body {
    (Guarantees QR Code NEVER Overlaps Content!)
    ========================================================================= */
 .slide-col-visual {
-  flex: 0 0 670px;
-  max-width: 670px;
+  flex: 1 1 740px;
+  max-width: 750px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -527,7 +527,7 @@ body {
 .hero-image-frame {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 465px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.9);
@@ -547,6 +547,19 @@ body {
   height: 100%;
   object-fit: cover;
   transition: opacity 0.25s ease, transform 0.35s ease;
+}
+
+.hero-image-frame-contain {
+  background: #0B0A09;
+}
+
+.hero-img-contain {
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+.hero-image-frame-contain:hover .hero-img-contain {
+  transform: scale(1.01) !important;
 }
 
 .hero-img:hover {
@@ -607,8 +620,8 @@ body {
 }
 
 .slide-thumb-item {
-  flex: 0 0 72px;
-  height: 48px;
+  flex: 0 0 76px;
+  height: 50px;
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -874,6 +887,29 @@ body {
   text-align: center;
 }
 
+/* Promotion Slide: Preserve 1522x1076 artwork intact & allow smooth 8-package thumb strip */
+.slide[data-category-id="promotion"] .hero-image-frame-contain {
+  background: #0c0a08;
+}
+
+.slide[data-category-id="promotion"] .slide-thumb-strip {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(197, 160, 89, 0.55) rgba(255, 255, 255, 0.05);
+  padding-bottom: 4px;
+}
+
+.slide[data-category-id="promotion"] .slide-thumb-item {
+  flex: 0 0 82px;
+  width: 82px;
+  height: 58px;
+}
+
+.slide[data-category-id="promotion"] .slide-thumb-item img {
+  object-fit: contain;
+  background: #0c0a08;
+}
+
 /* ==========================================================================
    Special Slide 0: Grand Cover Slide
    ========================================================================== */
@@ -925,8 +961,8 @@ body {
 
 .cover-by-rathcharot {
   position: absolute;
-  bottom: 38px;
-  right: 70px;
+  bottom: 42px;
+  right: 98px;
   font-family: var(--font-display);
   font-size: 0.88rem;
   color: rgba(212, 175, 55, 0.45);
@@ -954,18 +990,24 @@ body {
 }
 
 .cover-feature-card {
-  background: rgba(22, 20, 18, 0.75);
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: rgba(22, 20, 18, 0.78);
+  border: 1px solid rgba(212, 175, 55, 0.38);
   border-radius: 6px;
   padding: 12px 14px;
   text-align: left;
   transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 25;
 }
 
 .cover-feature-card:hover {
   border-color: var(--gold-primary);
-  background: rgba(30, 27, 23, 0.9);
-  transform: translateY(-2px);
+  background: rgba(34, 30, 25, 0.94);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 14px rgba(212, 175, 55, 0.22);
 }
 
 .cover-feature-card .card-icon {
@@ -985,6 +1027,19 @@ body {
   font-size: 0.78rem;
   color: var(--text-secondary);
   line-height: 1.38;
+  flex: 1;
+}
+
+.cover-feature-card .card-action-link {
+  margin-top: 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--gold-primary);
+  letter-spacing: 0.3px;
+}
+
+.cover-feature-card:hover .card-action-link {
+  color: var(--gold-light);
 }
 
 .cover-footer-row {
@@ -1287,13 +1342,22 @@ body {
 
 .lightbox-caption {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
-  padding: 12px 18px;
-  color: #FFF;
-  font-size: 0.88rem;
+  bottom: 10px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  background: rgba(10, 10, 12, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 999px;
+  padding: 4px 16px;
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
 }
 
 .lightbox-btn-prev, .lightbox-btn-next {
@@ -1977,13 +2041,26 @@ body.catalog-mode .slide {
     flex: none !important;
   }
 
+  .hero-image-frame-contain {
+    height: 255px !important;
+    max-height: 280px !important;
+  }
+
   .visual-footer-bar,
   .visual-footer-bar-portrait {
     width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
     flex-direction: column !important;
+    align-items: stretch !important;
     gap: 10px !important;
     margin-top: 0 !important;
+  }
+
+  .visual-footer-controls {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
 
   .slide-thumb-strip,
@@ -2116,6 +2193,11 @@ body.catalog-mode .slide {
     font-size: 0.76rem !important;
   }
 
+  .cover-feature-card .card-action-link {
+    font-size: 0.72rem !important;
+    margin-top: 6px !important;
+  }
+
   .cover-footer-row {
     flex-direction: column !important;
     gap: 10px !important;
@@ -2192,6 +2274,84 @@ body.catalog-mode .slide {
   .gallery-card-badge {
     font-size: 0.65rem !important;
     padding: 3px 6px !important;
+  }
+
+  /* Responsive Mobile Optimization for Contain Artworks (Coffin & Promotion 1522x1076) */
+  .hero-image-frame-contain {
+    width: 100% !important;
+    aspect-ratio: 1522 / 1076 !important;
+    height: auto !important;
+    min-height: 220px !important;
+    max-height: 310px !important;
+    background: #0c0a08 !important;
+  }
+
+  .slide-thumb-strip {
+    -webkit-overflow-scrolling: touch !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    scrollbar-width: thin !important;
+  }
+
+  .slide[data-category-id="promotion"] .slide-thumb-item {
+    flex: 0 0 78px !important;
+    width: 78px !important;
+    height: 56px !important;
+  }
+
+  .slide[data-category-id="promotion"] .slide-thumb-item img {
+    object-fit: contain !important;
+    background: #0c0a08 !important;
+  }
+
+  .slide[data-category-id="promotion"] .hero-zoom-badge {
+    top: 6px !important;
+    right: 6px !important;
+    padding: 3px 7px !important;
+    font-size: 0.64rem !important;
+  }
+
+  .contact-qr-hub {
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+    gap: 10px !important;
+    justify-content: center !important;
+  }
+
+  .contact-qr-card {
+    flex: 1 1 120px !important;
+    max-width: 160px !important;
+    min-width: 0 !important;
+  }
+
+  /* Responsive Mobile Lightbox Styling */
+  .lightbox-body {
+    padding: 48px 10px !important;
+  }
+
+  .lightbox-img-wrap {
+    max-width: 96vw !important;
+    max-height: 82vh !important;
+  }
+
+  .lightbox-img {
+    max-height: 82vh !important;
+  }
+
+  .lightbox-btn-prev,
+  .lightbox-btn-next {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 1.1rem !important;
+  }
+
+  .lightbox-btn-prev { left: 8px !important; }
+  .lightbox-btn-next { right: 8px !important; }
+
+  .lightbox-caption {
+    bottom: 8px !important;
+    padding: 3px 12px !important;
+    font-size: 0.82rem !important;
   }
 }
 

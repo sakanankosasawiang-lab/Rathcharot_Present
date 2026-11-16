@@ -65,7 +65,9 @@
       <button class="nav-pill" data-slide="5">04 วันฌาปนกิจ</button>
       <button class="nav-pill" data-slide="6">05 ลอยอังคาร</button>
       <button class="nav-pill" data-slide="7">06 ทีมช่างภาพ</button>
-      <button class="nav-pill" data-slide="8">07 ติดต่อเรา</button>
+      <button class="nav-pill" data-slide="8">07 หีบศพราชรถ</button>
+      <button class="nav-pill" data-slide="9">08 โปรโมชั่น</button>
+      <button class="nav-pill" data-slide="10">09 ติดต่อเรา</button>
     </nav>
 
     <!-- Header Actions -->
@@ -125,22 +127,25 @@
             <div class="ornate-line"></div>
           </div>
 
-          <!-- 3 Selling Pillars Highlight Cards (สำนวนคุณอมเรศ) -->
+          <!-- 3 Selling Pillars Highlight Cards (Clickable Links) -->
           <div class="cover-features-grid">
-            <div class="cover-feature-card">
+            <div class="cover-feature-card" role="button" tabindex="0" onclick="updateSlideView(2, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(2, { autoExpand: true });}">
               <div class="card-icon">📷</div>
               <div class="card-title">1. ถ่ายภาพงานพิธี</div>
               <div class="card-desc">ช่างภาพมืออาชีพประสบการณ์สูง เก็บบรรยากาศอย่างสมเกียรติ จัดองค์ประกอบภาพอย่างสวยงาม</div>
+              <div class="card-action-link">ดูผลงานถ่ายภาพพิธี ›</div>
             </div>
-            <div class="cover-feature-card">
+            <div class="cover-feature-card" role="button" tabindex="0" onclick="updateSlideView(4, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(4, { autoExpand: true });}">
               <div class="card-icon">🎬</div>
               <div class="card-title">2. ถ่ายวิดีโองานพิธี</div>
               <div class="card-desc">บันทึกไฟล์คุณภาพสูงระดับ 4K / Full HD คมชัดทุกรายละเอียด ตัดต่ออย่างประณีตโดยมืออาชีพ</div>
+              <div class="card-action-link">ดูภาพบรรยากาศ &amp; วิดีโอ ›</div>
             </div>
-            <div class="cover-feature-card">
+            <div class="cover-feature-card" role="button" tabindex="0" onclick="updateSlideView(1, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(1, { autoExpand: true });}">
               <div class="card-icon">📺</div>
-              <div class="card-title">3. จอทีวี 65" & Live Stream</div>
+              <div class="card-title">3. จอทีวี 65&quot; &amp; Live Stream</div>
               <div class="card-desc">ระบบสัญญาณมาตรฐานมืออาชีพ คมชัด เสถียร จาก Hollyland และ DJI พร้อมทีมงานเทคนิคดูแลตลอดงาน</div>
+              <div class="card-action-link">ดูระบบจอ &amp; ถ่ายทอดสด ›</div>
             </div>
           </div>
 
@@ -153,7 +158,7 @@
                 ▶ เริ่มรับชมแคตตาล็อก
               </button>
               <button class="btn-icon" onclick="openGalleryModal('all')" style="padding: 10px 20px; font-size: 0.95rem;">
-                🖼️ เปิดคลังภาพผลงาน (194 ภาพ)
+                🖼️ เปิดคลังภาพผลงาน (232 ภาพ)
               </button>
             </div>
             <div class="cover-qr-slot" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
@@ -204,16 +209,10 @@
 
             <span class="selling-section-label">ทำไมต้องเลือกบริการจอทีวี 65" & ถ่ายทอดสดกับเรา :</span>
             <ul class="why-us-list">
-              <li><strong>จอ 65 นิ้ว ภาพคมชัด High-Definition:</strong> เพื่อชม VDO พิธีการอย่างชัดเจนในพิธีสวดพระอภิธรรมหรืองานฌาปนกิจแบบ Real-Time รอบศาลา</li>
-              <li><strong>ระบบสัญญาณมาตรฐานมืออาชีพ คมชัด เสถียร:</strong> ถ่ายทอดสดด้วยอุปกรณ์มาตรฐานสากลจาก Hollyland และ DJI ป้องกันสัญญาณสะดุด</li>
-              <li><strong>พร้อมอุปกรณ์และทีมงานเทคนิคดูแลฟรีตลอดงาน:</strong> มี Switcher/OB ควบคุมตัดสลับมุมกล้องและดูแลระบบสัญญาณให้ฟรีตลอดพิธี</li>
-              <li><strong>บันทึกวิดีโอคุณภาพสูง ส่งมอบไฟล์ตัดต่อมืออาชีพ:</strong> บันทึกเทปพิธีการแบบ Full HD / 4K สำหรับเก็บไว้เป็นเกียรติประวัติครอบครัว</li>
+              <li><strong>จอ 65 นิ้ว ภาพคมชัด HD:</strong> ชม VDO พิธีสวดและงานฌาปนกิจได้ทั่วทั้งศาลาแบบ Real-Time</li>
+              <li><strong>ระบบสัญญาณเสถียรระดับมืออาชีพ:</strong> ส่งภาพและเสียงด้วยอุปกรณ์มาตรฐาน Hollyland และ DJI</li>
+              <li><strong>ทีม Switcher/OB ดูแลตลอดงาน:</strong> พร้อมบันทึกและตัดต่อไฟล์ 4K / Full HD เป็นเกียรติประวัติ</li>
             </ul>
-
-            <div class="info-accent-box">
-              <div class="box-title">ระบบสัญญาณมาตรฐานระดับโลก</div>
-              <div>บริการจอ 65 นิ้ว & Live Streaming ถ่ายทอดสดคมชัด เสถียร จาก Hollyland และ DJI พร้อมทีมงานเทคนิคดูแลตลอดงาน</div>
-            </div>
           </div>
 
           <div class="slide-col-visual">
@@ -229,6 +228,8 @@
                   <div class="slide-thumb-item" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046735_0.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046735_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046736_0.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046736_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246030381.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246030381.jpg"></div>
+                  <div class="slide-thumb-item" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246022318_0.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246022318_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246022319_0.jpg"><img src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8b%E0%B8%A5%E0%B8%B9%E0%B8%8a%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246022319_0.jpg"></div>
                 </div>
                 <div class="visual-actions-row">
                   <span class="photo-count-pill">คลังภาพบริการนี้: 13 ภาพ</span>
@@ -281,18 +282,12 @@
               <div class="ornate-line"></div>
             </div>
 
-            <span class="selling-section-label">“เกียรติยศสูงสุดแห่งชีวิต” และประวัติศาสตร์ของครอบครัว :</span>
+            <span class="selling-section-label">“เกียรติยศสูงสุดแห่งชีวิต” ของครอบครัว :</span>
             <ul class="why-us-list">
-              <li><strong>การบันทึกทางประวัติศาสตร์สูงสุด:</strong> ในพิธีพระราชทานน้ำหลวงอาบศพ พระราชทานโกศศพ พระราชทานเพลิงศพ และการเวียนเมรุ คือ "เกียรติยศสูงสุดแห่งชีวิต"</li>
-              <li><strong>พระมหากรุณาธิคุณอันหาที่สุดมิได้:</strong> ที่ได้รับพระมหากรุณาธิคุณโปรดเกล้าฯ พระราชทานแก่ผู้วายชนม์และวงศ์ตระกูล เพื่อเป็นประวัติศาสตร์อันทรงคุณค่า</li>
-              <li><strong>ทีมช่างภาพบันทึกประวัติศาสตร์ชาติ:</strong> ผู้ผ่านงานพิธีหลวงและพระราชพิธีสำคัญ ด้วยมาตรฐานละเอียด สำรวม และถูกต้องตามระเบียบแบบแผน</li>
-              <li><strong>บันทึกเกียรติยศและประวัติศาสตร์ของครอบครัว:</strong> ภาพถ่ายและวิดีโอคุณภาพสูงจะช่วยสืบสานเรื่องราว ความทรงจำ และคุณงามความดีของผู้จากไป</li>
+              <li><strong>เกียรติยศสูงสุดแห่งชีวิต:</strong> บันทึกพิธีน้ำหลวงอาบศพ โกศศพ และพระราชทานเพลิงศพอย่างครบถ้วน</li>
+              <li><strong>ผ่านงานพระราชพิธีระดับประเทศ:</strong> เข้าใจระเบียบขั้นตอน ริ้วขบวน และการเวียนเมรุอย่างถูกต้อง</li>
+              <li><strong>มาตรฐานละเอียด สำรวม สมเกียรติ:</strong> ส่งต่อภาพประวัติศาสตร์อันทรงคุณค่าสู่วงศ์ตระกูลสืบไป</li>
             </ul>
-
-            <div class="info-accent-box">
-              <div class="box-title">เกียรติยศสูงสุดแห่งชีวิต</div>
-              <div>การบันทึกภาพพิธีพระราชทานน้ำหลวงอาบศพ พระราชทานโกศศพ พระราชทานเพลิงศพ และการเวียนเมรุ คือการบันทึกประวัติศาสตร์อันทรงเกียรติสูงสุดของวงศ์ตระกูล</div>
-            </div>
           </div>
 
           <div class="slide-col-visual">
@@ -307,7 +302,9 @@
                   <div class="slide-thumb-item active" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022154_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022154_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022155_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022155_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022156_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022156_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022157_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022157_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022158_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022158_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022159_0.jpg"><img src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022159_0.jpg"></div>
                 </div>
                 <div class="visual-actions-row">
                   <span class="photo-count-pill">คลังภาพพิธีหลวง: 43 ภาพ</span>
@@ -359,18 +356,12 @@
               <div class="ornate-line"></div>
             </div>
 
-            <span class="selling-section-label">ทำไมต้องใช้ช่างภาพผู้เชี่ยวชาญพิธีกงเต็กแบบเรา :</span>
+            <span class="selling-section-label">จุดเด่นการถ่ายภาพพิธีกงเต็ก :</span>
             <ul class="why-us-list">
-              <li><strong>ความหมาย ความศรัทธา และสายสัมพันธ์:</strong> ทุกขั้นตอนเต็มไปด้วยความหมายแห่งความกตัญญู และการส่งดวงวิญญาณสู่สุคติในแบบมงคลตามประเพณีจีน</li>
-              <li><strong>เข้าใจลำดับขั้นตอนพิธีการอย่างลึกซึ้ง:</strong> เข้าใจพิธีสวดกงเต็ก การเดินข้ามสะพานโอฆสงสาร การจุดไฟนำทาง และการไหว้ตามลำดับอาวุโส</li>
-              <li><strong>ไม่พลาดช็อตสำคัญที่มีความต่อเนื่องรวดเร็ว:</strong> ดักตำแหน่งถ่ายภาพล่วงหน้าได้อย่างแม่นยำ ไม่พลาดช่วงเวลาสำคัญของลูกหลาน</li>
-              <li><strong>ถ่ายทอดความวิจิตรของเครื่องกระดาษและอารมณ์:</strong> บันทึกรายละเอียดบ้านกงเต็ก หีบไม้ และความผูกพันอันแน่นแฟ้นของครอบครัวทุกรุ่น</li>
+              <li><strong>สื่อความหมายและมงคลตามประเพณี:</strong> บันทึกทุกขั้นตอนแห่งความกตัญญูและการส่งดวงวิญญาณสู่สุคติภูมิ</li>
+              <li><strong>แม่นยำทุกลำดับพิธีที่รวดเร็ว:</strong> ข้ามสะพานโอฆสงสาร จุดไฟนำทาง และไหว้ตามลำดับอาวุโสไม่พลาดช็อตสำคัญ</li>
+              <li><strong>เก็บครบเครื่องกระดาษและสายสัมพันธ์:</strong> ถ่ายทอดความวิจิตรของบ้านกงเต็กและสายใยครอบครัวทุกรุ่น</li>
             </ul>
-
-            <div class="info-accent-box">
-              <div class="box-title">ส่งดวงวิญญาณสู่สุคติในแบบมงคล</div>
-              <div>พิธีกงเต็กทุกขั้นตอนเต็มไปด้วยความหมาย ความศรัทธา และสายสัมพันธ์ของครอบครัว บันทึกทุกความทรงจำอย่างถูกต้องตามโบราณประเพณี</div>
-            </div>
           </div>
 
           <div class="slide-col-visual">
@@ -384,6 +375,8 @@
                 <div class="slide-thumb-strip">
                   <div class="slide-thumb-item active" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030361.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030361.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022288_0.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022288_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022289_0.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022289_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022292_0.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022292_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022295_0.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246022295_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030353_0.jpg"><img src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030353_0.jpg"></div>
                 </div>
@@ -437,18 +430,12 @@
               <div class="ornate-line"></div>
             </div>
 
-            <span class="selling-section-label">ทำไมภาพบรรยากาศและแคนดิดถึงมีความหมายสูงสุด :</span>
+            <span class="selling-section-label">จุดเด่นภาพบรรยากาศและแคนดิด :</span>
             <ul class="why-us-list">
-              <li><strong>บันทึกสายสัมพันธ์ ความรัก และอารมณ์ความรู้สึก:</strong> ถ่ายทอดภาพแคนดิด แววตา การให้กำลังใจ และความรักอันบริสุทธิ์ของญาติมิตร</li>
-              <li><strong>สืบสานเรื่องราวและคุณงามความดีของผู้จากไป:</strong> งานศพคือพิธีสำคัญครั้งสุดท้ายในชีวิต ภาพถ่ายคุณภาพสูงช่วยสืบสานความทรงจำชั่วนิรันดร์</li>
-              <li><strong>บริการถ่ายภาพงานพิธีโดยมืออาชีพประสบการณ์สูง:</strong> เก็บบรรยากาศภายในงานอย่างสมเกียรติ จัดองค์ประกอบภาพอย่างสวยงาม แสงสีนุ่มนวล คลาสสิก</li>
-              <li><strong>สุภาพ สำรวม ปฏิบัติงานด้วยความเงียบสงบ:</strong> ใช้ชัตเตอร์เงียบ (Silent Shutter) ไม่รบกวนสมาธิระหว่างการฟังสวดพระอภิธรรม</li>
+              <li><strong>บันทึกอารมณ์และความผูกพัน:</strong> ภาพแคนดิด แววตา การให้กำลังใจ และความรักของครอบครัว</li>
+              <li><strong>องค์ประกอบสง่างาม สมเกียรติ:</strong> โทนสีสุภาพ คลาสสิก สืบสานคุณงามความดีของผู้จากไป</li>
+              <li><strong>สุภาพ สำรวม ใช้ Silent Shutter:</strong> ทำงานเงียบสงบ ไม่รบกวนสมาธิระหว่างฟังสวดพระอภิธรรม</li>
             </ul>
-
-            <div class="info-accent-box">
-              <div class="box-title">บันทึกสายสัมพันธ์และความรู้สึก</div>
-              <div>ภาพบรรยากาศในงานศพไม่ใช่แค่การถ่ายภาพคนมาร่วมงาน แต่คือการบันทึกสายสัมพันธ์ ความรัก และอารมณ์ความรู้สึกชั่วนิรันดร์</div>
-            </div>
           </div>
 
           <div class="slide-col-visual">
@@ -464,6 +451,8 @@
                   <div class="slide-thumb-item" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022191_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022191_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022192_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022192_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022193_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022193_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022194_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022194_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022195_0.jpg"><img src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022195_0.jpg"></div>
                 </div>
                 <div class="visual-actions-row">
                   <span class="photo-count-pill">คลังภาพสวดอภิธรรม: 56 ภาพ</span>
@@ -515,18 +504,12 @@
               <div class="ornate-line"></div>
             </div>
 
-            <span class="selling-section-label">บันทึกประวัติศาสตร์ครั้งสำคัญที่สุดของครอบครัว :</span>
+            <span class="selling-section-label">บันทึกประวัติศาสตร์วันสำคัญของครอบครัว :</span>
             <ul class="why-us-list">
-              <li><strong>บันทึกประวัติศาสตร์ครั้งสำคัญที่สุดของครอบครัว:</strong> ถ่ายทอดภาพการเคลื่อนขบวนศพ การเวียนรอบเมรุ พิธีทอดผ้าบังสุกุล และการวางดอกไม้จันทน์</li>
-              <li><strong>บริการถ่ายภาพและวิดีโอคุณภาพสูง:</strong> บันทึกไฟล์คุณภาพสูงระดับ 4K / Full HD ตัดต่อโดยมืออาชีพเพื่อส่งมอบเป็นเกียรติประวัติ</li>
-              <li><strong>จัดองค์ประกอบภาพอย่างสวยงามและสมเกียรติ:</strong> คุมโทนสีสุภาพ สง่างาม ถ่ายทอดความอาลัย ความเคารพ และความรักสูงสุด</li>
-              <li><strong>ทีมงานมีประสบการณ์เฉพาะทางงานศพ:</strong> ทราบจุดยืนและกาลเทศะ ประสานงานกับเจ้าหน้าที่ฌาปนสถานอย่างราบรื่น</li>
+              <li><strong>บันทึกครบทุกวาระสำคัญ:</strong> เคลื่อนขบวนศพ เวียนรอบเมรุ ทอดผ้าบังสุกุล และวางดอกไม้จันทน์</li>
+              <li><strong>ภาพนิ่ง &amp; วิดีโอ 4K / Full HD:</strong> คุมโทนสุภาพ สง่างาม ตัดต่อประณีตเป็นมรดกของวงศ์ตระกูล</li>
+              <li><strong>ชำนาญพื้นที่ฌาปนสถาน:</strong> ทราบจุดยืนและกาลเทศะ ประสานงานเจ้าหน้าที่อย่างราบรื่น</li>
             </ul>
-
-            <div class="info-accent-box">
-              <div class="box-title">มรดกแห่งความทรงจำ</div>
-              <div>งานศพคือพิธีสำคัญครั้งสุดท้ายในชีวิต ภาพถ่ายและวิดีโอคุณภาพสูงจะช่วยสืบสานเรื่องราว ความทรงจำ และคุณงามความดีของวงศ์ตระกูล</div>
-            </div>
           </div>
 
           <div class="slide-col-visual">
@@ -540,6 +523,8 @@
                 <div class="slide-thumb-strip">
                   <div class="slide-thumb-item active" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022254_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022254_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022255_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022255_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022256_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022256_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022257_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022257_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022262_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022262_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022261_0.jpg"><img src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022261_0.jpg"></div>
                 </div>
@@ -593,18 +578,12 @@
               <div class="ornate-line"></div>
             </div>
 
-            <span class="selling-section-label">ความต่อเนื่องและการดูแลอย่างครบวงจร :</span>
+            <span class="selling-section-label">การดูแลต่อเนื่องจนถึงพิธีขั้นสุดท้าย :</span>
             <ul class="why-us-list">
-              <li><strong>ดูแลต่อเนื่องจนถึงแม่น้ำและทะเล:</strong> บันทึกพิธีการบนเรือลอยอังคาร พิธีไหว้แม่ย่านางและเจ้าแม่คงคาอย่างถูกต้องครบถ้วน</li>
-              <li><strong>ภาพมุมมองสงบ สว่าง และร่มเย็น:</strong> ถ่ายทอดความหมายแห่งการปล่อยวาง การโปรยดอกไม้ และการส่งดวงวิญญาณสู่ความสงบ</li>
-              <li><strong>เก็บบันทึกความอบอุ่นของครอบครัวอย่างใกล้ชิด:</strong> ถ่ายทอดความรัก การอธิษฐาน และสายใยผูกพันในวาระสุดท้ายอย่างนุ่มนวล</li>
-              <li><strong>ช่างภาพมีความชำนาญบนเรือและคลื่นลม:</strong> ทรงตัวและจัดมุมกล้องได้มั่นคง ปลอดภัย พร้อมบันทึกภาพคมชัดทุกช่วงเวลา</li>
+              <li><strong>ดูแลต่อเนื่องถึงแม่น้ำและทะเล:</strong> บันทึกพิธีไหว้แม่ย่านาง เจ้าแม่คงคา และขั้นตอนบนเรือครบถ้วน</li>
+              <li><strong>มุมมองสงบ สว่าง และร่มเย็น:</strong> ถ่ายทอดการโปรยดอกไม้ การอธิษฐาน และสายใยครอบครัว</li>
+              <li><strong>มั่นคงปลอดภัยบนเรือและคลื่นลม:</strong> จัดมุมกล้องอย่างชำนาญ บันทึกภาพคมชัดทุกช่วงเวลา</li>
             </ul>
-
-            <div class="info-accent-box">
-              <div class="box-title">สู่สุคติภูมิอันร่มเย็น</div>
-              <div>บันทึกพิธีการขั้นสุดท้ายอย่างสงบ บริสุทธิ์ สว่าง และร่มเย็น เพื่อส่งดวงวิญญาณอันเป็นที่รักสู่ความสงบชั่วนิรันดร์</div>
-            </div>
           </div>
 
           <div class="slide-col-visual">
@@ -620,6 +599,8 @@
                   <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022309_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022309_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022310_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022310_0.jpg"></div>
                   <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022306_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022306_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022311_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022311_0.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022312_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022312_0.jpg"></div>
                 </div>
                 <div class="visual-actions-row">
                   <span class="photo-count-pill">คลังภาพลอยอังคาร: 10 ภาพ</span>
@@ -655,13 +636,13 @@
 
         <div class="slide-inner">
           <div class="slide-col-info">
-            <span class="badge-service-type">PROFESSIONAL PHOTOGRAPHER TEAM & PROFILES</span>
+            <span class="badge-service-type">PROFESSIONALISM &amp; EXPERT PHOTOGRAPHER TEAM</span>
             
             <div class="slide-heading-row">
               <span class="slide-numeral">6</span>
               <div class="slide-title-wrap">
-                <h2 class="slide-title">ทีมช่างภาพบันทึกประวัติศาสตร์ชาติ & ทีมงานมืออาชีพ</h2>
-                <p class="slide-subtitle">ช่างภาพมืออาชีพประสบการณ์สูง เก็บบรรยากาศอย่างสมเกียรติ จัดองค์ประกอบภาพสวยงาม สวมชุดสูทสากลสีดำ สำรวม รู้กาลเทศะสูงสุด</p>
+                <h2 class="slide-title">ทำไมต้องจ้างช่างภาพระดับ Professional?</h2>
+                <p class="slide-subtitle">ผลงานช่างภาพที่ผ่านงานพิธีหลวงและงานสำคัญ พร้อมไหวพริบแก้ปัญหาเฉพาะหน้าและการวางตัวที่เหมาะสมที่สุด</p>
               </div>
             </div>
 
@@ -671,17 +652,16 @@
               <div class="ornate-line"></div>
             </div>
 
-            <span class="selling-section-label">มาตรฐานทีมช่างภาพมืออาชีพ ราชรถ & ช่างภาพงานศพ.com :</span>
+            <span class="selling-section-label">หัวใจของ Professionalism ที่ช่างภาพมืออาชีพต้องมี :</span>
             <ul class="why-us-list">
-              <li><strong>ทีมช่างภาพบันทึกประวัติศาสตร์ชาติ:</strong> ผู้ผ่านงานพิธีหลวง พระราชพิธีสำคัญ และงานบุคคลสำคัญระดับประเทศ ด้วยความเชี่ยวชาญสูงสุด</li>
-              <li><strong>บริการถ่ายภาพงานพิธี:</strong> ช่างภาพมืออาชีพประสบการณ์สูง เก็บบรรยากาศภายในงานอย่างสมเกียรติ จัดองค์ประกอบภาพอย่างสวยงาม</li>
-              <li><strong>บริการถ่ายวิดีโองานพิธี:</strong> บันทึกไฟล์ที่มีคุณภาพสูง คมชัด 4K / Full HD ตัดต่ออย่างประณีตโดยทีมงานมืออาชีพ</li>
-              <li><strong>บริการจอทีวี 65" & ถ่ายทอดสด:</strong> ระบบสัญญาณระดับมืออาชีพ คมชัด เสถียร จาก Hollyland และ DJI พร้อมทีมงานเทคนิคดูแลตลอดงาน</li>
+              <li><strong>แก้ไขปัญหาเฉพาะหน้าและรับมือได้ทุกสถานการณ์:</strong> ช่างภาพประสบการณ์สูงมีวิธีจัดการปัญหาที่เกิดขึ้นระหว่างการทำงานได้อย่างราบรื่น นี่คือมูลค่าสูงสุดของคำว่า <em>Professionalism</em></li>
+              <li><strong>รู้กาลเทศะในงานศพและงานพิธีใหญ่:</strong> รู้ชัดว่าควรทำอะไร ไม่ควรทำอะไรในแต่ละช่วงเวลา และวางตัวอย่างไรให้เหมาะสม สมเกียรติเจ้าภาพและแขกผู้ใหญ่</li>
+              <li><strong>มาตรฐานบันทึกประวัติศาสตร์ชาติ 100%:</strong> ทีมงานแต่งกายสูทสากลสีดำ กิริยาสำรวม นอบน้อม พร้อมอุปกรณ์สำรอง Dual-Slot มั่นใจได้ทุกลำดับพิธี</li>
             </ul>
 
             <div class="info-accent-box">
-              <div class="box-title">มาตรฐานและจรรยาบรรณวิชาชีพ</div>
-              <div>ทีมงานทุกคนสวมชุดสูทสากลสีดำ สำรวม รู้กาลเทศะสูงสุด พร้อมอุปกรณ์สำรองข้อมูลคู่ขนาน Dual-Slot มั่นใจได้ 100% ดูแลตลอด 24 ชั่วโมง</div>
+              <div class="box-title">ความต่างของช่างภาพระดับมืออาชีพ</div>
+              <div>งานศพและงานพิธีใหญ่ไม่อาจย้อนกลับมาถ่ายซ้ำได้ ช่างภาพที่รู้กาลเทศะและคุมสถานการณ์เป็นคือหลักประกันความอุ่นใจของเจ้าภาพตลอด 24 ชม.</div>
             </div>
           </div>
 
@@ -717,7 +697,160 @@
       <!-- ====================================================================
            SLIDE 8: CLOSING SLIDE & CONTACT (Exact Match to Reference Image)
            ==================================================================== -->
-      <section class="slide" data-slide-index="8" data-category-id="closing">
+      <!-- ====================================================================
+           SLIDE 8: COFFIN CATALOG - หีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ (28 รุ่น)
+           ==================================================================== -->
+      <section class="slide" data-slide-index="8" data-category-id="coffin">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">FINAL CATALOG : RATHCHAROT COFFIN &amp; CASKET</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral">7</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">แคตตาล็อกหีบศพมาตรฐาน &amp; แพ็กเกจหีบศพราชรถ</h2>
+                <p class="slide-subtitle">แบบหีบศพมาตรฐานและหีบศพทรงเกียรติกว่า 28 รุ่น จากแบรนด์ราชรถ พร้อมสเปกขนาดและบริการจัดงานครบวงจร 24 ชม.</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">จุดเด่นหีบศพราชรถ &amp; บริการครบวงจร :</span>
+            <ul class="why-us-list">
+              <li><strong>ครบครัน 28 รุ่นมาตรฐาน &amp; ทรงเกียรติ:</strong> ตั้งแต่หีบเทพพนม หีบหลุยส์ หีบคริสต์ จนถึงหีบจำปาไม้สักทอง</li>
+              <li><strong>วัสดุประณีต พร้อมสเปกชัดเจน:</strong> แสดงรายละเอียดเนื้อไม้ ผ้าบุ และขนาดมาตรฐานครบทุกรุ่นในภาพ</li>
+              <li><strong>ดูแลครบวงจร 24 ชั่วโมง:</strong> จัดดอกไม้หน้าศพ เคลื่อนย้ายร่างทั่วไทย และบริหารพิธีการโดยทีมราชรถ</li>
+            </ul>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame hero-image-frame-contain" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img hero-img-contain" src="coffin/S__248741975_0.jpg" alt="แคตตาล็อกหีบศพราชรถ">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="coffin/S__248741975_0.jpg"><img src="coffin/S__248741975_0.jpg" alt="หน้าปกหีบศพราชรถ"></div>
+                  <div class="slide-thumb-item" data-src="coffin/S__248741977_0.jpg"><img src="coffin/S__248741977_0.jpg" alt="หีบเทพพนม 1 ชั้น ผ้าตาดเงิน"></div>
+                  <div class="slide-thumb-item" data-src="coffin/S__248741978_0.jpg"><img src="coffin/S__248741978_0.jpg" alt="หีบเทพพนม 1 ชั้น ผ้าตาดทอง"></div>
+                  <div class="slide-thumb-item" data-src="coffin/S__248741982_0.jpg"><img src="coffin/S__248741982_0.jpg" alt="หีบศพราชรถ รุ่นมาตรฐาน"></div>
+                  <div class="slide-thumb-item" data-src="coffin/S__248741990_0.jpg"><img src="coffin/S__248741990_0.jpg" alt="หีบศพราชรถ รุ่นทรงเกียรติ"></div>
+                  <div class="slide-thumb-item" data-src="coffin/S__248742006_0.jpg"><img src="coffin/S__248742006_0.jpg" alt="หีบจำปาไม้สักขุด"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">คลังภาพหีบศพ: 30 ภาพ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูแบบหีบศพทั้งหมด (30 ภาพ)</button>
+                </div>
+              </div>
+
+              <div class="slide-qr-badge" onclick="openQrModal('ราชรถ.com')" title="สแกนเว็บไซต์ราชรถ">
+                <img src="qr_rathcharot.svg" alt="QR Code www.rathcharot.com">
+                <span class="qr-label">www.rathcharot.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: PROMOTION PACKAGES - โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร ราชรถ (8 แพ็กเกจ)
+           ==================================================================== -->
+      <section class="slide" data-slide-index="9" data-category-id="promotion">
+        <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
+
+        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
+          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
+                fill="none" stroke="#C5A059" stroke-width="1.8" />
+          <use href="#thai-rosette" x="58" y="58" />
+          <use href="#thai-rosette" x="1382" y="58" />
+          <use href="#thai-rosette" x="1382" y="752" />
+          <use href="#thai-rosette" x="58" y="752" />
+          <use href="#thai-rosette" x="720" y="32" />
+          <use href="#thai-rosette" x="720" y="778" />
+        </svg>
+
+        <div class="slide-inner">
+          <div class="slide-col-info">
+            <span class="badge-service-type">SPECIAL PROMOTION PACKAGES • RATHCHAROT</span>
+            
+            <div class="slide-heading-row">
+              <span class="slide-numeral">8</span>
+              <div class="slide-title-wrap">
+                <h2 class="slide-title">โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร ราชรถ</h2>
+                <p class="slide-subtitle">แพ็กเกจจัดงานศพครบวงจร หีบศพ ดอกไม้หน้าหีบ Luxury รถรับร่าง อุปกรณ์พิธี พร้อมฟรีช่างภาพ 1 คืน (คลิกที่ภาพเพื่อขยายอ่านรายละเอียด)</p>
+              </div>
+            </div>
+
+            <div class="ornate-divider">
+              <div class="ornate-line"></div>
+              <span class="ornate-diamond">◇</span>
+              <div class="ornate-line"></div>
+            </div>
+
+            <span class="selling-section-label">สิทธิพิเศษในแพ็กเกจโปรโมชั่นราชรถ (8 แพ็กเกจ) :</span>
+            <ul class="why-us-list">
+              <li><strong>แพ็กเกจมาตรฐานถึงระดับ VIP:</strong> ครอบคลุมรุ่น RW1–RW6, RJ1 (พิธีกงเต็ก/จีน) และ RVIP1 เริ่มต้น 100,000 บาท</li>
+              <li><strong>ฟรี! ช่างภาพงานศพ 1 คืน:</strong> ทุกแพ็กเกจโปรโมชั่นแถมฟรีบริการช่างภาพมืออาชีพวันรดน้ำหรือวันสวด 1 คืน</li>
+              <li><strong>ครบจบในที่เดียว 24 ชม.:</strong> ดอกไม้หน้าหีบ Luxury รถรับร่าง ชุดรดน้ำศพ และดอกไม้จันทน์ 300 ดอกครบชุด</li>
+            </ul>
+          </div>
+
+          <div class="slide-col-visual">
+            <div class="hero-image-frame hero-image-frame-contain" title="คลิกเพื่อขยายดูรายละเอียดแพ็กเกจขนาดใหญ่">
+              <img class="hero-img hero-img-contain" src="Promotion/S__248742009_0.jpg" alt="โปรโมชั่นแพ็กเกจจัดงานศพ ราชรถ RVIP1">
+              <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
+            </div>
+
+            <div class="visual-footer-bar">
+              <div class="visual-footer-controls">
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="Promotion/S__248742009_0.jpg"><img src="Promotion/S__248742009_0.jpg" alt="แพ็กเกจราชรถ RVIP1 (510,000 บาท)"></div>
+                  <div class="slide-thumb-item" data-src="Promotion/S__248742010_0.jpg"><img src="Promotion/S__248742010_0.jpg" alt="แพ็กเกจราชรถ RJ1 (121,000 บาท)"></div>
+                  <div class="slide-thumb-item" data-src="Promotion/S__248742011_0.jpg"><img src="Promotion/S__248742011_0.jpg" alt="แพ็กเกจราชรถ RW6 (190,000 บาท)"></div>
+                  <div class="slide-thumb-item" data-src="Promotion/S__248742012_0.jpg"><img src="Promotion/S__248742012_0.jpg" alt="แพ็กเกจราชรถ RW5 (225,000 บาท)"></div>
+                  <div class="slide-thumb-item" data-src="Promotion/S__248742013_0.jpg"><img src="Promotion/S__248742013_0.jpg" alt="แพ็กเกจราชรถ RW4 (165,000 บาท)"></div>
+                  <div class="slide-thumb-item" data-src="Promotion/S__248742014_0.jpg"><img src="Promotion/S__248742014_0.jpg" alt="แพ็กเกจราชรถ RW3 (125,000 บาท)"></div>
+                  <div class="slide-thumb-item" data-src="Promotion/S__248742015_0.jpg"><img src="Promotion/S__248742015_0.jpg" alt="แพ็กเกจราชรถ RW2 (115,000 บาท)"></div>
+                  <div class="slide-thumb-item" data-src="Promotion/S__248742016_0.jpg"><img src="Promotion/S__248742016_0.jpg" alt="แพ็กเกจราชรถ RW1 (100,000 บาท)"></div>
+                </div>
+                <div class="visual-actions-row">
+                  <span class="photo-count-pill">โปรโมชั่น: 8 แพ็กเกจ</span>
+                  <button class="btn-open-folder-gallery">🔍 ดูโปรโมชั่นทั้งหมด (8 แพ็กเกจ)</button>
+                </div>
+              </div>
+
+              <div class="slide-qr-badge" onclick="openQrModal('ราชรถ.com')" title="สแกนเว็บไซต์ราชรถ">
+                <img src="qr_rathcharot.svg" alt="QR Code www.rathcharot.com">
+                <span class="qr-label">www.rathcharot.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: CLOSING & CONTACT HUB
+           ==================================================================== -->
+      <section class="slide" data-slide-index="10" data-category-id="closing">
         <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
 
         <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
@@ -748,7 +881,8 @@
             <li style="color: #fff; font-weight: 500;">บริการถ่ายภาพงานพิธี (ภาพนิ่ง) : ช่างภาพมืออาชีพประสบการณ์สูง เก็บบรรยากาศอย่างสมเกียรติ</li>
             <li style="color: #fff; font-weight: 500;">บริการถ่ายวิดีโองานพิธี (VDO Cinema) : บันทึกไฟล์คุณภาพสูง ตัดต่อโดยมืออาชีพ</li>
             <li style="color: var(--gold-light); font-weight: 500;">บริการจอทีวี 65" & ถ่ายทอดสด (Live Stream & Display) : สัญญาณเสถียรจาก Hollyland และ DJI</li>
-            <li>หีบศพมาตรฐาน และแพคเกจหีบศพพร้อมดอกไม้ครบวงจร พร้อมอุปกรณ์</li>
+            <li><a href="javascript:void(0)" onclick="updateSlideView(8, { autoExpand: true })" style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 4px;">หีบศพมาตรฐาน และแพคเกจหีบศพพร้อมดอกไม้ครบวงจร (คลิกชม 28 รุ่น) ›</a></li>
+            <li><a href="javascript:void(0)" onclick="updateSlideView(9, { autoExpand: true })" style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 4px;">โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร แถมฟรีช่างภาพ 1 คืน (คลิกชม 8 แพ็กเกจ) ›</a></li>
             <li>เคลื่อนย้ายศพทั่วประเทศ และออแกไนซ์งานศพครบวงจร</li>
             <li>ให้บริการครบทุกขั้นตอน ทั้งไทย-จีน โดยทีมงานมืออาชีพ ดูแลตั้งแต่เคลื่อนย้ายร่าง ถึงลอยอังคาร</li>
           </ul>
@@ -799,7 +933,7 @@
     <div class="controls-left">
       <button class="btn-ctrl btn-ctrl-edge" id="btnFirst" title="ไปหน้าแรก">⏮</button>
       <button class="btn-ctrl" id="btnPrev" title="หน้าก่อนหน้า (ลูกศรซ้าย)">◀</button>
-      <span class="slide-counter" id="slideCounter">01 / 09</span>
+      <span class="slide-counter" id="slideCounter">01 / 11</span>
       <button class="btn-ctrl" id="btnNext" title="หน้าถัดไป (ลูกศรขวา)">▶</button>
       <button class="btn-ctrl btn-ctrl-edge" id="btnLast" title="ไปหน้าสุดท้าย">⏭</button>
     </div>
@@ -896,15 +1030,31 @@
           <button class="drawer-nav-item" data-slide="7">
             <span class="drawer-num">06</span>
             <div class="drawer-item-text">
-              <span class="drawer-item-main">ทีมช่างภาพประวัติศาสตร์ชาติ</span>
-              <span class="drawer-item-desc">ช่างภาพมืออาชีพประสบการณ์สูง สวมสูทสากลสีดำ สำรวม</span>
+              <span class="drawer-item-main">ทำไมต้องช่างภาพ Professional?</span>
+              <span class="drawer-item-desc">แก้ปัญหาเฉพาะหน้า รู้กาลเทศะ งานพิธีใหญ่</span>
             </div>
             <span class="drawer-arrow">›</span>
           </button>
           <button class="drawer-nav-item" data-slide="8">
             <span class="drawer-num">07</span>
             <div class="drawer-item-text">
-              <span class="drawer-item-main">ติดต่อเรา & ศูนย์บริการ 24 ชม.</span>
+              <span class="drawer-item-main">หีบศพมาตรฐานราชรถ (28 รุ่น)</span>
+              <span class="drawer-item-desc">แบบหีบศพพร้อมสเปกขนาด &amp; ดอกไม้ครบวงจร</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="9">
+            <span class="drawer-num">08</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">โปรโมชั่นแพ็กเกจจัดงานศพ (8 แพ็กเกจ)</span>
+              <span class="drawer-item-desc">หีบศพ ดอกไม้ Luxury รถรับร่าง ฟรีช่างภาพ 1 คืน</span>
+            </div>
+            <span class="drawer-arrow">›</span>
+          </button>
+          <button class="drawer-nav-item" data-slide="10">
+            <span class="drawer-num">09</span>
+            <div class="drawer-item-text">
+              <span class="drawer-item-main">ติดต่อเรา &amp; ศูนย์บริการ 24 ชม.</span>
               <span class="drawer-item-desc">โทร 085-999-2396 • เว็บไซต์ • LINE : Rathcharot</span>
             </div>
             <span class="drawer-arrow">›</span>
@@ -913,7 +1063,7 @@
 
         <div class="drawer-quick-actions">
           <button class="drawer-action-btn" id="btnDrawerGallery">
-            🖼️ เปิดคลังภาพผลงาน (194 ภาพ)
+            🖼️ เปิดคลังภาพผลงาน (232 ภาพ)
           </button>
           <button class="drawer-action-btn btn-gold" id="btnDrawerQr">
             📱 สแกน QR / เว็บไซต์

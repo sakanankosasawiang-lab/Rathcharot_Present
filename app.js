@@ -93,7 +93,7 @@ function fitStageToScreen() {
 // --------------------------------------------------------------------------
 // Slide Navigation
 // --------------------------------------------------------------------------
-function updateSlideView(index) {
+function updateSlideView(index, options = {}) {
   if (index < 0) index = 0;
   if (index >= slides.length) index = slides.length - 1;
   currentSlideIndex = index;
@@ -141,6 +141,22 @@ function updateSlideView(index) {
   } else {
     // Re-verify scale fitting
     fitStageToScreen();
+  }
+
+  if (options && options.autoExpand) {
+    openSlideLightbox(currentSlideIndex);
+  }
+}
+
+function openSlideLightbox(slideIndex) {
+  const slide = slides[slideIndex];
+  if (!slide) return;
+  const catId = slide.dataset.categoryId;
+  const catData = catId ? CATALOG_CATEGORIES.find(c => c.id === catId) : null;
+  if (catData && Array.isArray(catData.images) && catData.images.length > 0) {
+    openLightbox(catData.images, 0, catData.title);
+  } else {
+    closeLightbox();
   }
 }
 
@@ -229,6 +245,12 @@ function setupTouchNav() {
     const diffY = touchEndY - touchStartY;
     // Require at least 45px swipe and more horizontal than vertical
     if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
+      const lightboxModal = document.getElementById('lightboxModal');
+      if (lightboxModal && lightboxModal.classList.contains('active')) {
+        if (diffX < 0) nextLightboxImage();
+        else prevLightboxImage();
+        return;
+      }
       if (diffX < 0) nextSlide();
       else prevSlide();
     }
@@ -249,12 +271,15 @@ function setupEventListeners() {
   document.querySelectorAll('.nav-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       const idx = parseInt(pill.dataset.slide, 10);
-      updateSlideView(idx);
+      updateSlideView(idx, { autoExpand: true });
     });
   });
 
   // Brand click -> Slide 0
-  document.querySelector('.brand-badge')?.addEventListener('click', () => updateSlideView(0));
+  document.querySelector('.brand-badge')?.addEventListener('click', () => {
+    closeLightbox();
+    updateSlideView(0);
+  });
 
   // Fullscreen button
   document.getElementById('btnFullscreen')?.addEventListener('click', toggleFullscreen);
@@ -297,8 +322,8 @@ function setupEventListeners() {
   document.querySelectorAll('.drawer-nav-item').forEach(item => {
     item.addEventListener('click', () => {
       const idx = parseInt(item.dataset.slide, 10);
-      updateSlideView(idx);
       closeDrawer();
+      updateSlideView(idx, { autoExpand: true });
     });
   });
 
@@ -351,7 +376,9 @@ function initThumbnailStrips() {
     heroFrame?.addEventListener('click', () => {
       if (catData) {
         const activeSrc = heroImg.getAttribute('src');
-        const activeIdx = catData.images.findIndex(img => img.encoded_path === activeSrc || img.rel_path === activeSrc);
+        const activeIdx = catData.images.findIndex(
+          img => img.encoded_path === activeSrc || img.rel_path === activeSrc || (activeSrc && activeSrc.endsWith('/' + img.filename))
+        );
         openLightbox(catData.images, activeIdx >= 0 ? activeIdx : 0, catData.title);
       }
     });
@@ -392,26 +419,31 @@ function toggleViewMode() {
 // --------------------------------------------------------------------------
 // Lightbox Modal
 // --------------------------------------------------------------------------
-function openLightbox(imagesList, startIndex = 0, title = '') {
+function renderLightboxFrame() {
+  if (!lightboxCurrentImages || lightboxCurrentImages.length === 0) return;
+  const cur = lightboxCurrentImages[lightboxCurrentIndex];
+  const img = document.getElementById('lightboxImg');
+  const caption = document.getElementById('lightboxCaption');
+  const label = `${lightboxCurrentIndex + 1}/${lightboxCurrentImages.length}`;
+  if (img && cur) {
+    img.src = cur.encoded_path || cur.rel_path;
+    img.alt = label;
+  }
+  if (caption) {
+    caption.textContent = label;
+  }
+}
+
+function openLightbox(imagesList, startIndex = 0, _title = '') {
+  if (!Array.isArray(imagesList) || imagesList.length === 0) return;
   lightboxCurrentImages = imagesList;
   lightboxCurrentIndex = startIndex;
 
   const modal = document.getElementById('lightboxModal');
   const img = document.getElementById('lightboxImg');
-  const caption = document.getElementById('lightboxCaption');
-
   if (!modal || !img) return;
 
-  function render() {
-    const cur = lightboxCurrentImages[lightboxCurrentIndex];
-    img.src = cur.encoded_path || cur.rel_path;
-    img.alt = cur.filename;
-    if (caption) {
-      caption.textContent = `${title || 'ภาพผลงาน'} (${lightboxCurrentIndex + 1} / ${lightboxCurrentImages.length}) - ${cur.filename}`;
-    }
-  }
-
-  render();
+  renderLightboxFrame();
   modal.classList.add('active');
 }
 
@@ -422,25 +454,13 @@ function closeLightbox() {
 function nextLightboxImage() {
   if (lightboxCurrentImages.length === 0) return;
   lightboxCurrentIndex = (lightboxCurrentIndex + 1) % lightboxCurrentImages.length;
-  const cur = lightboxCurrentImages[lightboxCurrentIndex];
-  const img = document.getElementById('lightboxImg');
-  const caption = document.getElementById('lightboxCaption');
-  if (img) img.src = cur.encoded_path || cur.rel_path;
-  if (caption) {
-    caption.textContent = `ภาพ ${lightboxCurrentIndex + 1} จาก ${lightboxCurrentImages.length} - ${cur.filename}`;
-  }
+  renderLightboxFrame();
 }
 
 function prevLightboxImage() {
   if (lightboxCurrentImages.length === 0) return;
   lightboxCurrentIndex = (lightboxCurrentIndex - 1 + lightboxCurrentImages.length) % lightboxCurrentImages.length;
-  const cur = lightboxCurrentImages[lightboxCurrentIndex];
-  const img = document.getElementById('lightboxImg');
-  const caption = document.getElementById('lightboxCaption');
-  if (img) img.src = cur.encoded_path || cur.rel_path;
-  if (caption) {
-    caption.textContent = `ภาพ ${lightboxCurrentIndex + 1} จาก ${lightboxCurrentImages.length} - ${cur.filename}`;
-  }
+  renderLightboxFrame();
 }
 
 // --------------------------------------------------------------------------
@@ -589,8 +609,10 @@ function closeQrModal() {
 
 // Expose handlers globally
 window.updateSlideView = updateSlideView;
+window.openSlideLightbox = openSlideLightbox;
 window.nextSlide = nextSlide;
 window.prevSlide = prevSlide;
+window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 window.nextLightboxImage = nextLightboxImage;
 window.prevLightboxImage = prevLightboxImage;

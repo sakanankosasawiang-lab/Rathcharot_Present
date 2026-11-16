@@ -158,6 +158,8 @@ def resync_all_folders():
         all_files = sorted([f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))])
         if cat['id'] == 'royal':
             all_files = [f for f in all_files if f not in ['S__246022147.jpg', 'S__246022150_0.png', 'S__246022151_0.png']]
+        elif cat['id'] == 'coffin':
+            all_files = [f for f in all_files if f not in ['1794279723605.jpg']]
         
         encoded_images = []
         for f in all_files:

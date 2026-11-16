@@ -16,3 +16,6 @@ __pycache__/
 
 # Office lock files
 ~$*
+
+# Removed/quarantined admin photos
+.deleted_photos/

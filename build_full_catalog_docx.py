@@ -289,7 +289,7 @@ def generate_full_catalog():
         format_run(r_qs, size_pt=7, color_rgb=C_WHITE)
 
     # Helper function for adding the Main Showcase Page of a category
-    def add_category_showcase_page(badge_text, title_text, subtitle_text, hook_title, hook_bullets, accent_box, hero_img, hero_cap, sub_imgs, folder_total_count):
+    def add_category_showcase_page(badge_text, title_text, subtitle_text, hook_title, hook_bullets, accent_box, hero_img, hero_cap, sub_imgs, folder_total_count, preserve_aspect=False):
         nonlocal current_page_num
         current_page_num += 1
         doc.add_page_break()
@@ -350,9 +350,16 @@ def generate_full_catalog():
         p_hero.paragraph_format.space_before = Pt(6)
         p_hero.paragraph_format.space_after = Pt(2)
         if os.path.exists(hero_img):
-            h_s, _ = get_optimized_image_stream(hero_img, max_dim=1600, quality=86)
+            h_s, aspect = get_optimized_image_stream(hero_img, max_dim=1600, quality=86)
             if h_s:
-                add_picture_with_optional_link(p_hero, h_s, link_target=hero_img, width=Mm(176), height=Mm(72))
+                if preserve_aspect and aspect:
+                    max_w, max_h = 176, 76
+                    if (max_h * aspect) <= max_w:
+                        add_picture_with_optional_link(p_hero, h_s, link_target=hero_img, width=Mm(round(max_h * aspect, 2)), height=Mm(max_h))
+                    else:
+                        add_picture_with_optional_link(p_hero, h_s, link_target=hero_img, width=Mm(max_w), height=Mm(round(max_w / aspect, 2)))
+                else:
+                    add_picture_with_optional_link(p_hero, h_s, link_target=hero_img, width=Mm(176), height=Mm(72))
 
         p_hcap = c.add_paragraph()
         p_hcap.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -384,9 +391,16 @@ def generate_full_catalog():
             sp.alignment = WD_ALIGN_PARAGRAPH.CENTER
             sp.paragraph_format.space_after = Pt(2)
             if os.path.exists(s_path):
-                sub_s, _ = get_optimized_image_stream(s_path, max_dim=900, quality=84)
+                sub_s, s_aspect = get_optimized_image_stream(s_path, max_dim=900, quality=84)
                 if sub_s:
-                    add_picture_with_optional_link(sp, sub_s, link_target=s_path, width=Mm(54), height=Mm(38))
+                    if preserve_aspect and s_aspect:
+                        max_sw, max_sh = 54, 38
+                        if (max_sh * s_aspect) <= max_sw:
+                            add_picture_with_optional_link(sp, sub_s, link_target=s_path, width=Mm(round(max_sh * s_aspect, 2)), height=Mm(max_sh))
+                        else:
+                            add_picture_with_optional_link(sp, sub_s, link_target=s_path, width=Mm(max_sw), height=Mm(round(max_sw / s_aspect, 2)))
+                    else:
+                        add_picture_with_optional_link(sp, sub_s, link_target=s_path, width=Mm(54), height=Mm(38))
             
             sp_cap = sc.add_paragraph()
             sp_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -797,23 +811,22 @@ def generate_full_catalog():
     # 4 Showcase images: Hero equipment/display + 3 Sub-images (Camera gear, switcher, suit portrait)
     c7_showcase_keys = ['S__246399003_0.jpg', 'S__246399004_0.jpg', 'S__246399005_0.jpg', 'S__246399007_0.jpg']
     add_category_showcase_page(
-        badge_text="PROFESSIONAL PHOTOGRAPHER TEAM & PROFILES",
-        title_text="ทีมช่างภาพบันทึกประวัติศาสตร์ชาติ & ทีมงานมืออาชีพ",
-        subtitle_text="ทีมช่างภาพบันทึกประวัติศาสตร์ชาติ ผู้ผ่านงานพิธีหลวงและพระราชพิธีสำคัญ ด้วยมาตรฐานละเอียด สำรวม และสมเกียรติสูงสุด",
-        hook_title="มาตรฐานทีมช่างภาพมืออาชีพ ราชรถ & ช่างภาพงานศพ.com :",
+        badge_text="PROFESSIONALISM & EXPERT PHOTOGRAPHER TEAM",
+        title_text="ทำไมต้องจ้างช่างภาพระดับ Professional?",
+        subtitle_text="ผลงานช่างภาพที่ผ่านงานพิธีหลวงและงานสำคัญ พร้อมไหวพริบการแก้ปัญหาเฉพาะหน้าและการวางตัวที่เหมาะสมที่สุด",
+        hook_title="หัวใจของ Professionalism ที่ช่างภาพมืออาชีพต้องมี :",
         hook_bullets=[
-            ("ทีมช่างภาพบันทึกประวัติศาสตร์ชาติ", "ผู้ผ่านงานพิธีหลวง พระราชพิธีสำคัญ และงานบุคคลสำคัญระดับประเทศ ด้วยความเชี่ยวชาญสูงสุด"),
-            ("บริการถ่ายภาพงานพิธี", "ช่างภาพมืออาชีพประสบการณ์สูง เก็บบรรยากาศภายในงานอย่างสมเกียรติ จัดองค์ประกอบภาพอย่างสวยงาม"),
-            ("บริการถ่ายวิดีโองานพิธี", "บันทึกไฟล์ที่มีคุณภาพสูง คมชัด 4K / Full HD ตัดต่ออย่างประณีตโดยทีมงานมืออาชีพ"),
-            ("บริการจอทีวี 65\" & ถ่ายทอดสด (Live Stream & Display)", "ระบบสัญญาณระดับมืออาชีพ คมชัด เสถียร จาก Hollyland และ DJI พร้อมทีมงานเทคนิคดูแลตลอดงาน")
+            ("แก้ไขปัญหาเฉพาะหน้าและรับมือได้ทุกสถานการณ์", "ช่างภาพที่มีประสบการณ์สูงมีวิธีแก้ไขปัญหาที่เกิดขึ้นระหว่างการทำงานได้อย่างราบรื่น นี่คือมูลค่าสูงสุดของคำว่า Professionalism"),
+            ("รู้กาลเทศะในงานศพและงานพิธีใหญ่", "ต้องรู้ชัดว่าควรทำอะไร ไม่ควรทำอะไรในแต่ละช่วงเวลา และวางตัวอย่างไรให้เหมาะสม สมเกียรติเจ้าภาพและแขกผู้ใหญ่"),
+            ("มาตรฐานบันทึกประวัติศาสตร์ชาติ & อุปกรณ์สำรอง 100%", "ทีมงานสวมชุดสูทสากลสีดำ กิริยาสำรวม นอบน้อม พร้อมอุปกรณ์สำรองข้อมูลคู่ขนาน Dual-Slot มั่นใจได้ทุกลำดับพิธี")
         ],
-        accent_box=("มาตรฐานและจรรยาบรรณวิชาชีพ", "ทีมช่างภาพทุกคนสวมชุดสูทสากลสีดำ กิริยาสำรวม สุภาพ นอบน้อม รู้กาลเทศะสูงสุด พร้อมอุปกรณ์สำรองข้อมูล Dual-Slot ปลอดภัย 100%"),
+        accent_box=("ความต่างของช่างภาพมืออาชีพ", "งานศพและงานพิธีใหญ่ไม่อาจย้อนกลับมาถ่ายซ้ำได้ ช่างภาพที่รู้กาลเทศะและคุมสถานการณ์เป็นคือหลักประกันความอุ่นใจของเจ้าภาพตลอด 24 ชม."),
         hero_img=os.path.join(cat7_name, 'S__246399003_0.jpg'),
         hero_cap="ระบบจอทีวี 65-75 นิ้ว & Live Streaming ถ่ายทอดสดสัญญาณมาตรฐานจาก Hollyland และ DJI พร้อมทีมงานเทคนิคดูแลตลอดงาน",
         sub_imgs=[
             (os.path.join(cat7_name, 'S__246399004_0.jpg'), "อุปกรณ์มาตรฐานระดับโลก", "กล้อง เลนส์ และระบบสัญญาณเสถียรจาก Hollyland และ DJI"),
             (os.path.join(cat7_name, 'S__246399005_0.jpg'), "ระบบ Switcher / OB", "โต๊ะควบคุมสัญญาณตัดสลับกล้อง พร้อมทีมงานเทคนิคดูแลฟรีตลอดงาน"),
-            (os.path.join(cat7_name, 'S__246399007_0.jpg'), "ชุดสูทสากลสีดำสุภาพ", "ช่างภาพมืออาชีพในชุดสูทสากลสีดำ ปฏิบัติหน้าที่ด้วยความสำรวม")
+            (os.path.join(cat7_name, 'S__246399007_0.jpg'), "ชุดสูทสากลสีดำสุภาพ", "ช่างภาพมืออาชีพในชุดสูทสากลสีดำ ปฏิบัติหน้าที่ด้วยความสำรวมและรู้กาลเทศะ")
         ],
         folder_total_count=len(cat7_files)
     )
@@ -832,6 +845,91 @@ def generate_full_catalog():
     ]
     if c7_remaining:
         add_continuation_gallery_pages(cat7_name, c7_remaining, "ทำเนียบทีมช่างภาพมืออาชีพ & อุปกรณ์ระดับสากล", "PHOTOGRAPHER PROFILES")
+
+    # =========================================================================
+    # CATEGORY 8: แคตตาล็อกหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ (Coffin Catalog)
+    # =========================================================================
+    cat8_name = "coffin"
+    cat8_raw = manifest.get(cat8_name) or sorted([
+        f for f in os.listdir(cat8_name) if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+    ])
+    cat8_files = [f for f in cat8_raw if f != '1794279723605.jpg']
+    print(f"Building Category 8: Rathcharot Coffin & Casket Catalog ({len(cat8_files)} images)...")
+
+    c8_showcase_keys = ['S__248741975_0.jpg', 'S__248741977_0.jpg', 'S__248741978_0.jpg', 'S__248742006_0.jpg']
+    add_category_showcase_page(
+        badge_text="FINAL CATALOG : RATHCHAROT COFFIN & CASKET",
+        title_text="แคตตาล็อกหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ",
+        subtitle_text="แบบหีบศพมาตรฐานและหีบศพทรงเกียรติกว่า 28 รุ่น จากแบรนด์ราชรถ พร้อมสเปกขนาดและบริการจัดงานครบวงจร 24 ชม.",
+        hook_title="จุดเด่นหีบศพราชรถ & บริการครบวงจร :",
+        hook_bullets=[
+            ("ครบครัน 28 รุ่นมาตรฐาน & ทรงเกียรติ", "ตั้งแต่หีบเทพพนม หีบหลุยส์ หีบคริสต์ จนถึงหีบจำปาไม้สักทองเกรดพรีเมียม"),
+            ("วัสดุประณีต พร้อมสเปกขนาดชัดเจน", "ระบุรายละเอียดเนื้อไม้ ผ้าบุ และขนาดมาตรฐานครบถ้วนทุกรุ่นในภาพเดียว"),
+            ("ดูแลครบวงจร 24 ชั่วโมง", "บริการจัดดอกไม้หน้าหีบศพ เคลื่อนย้ายร่างทั่วประเทศ และบริหารพิธีการโดยทีมงานราชรถ")
+        ],
+        accent_box=("บริการหีบศพและจัดงานศพครบวงจร", "เลือกชมแบบหีบศพมาตรฐานราชรถได้ครบทั้ง 28 รุ่น พร้อมทีมงานให้คำปรึกษาและดูแลตลอด 24 ชั่วโมง โทร 085-999-2396"),
+        hero_img=os.path.join(cat8_name, 'S__248741975_0.jpg'),
+        hero_cap="หน้าปกแคตตาล็อกหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ (www.rathcharot.com)",
+        sub_imgs=[
+            (os.path.join(cat8_name, 'S__248741977_0.jpg'), "รุ่นที่ 1 : หีบเทพพนม ผ้าตาดเงิน", "หีบศพมาตรฐานลายเทพพนม 1 ชั้น พร้อมรายละเอียดขนาดครบถ้วน"),
+            (os.path.join(cat8_name, 'S__248741978_0.jpg'), "รุ่นที่ 2 : หีบเทพพนม ผ้าตาดทอง", "หีบเทพพนม 1 ชั้น ผ้าตาดทองฝานูน ทรงเกียรติและประณีตงดงาม"),
+            (os.path.join(cat8_name, 'S__248742006_0.jpg'), "รุ่นที่ 28 : หีบจำปาไม้สักขุด", "หีบจำปาไม้สักทองแท้ขุดขึ้นรูป ทรงคุณค่าและความสง่างามสูงสุด")
+        ],
+        folder_total_count=len(cat8_files),
+        preserve_aspect=True
+    )
+
+    c8_remaining = [
+        (f, "แบบหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ พร้อมระบุสเปกขนาดและวัสดุครบถ้วน (คลิกเปิดดูภาพขนาดใหญ่)")
+        for f in cat8_files if f not in c8_showcase_keys
+    ]
+    if c8_remaining:
+        add_continuation_gallery_pages(cat8_name, c8_remaining, "แคตตาล็อกหีบศพมาตรฐาน & หีบศพราชรถ (28 รุ่น)", "RATHCHAROT COFFIN CATALOG")
+
+    # =========================================================================
+    # CATEGORY 9: โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร ราชรถ (Promotion Packages)
+    # =========================================================================
+    cat9_name = "Promotion"
+    cat9_files = manifest.get(cat9_name) or sorted([
+        f for f in os.listdir(cat9_name) if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+    ])
+    print(f"Building Category 9: Rathcharot Promotion Packages ({len(cat9_files)} images)...")
+
+    c9_showcase_keys = ['S__248742009_0.jpg', 'S__248742010_0.jpg', 'S__248742011_0.jpg', 'S__248742012_0.jpg']
+    add_category_showcase_page(
+        badge_text="SPECIAL PROMOTION PACKAGES • RATHCHAROT",
+        title_text="โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร ราชรถ",
+        subtitle_text="แพ็กเกจจัดงานศพครบวงจร หีบศพ ดอกไม้หน้าหีบ Luxury รถรับร่าง อุปกรณ์พิธี พร้อมฟรีช่างภาพ 1 คืน (ภาพรายละเอียดครบในตัว)",
+        hook_title="สิทธิพิเศษในแพ็กเกจโปรโมชั่นราชรถ (8 แพ็กเกจ) :",
+        hook_bullets=[
+            ("แพ็กเกจมาตรฐานถึงระดับ VIP", "ครอบคลุมรุ่น RW1–RW6, RJ1 (พิธีกงเต็ก/จีน) และ RVIP1 เริ่มต้น 100,000 บาท"),
+            ("ฟรี! บริการช่างภาพงานศพ 1 คืน", "ทุกแพ็กเกจโปรโมชั่นแถมฟรีบริการช่างภาพมืออาชีพวันรดน้ำหรือวันสวด 1 คืน"),
+            ("ครบจบในที่เดียว 24 ชั่วโมง", "ดอกไม้หน้าหีบ Luxury รถรับร่าง ชุดรดน้ำศพ และดอกไม้จันทน์ 300 ดอกครบชุด")
+        ],
+        accent_box=("บริการจัดงานศพครบวงจรราชรถ 24 ชม.", "ดูรายละเอียดอุปกรณ์และราคาชัดเจนครบทั้ง 8 แพ็กเกจ สอบถามจองคิวโทร 085-999-2396 หรือ LINE : Rathcharot"),
+        hero_img=os.path.join(cat9_name, 'S__248742009_0.jpg'),
+        hero_cap="แพ็กเกจจัดงานศพ ราชรถ RVIP1 (510,000 บาท) — หีบจำปาไม้สักขุด ดอกไม้ Luxury พร้อมฟรีช่างภาพ 1 คืน",
+        sub_imgs=[
+            (os.path.join(cat9_name, 'S__248742010_0.jpg'), "แพ็กเกจ ราชรถ RJ1 (121,000 บาท)", "แพ็กเกจพิธีจีน หีบจีน 3 แบบ ดอกไม้ Luxury พร้อมฟรีช่างภาพ 1 คืน"),
+            (os.path.join(cat9_name, 'S__248742011_0.jpg'), "แพ็กเกจ ราชรถ RW6 (190,000 บาท)", "เลือกหีบศพได้ ดอกไม้ Luxury พร้อมฟรีช่างภาพ 1 คืน"),
+            (os.path.join(cat9_name, 'S__248742012_0.jpg'), "แพ็กเกจ ราชรถ RW5 (225,000 บาท)", "เลือกหีบศพได้ ดอกไม้ Luxury พร้อมฟรีช่างภาพ 1 คืน")
+        ],
+        folder_total_count=len(cat9_files),
+        preserve_aspect=True
+    )
+
+    c9_captions_map = {
+        'S__248742013_0.jpg': "แพ็กเกจจัดงานศพ ราชรถ RW4 (ราคา 165,000 บาท) — หีบศพโมเดิร์น ดอกไม้ Luxury ฟรีช่างภาพ 1 คืน",
+        'S__248742014_0.jpg': "แพ็กเกจจัดงานศพ ราชรถ RW3 (ราคา 125,000 บาท) — หีบศพโมเดิร์น ดอกไม้ Luxury ฟรีช่างภาพ 1 คืน",
+        'S__248742015_0.jpg': "แพ็กเกจจัดงานศพ ราชรถ RW2 (ราคา 115,000 บาท) — หีบศพโมเดิร์น ดอกไม้ Luxury ฟรีช่างภาพ 1 คืน",
+        'S__248742016_0.jpg': "แพ็กเกจจัดงานศพ ราชรถ RW1 (ราคา 100,000 บาท) — หีบศพโมเดิร์น ดอกไม้ Luxury ฟรีช่างภาพ 1 คืน"
+    }
+    c9_remaining = [
+        (f, c9_captions_map.get(f, "โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร ราชรถ (คลิกเปิดดูรายละเอียดแพ็กเกจขนาดใหญ่)"))
+        for f in cat9_files if f not in c9_showcase_keys
+    ]
+    if c9_remaining:
+        add_continuation_gallery_pages(cat9_name, c9_remaining, "โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร ราชรถ (RW1–RW4)", "SPECIAL PROMOTION PACKAGES")
 
     # =========================================================================
     # CLOSING & CONTACT HUB PAGE
@@ -867,7 +965,8 @@ def generate_full_catalog():
         "บริการถ่ายภาพงานพิธี (ภาพนิ่ง) : ช่างภาพมืออาชีพประสบการณ์สูง เก็บบรรยากาศอย่างสมเกียรติ",
         "บริการถ่ายวิดีโองานพิธี (VDO Cinema) : บันทึกไฟล์คุณภาพสูง ตัดต่อโดยมืออาชีพ",
         "บริการจอทีวี 65\" & ถ่ายทอดสด (Live Stream & Display) : สัญญาณเสถียรจาก Hollyland และ DJI",
-        "หีบศพมาตรฐาน และแพคเกจหีบศพพร้อมดอกไม้ครบวงจร",
+        "หีบศพมาตรฐาน และแพคเกจหีบศพราชรถกว่า 28 รุ่น พร้อมดอกไม้ครบวงจร",
+        "โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร แถมฟรีช่างภาพ 1 คืน (8 แพ็กเกจ)",
         "เคลื่อนย้ายศพทั่วประเทศ และออแกไนซ์งานศพครบวงจร",
         "ให้บริการครบทุกขั้นตอน ทั้งไทย-จีน โดยทีมงานมืออาชีพ ดูแลตั้งแต่เคลื่อนย้ายร่าง ถึงลอยอังคาร"
     ]
