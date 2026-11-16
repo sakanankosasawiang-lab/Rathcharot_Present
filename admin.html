@@ -1154,8 +1154,8 @@
         return;
       }
 
-      // Filter slides that have visual presentation (Slides 1 to 7)
-      const visualSlides = catalogData.slides.filter(s => s.slide_index >= 1 && s.slide_index <= 7);
+      // Filter slides that have visual presentation (Slides 1 to 9)
+      const visualSlides = catalogData.slides.filter(s => s.slide_index >= 1 && s.slide_index <= 9);
 
       visualSlides.forEach(slide => {
         const cat = catalogData.categories.find(c => c.id === slide.category_id) || {};

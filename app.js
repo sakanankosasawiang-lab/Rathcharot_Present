@@ -3,6 +3,9 @@
 // Canva-Style Auto-Scaling Engine & Slide Navigation
 // ==========================================================================
 
+const COVER_HERO_STORAGE_KEY = 'rathcharot_cover_heroes_v1';
+const DEFAULT_COVER_HEROES = {};
+
 let currentSlideIndex = 0;
 let slides = [];
 let lightboxCurrentImages = [];
@@ -14,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initApp() {
   slides = Array.from(document.querySelectorAll('.slide'));
+  captureDefaultCoverHeroes();
   
   // Support direct slide linking via ?slide=X or #slide=X
   const params = new URLSearchParams(window.location.search);
@@ -31,6 +35,8 @@ function initApp() {
   setupKeyboardNav();
   setupTouchNav();
   initThumbnailStrips();
+  initCoverMenuHub();
+  applySavedCoverHeroes();
   buildGalleryModal();
   
   // Canva-style Auto-scaling on load & resize
@@ -58,8 +64,8 @@ function fitStageToScreen() {
     return;
   }
 
-  // Mobile check: If screen is phone/tablet portrait (<= 900px or portrait), use 100% native mobile card layout
-  const isMobile = window.innerWidth <= 900 || window.matchMedia('(orientation: portrait)').matches;
+  // Mobile check: Align breakpoint with CSS @media (max-width: 1100px), (orientation: portrait)
+  const isMobile = window.innerWidth <= 1100 || window.matchMedia('(orientation: portrait)').matches;
   if (isMobile) {
     document.body.classList.add('mobile-layout');
     stage.style.transform = 'none';
@@ -150,11 +156,15 @@ function updateSlideView(index, options = {}) {
 
 function openSlideLightbox(slideIndex) {
   const slide = slides[slideIndex];
-  if (!slide) return;
+  if (!slide || slideIndex === 0) {
+    closeLightbox();
+    return;
+  }
   const catId = slide.dataset.categoryId;
   const catData = catId ? CATALOG_CATEGORIES.find(c => c.id === catId) : null;
   if (catData && Array.isArray(catData.images) && catData.images.length > 0) {
-    openLightbox(catData.images, 0, catData.title);
+    const orderedImages = getOrderedImagesForCategory(catId, slide);
+    openLightbox(orderedImages, 0, catData.title);
   } else {
     closeLightbox();
   }
@@ -177,9 +187,15 @@ function prevSlide() {
 // --------------------------------------------------------------------------
 function setupKeyboardNav() {
   window.addEventListener('keydown', (e) => {
+    const coverPickerModal = document.getElementById('coverPickerModal');
     const lightboxModal = document.getElementById('lightboxModal');
     const galleryModal = document.getElementById('galleryModal');
     const qrModal = document.getElementById('qrModal');
+
+    if (coverPickerModal && coverPickerModal.classList.contains('active')) {
+      if (e.key === 'Escape') closeCoverPickerModal();
+      return;
+    }
 
     // If Lightbox is open
     if (lightboxModal && lightboxModal.classList.contains('active')) {
@@ -607,6 +623,200 @@ function closeQrModal() {
   document.getElementById('qrModal')?.classList.remove('active');
 }
 
+// --------------------------------------------------------------------------
+// Home Menu Hub Visual Cards & Cover Image Selector
+// --------------------------------------------------------------------------
+function captureDefaultCoverHeroes() {
+  document.querySelectorAll('.cover-menu-card[data-cover-cat]').forEach(card => {
+    const catId = card.dataset.coverCat;
+    const bgImg = card.querySelector('.cover-card-bg-img');
+    if (catId && bgImg) {
+      DEFAULT_COVER_HEROES[catId] = bgImg.getAttribute('src');
+    }
+  });
+}
+
+function getCoverHeroOverrides() {
+  try {
+    const raw = localStorage.getItem(COVER_HERO_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveCoverHeroOverrides(map) {
+  try {
+    localStorage.setItem(COVER_HERO_STORAGE_KEY, JSON.stringify(map));
+  } catch (e) {
+    // Ignore storage quota errors in restricted environments
+  }
+}
+
+function findMatchingImageIndex(images, targetSrc) {
+  if (!Array.isArray(images) || !targetSrc) return -1;
+  return images.findIndex(img =>
+    img.encoded_path === targetSrc ||
+    img.rel_path === targetSrc ||
+    targetSrc.endsWith('/' + img.filename)
+  );
+}
+
+function getActiveCoverSrcForCategory(catId) {
+  const overrides = getCoverHeroOverrides();
+  if (overrides[catId]) return overrides[catId];
+  const cardImg = document.querySelector(`.cover-menu-card[data-cover-cat="${catId}"] .cover-card-bg-img`);
+  return cardImg ? cardImg.getAttribute('src') : (DEFAULT_COVER_HEROES[catId] || '');
+}
+
+function getOrderedImagesForCategory(catId, _slideEl) {
+  const catData = CATALOG_CATEGORIES.find(c => c.id === catId);
+  if (!catData || !Array.isArray(catData.images) || catData.images.length === 0) return [];
+  const activeSrc = getActiveCoverSrcForCategory(catId);
+  const idx = findMatchingImageIndex(catData.images, activeSrc);
+  if (idx <= 0) return catData.images;
+  return [catData.images[idx], ...catData.images.filter((_, i) => i !== idx)];
+}
+
+function applyCoverHeroForCategory(catId, encodedPath) {
+  if (!catId || !encodedPath) return;
+
+  // 1. Update Home Hub visual card background
+  const card = document.querySelector(`.cover-menu-card[data-cover-cat="${catId}"]`);
+  const cardImg = card?.querySelector('.cover-card-bg-img');
+  if (cardImg) {
+    cardImg.src = encodedPath;
+  }
+
+  // 2. Update corresponding category slide Hero image & active thumbnail state
+  const targetSlide = document.querySelector(`section.slide[data-category-id="${catId}"]`);
+  if (targetSlide && targetSlide.dataset.slideIndex !== '0') {
+    const heroImg = targetSlide.querySelector('.hero-img');
+    if (heroImg) {
+      heroImg.src = encodedPath;
+    }
+    const thumbs = targetSlide.querySelectorAll('.slide-thumb-item');
+    thumbs.forEach(t => {
+      const tSrc = t.dataset.src || '';
+      const isMatch = tSrc === encodedPath || encodedPath.endsWith(tSrc) || tSrc.endsWith(encodedPath);
+      t.classList.toggle('active', isMatch);
+    });
+  }
+}
+
+function applySavedCoverHeroes() {
+  const overrides = getCoverHeroOverrides();
+  Object.entries(overrides).forEach(([catId, path]) => {
+    const catData = CATALOG_CATEGORIES.find(c => c.id === catId);
+    if (catData && findMatchingImageIndex(catData.images, path) >= 0) {
+      applyCoverHeroForCategory(catId, path);
+    }
+  });
+}
+
+function initCoverMenuHub() {
+  document.querySelectorAll('.btn-cover-pick').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const catId = btn.dataset.pickCat;
+      const slideIdx = parseInt(btn.dataset.pickSlide, 10);
+      openCoverPickerModal(catId, slideIdx);
+    });
+  });
+
+  const pickerOverlay = document.getElementById('coverPickerModal');
+  pickerOverlay?.addEventListener('click', (e) => {
+    if (e.target === pickerOverlay) closeCoverPickerModal();
+  });
+}
+
+function openCoverPickerModal(catId, slideIdx) {
+  const modal = document.getElementById('coverPickerModal');
+  const grid = document.getElementById('coverPickerGrid');
+  const titleEl = document.getElementById('coverPickerTitle');
+  const resetBtn = document.getElementById('btnResetCoverHero');
+  if (!modal || !grid) return;
+
+  const catData = CATALOG_CATEGORIES.find(c => c.id === catId);
+  if (!catData || !Array.isArray(catData.images)) return;
+
+  if (titleEl) {
+    titleEl.textContent = `🖼️ เลือกภาพหลัก: ${catData.title}`;
+  }
+
+  const currentSrc = getActiveCoverSrcForCategory(catId);
+  const currentIdx = findMatchingImageIndex(catData.images, currentSrc);
+  grid.innerHTML = '';
+
+  catData.images.forEach((img, idx) => {
+    const isSelected = idx === currentIdx || img.encoded_path === currentSrc;
+    const card = document.createElement('div');
+    card.className = `gallery-card cover-picker-card${isSelected ? ' selected' : ''}`;
+    card.innerHTML = `
+      ${isSelected ? '<span class="cover-picker-active-tag">✓ ภาพหลักปัจจุบัน</span>' : ''}
+      <img src="${img.encoded_path}" alt="${img.filename}" loading="lazy" decoding="async" />
+      <div class="gallery-card-badge">ภาพที่ ${idx + 1} / ${catData.images.length}</div>
+    `;
+    card.addEventListener('click', () => {
+      selectCoverHeroImage(catId, slideIdx, img.encoded_path);
+    });
+    grid.appendChild(card);
+  });
+
+  if (resetBtn) {
+    resetBtn.onclick = () => resetCoverHeroForCategory(catId, slideIdx);
+  }
+
+  modal.classList.add('active');
+}
+
+function closeCoverPickerModal() {
+  const modal = document.getElementById('coverPickerModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  setTimeout(() => {
+    const grid = document.getElementById('coverPickerGrid');
+    if (grid && !modal.classList.contains('active')) {
+      grid.innerHTML = '';
+    }
+  }, 250);
+}
+
+function persistCoverToServer(slideIdx, heroSrc) {
+  if (!slideIdx || !heroSrc) return;
+  fetch('/api/save-slide', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      slide_index: slideIdx,
+      hero_src: heroSrc,
+      thumbs: null
+    })
+  }).catch(() => {});
+}
+
+function selectCoverHeroImage(catId, slideIdx, encodedPath) {
+  const overrides = getCoverHeroOverrides();
+  overrides[catId] = encodedPath;
+  saveCoverHeroOverrides(overrides);
+  applyCoverHeroForCategory(catId, encodedPath);
+  persistCoverToServer(slideIdx, encodedPath);
+  closeCoverPickerModal();
+}
+
+function resetCoverHeroForCategory(catId, slideIdx) {
+  const defaultSrc = DEFAULT_COVER_HEROES[catId];
+  const overrides = getCoverHeroOverrides();
+  delete overrides[catId];
+  saveCoverHeroOverrides(overrides);
+  if (defaultSrc) {
+    applyCoverHeroForCategory(catId, defaultSrc);
+    persistCoverToServer(slideIdx, defaultSrc);
+  }
+  closeCoverPickerModal();
+}
+
 // Expose handlers globally
 window.updateSlideView = updateSlideView;
 window.openSlideLightbox = openSlideLightbox;
@@ -620,4 +830,8 @@ window.closeGalleryModal = closeGalleryModal;
 window.openGalleryModal = openGalleryModal;
 window.openQrModal = openQrModal;
 window.closeQrModal = closeQrModal;
+window.openCoverPickerModal = openCoverPickerModal;
+window.closeCoverPickerModal = closeCoverPickerModal;
+window.selectCoverHeroImage = selectCoverHeroImage;
+window.resetCoverHeroForCategory = resetCoverHeroForCategory;
 window.fitStageToScreen = fitStageToScreen;

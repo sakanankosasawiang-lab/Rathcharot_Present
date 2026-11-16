@@ -911,18 +911,55 @@ body {
 }
 
 /* ==========================================================================
-   Special Slide 0: Grand Cover Slide
+   Special Slide 0: Grand Cover Hub with Dynamic Gold Frame & Visual Cards
    ========================================================================== */
+.slide[data-slide-index="0"] {
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 22px 26px;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.45) rgba(12, 11, 10, 0.6);
+}
+
+.slide[data-slide-index="0"] > .slide-frame-svg {
+  display: none !important;
+}
+
 .slide-cover-layout {
+  width: 100%;
+  max-width: 1388px;
+  height: auto !important;
+  min-height: calc(100% - 4px);
+  margin: 0 auto;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 24px 104px 40px 104px;
+  padding: 28px 46px 34px 46px;
   box-sizing: border-box;
   position: relative;
   z-index: 10;
+  border: 1.8px solid #C5A059;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 18%, rgba(36, 31, 24, 0.72) 0%, rgba(14, 13, 12, 0.94) 68%, rgba(8, 8, 8, 0.98) 100%);
+  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.14), inset 0 0 42px rgba(212, 175, 55, 0.06), 0 14px 44px rgba(0, 0, 0, 0.85);
 }
+
+/* Dynamic Corner Thai Rosettes locked to Slide 0 Frame Corners */
+.cover-corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 15;
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.45));
+}
+.cover-corner.tl { top: 8px; left: 8px; }
+.cover-corner.tr { top: 8px; right: 8px; }
+.cover-corner.bl { bottom: 8px; left: 8px; }
+.cover-corner.br { bottom: 8px; right: 8px; }
 
 .cover-logos {
   display: flex;
@@ -933,14 +970,14 @@ body {
 }
 
 .cover-logo-item {
-  height: 76px;
+  height: 68px;
   width: auto;
   filter: drop-shadow(0 4px 14px rgba(0,0,0,0.75));
 }
 
 .cover-heading {
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: 700;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
@@ -951,7 +988,7 @@ body {
 
 .cover-sub-brand {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: var(--gold-light);
   letter-spacing: 2px;
   margin-bottom: 6px;
@@ -960,86 +997,238 @@ body {
 }
 
 .cover-by-rathcharot {
-  position: absolute;
-  bottom: 42px;
-  right: 98px;
+  position: static;
+  display: block;
+  margin: 6px auto 12px auto;
   font-family: var(--font-display);
-  font-size: 0.88rem;
-  color: rgba(212, 175, 55, 0.45);
-  letter-spacing: 2px;
+  font-size: 0.85rem;
+  color: rgba(212, 175, 55, 0.55);
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   pointer-events: none;
 }
 
 .cover-tagline {
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   color: #FFFFFF;
   font-weight: 400;
-  max-width: 860px;
+  max-width: 900px;
   margin: 0 auto 12px auto;
-  line-height: 1.45;
+  line-height: 1.48;
+}
+
+.cover-hub-label {
+  font-size: 0.84rem;
+  color: var(--gold-light);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+  opacity: 0.92;
 }
 
 .cover-features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  max-width: 960px;
-  margin: 0 auto 16px auto;
+  max-width: 1220px;
+  margin: 0 auto 14px auto;
   width: 100%;
 }
 
-.cover-feature-card {
-  background: rgba(22, 20, 18, 0.78);
-  border: 1px solid rgba(212, 175, 55, 0.38);
-  border-radius: 6px;
-  padding: 12px 14px;
-  text-align: left;
-  transition: all 0.2s ease;
+.cover-menu-card {
+  position: relative;
+  min-height: 178px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  background: #12100e;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  position: relative;
+  justify-content: space-between;
+  padding: 12px 14px 13px 14px;
+  text-align: left;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
   z-index: 25;
+  box-sizing: border-box;
 }
 
-.cover-feature-card:hover {
-  border-color: var(--gold-primary);
-  background: rgba(34, 30, 25, 0.94);
+.cover-menu-card:hover {
+  border-color: var(--gold-bright);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 14px rgba(212, 175, 55, 0.22);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), 0 0 18px rgba(212, 175, 55, 0.32);
 }
 
-.cover-feature-card .card-icon {
-  font-size: 1.25rem;
-  margin-bottom: 4px;
+.cover-card-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  z-index: 0;
+  transition: transform 0.45s ease;
+  filter: brightness(0.88);
+}
+
+.cover-card-bg-img.portrait-focus {
+  object-position: center 12%;
+}
+
+.cover-menu-card:hover .cover-card-bg-img {
+  transform: scale(1.06);
+  filter: brightness(0.95);
+}
+
+.cover-card-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 7, 6, 0.42) 0%,
+    rgba(10, 9, 8, 0.56) 38%,
+    rgba(9, 8, 7, 0.88) 72%,
+    rgba(6, 5, 4, 0.97) 100%
+  );
+  pointer-events: none;
+}
+
+.cover-card-top {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cover-card-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cover-card-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 7px;
+  border-radius: 5px;
+  background: rgba(12, 11, 9, 0.82);
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 700;
   color: var(--gold-light);
 }
 
-.cover-feature-card .card-title {
-  font-size: 0.92rem;
+.cover-card-num.highlight {
+  background: var(--gold-gradient);
+  color: #141108;
+  border-color: #FFF2A3;
+}
+
+.cover-card-count {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #F4EFE6;
+  background: rgba(12, 11, 9, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 2px 8px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+.btn-cover-pick {
+  position: relative;
+  z-index: 5;
+  background: rgba(15, 14, 12, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  color: var(--gold-light);
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-family: var(--font-main);
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.btn-cover-pick:hover {
+  background: var(--gold-gradient);
+  color: #121008;
+  border-color: #FFF;
+  font-weight: 600;
+}
+
+.cover-card-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 28px;
+}
+
+.cover-menu-card .card-title {
+  font-size: 0.96rem;
   font-weight: 600;
   color: var(--gold-light);
-  margin-bottom: 3px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+  line-height: 1.3;
 }
 
-.cover-feature-card .card-desc {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  line-height: 1.38;
-  flex: 1;
+.cover-menu-card .card-desc {
+  font-size: 0.76rem;
+  color: #EAE4D9;
+  line-height: 1.36;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
 }
 
-.cover-feature-card .card-action-link {
-  margin-top: 8px;
+.cover-menu-card .card-action-link {
+  margin-top: 4px;
   font-size: 0.74rem;
   font-weight: 600;
   color: var(--gold-primary);
   letter-spacing: 0.3px;
 }
 
-.cover-feature-card:hover .card-action-link {
-  color: var(--gold-light);
+.cover-menu-card:hover .card-action-link {
+  color: #FFF;
+}
+
+.cover-menu-card-contact {
+  grid-column: 1 / -1;
+  min-height: 82px;
+  justify-content: center;
+  padding: 14px 18px;
+}
+
+.cover-card-scrim.contact-scrim {
+  background: linear-gradient(90deg, rgba(12, 11, 9, 0.94) 0%, rgba(16, 14, 10, 0.86) 55%, rgba(12, 11, 9, 0.94) 100%);
+}
+
+.cover-contact-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+}
+
+.cover-contact-text {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
 }
 
 .cover-footer-row {
@@ -1047,8 +1236,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 28px;
-  margin-top: 0;
-  transform: translateY(-36px); /* Ample luxurious clearance above bottom frame line */
+  margin-top: 4px;
+  transform: none;
   position: relative;
   z-index: 30; /* Strictly on top of any frame line or rosette */
 }
@@ -1313,6 +1502,58 @@ body {
   opacity: 1;
 }
 
+#galleryModal {
+  z-index: 2000;
+}
+
+#qrModal {
+  z-index: 2100;
+}
+
+#lightboxModal {
+  z-index: 2500 !important;
+}
+
+#coverPickerModal {
+  z-index: 2600 !important;
+}
+
+.cover-picker-content {
+  max-width: 1120px;
+}
+
+.cover-picker-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.cover-picker-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cover-picker-card.selected {
+  border-color: var(--gold-bright) !important;
+  box-shadow: 0 0 0 2px var(--gold-primary), 0 10px 24px rgba(0, 0, 0, 0.9) !important;
+}
+
+.cover-picker-active-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--gold-gradient);
+  color: #141108;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  z-index: 4;
+}
+
 .lightbox-body {
   flex: 1;
   display: flex;
@@ -1530,6 +1771,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   display: block;
   transition: transform 0.35s ease;
 }
@@ -1978,6 +2220,7 @@ body.catalog-mode .slide {
   }
 
   .slide {
+    display: block !important; /* Expand height dynamically with child content so borders never cut off mid-card */
     width: 100% !important;
     height: 100% !important;
     overflow-y: auto !important;
@@ -2139,14 +2382,31 @@ body.catalog-mode .slide {
     font-size: 0.78rem !important;
   }
 
-  /* Slide 0 (Cover) Mobile Styling */
+  /* Slide 0 (Cover Hub) Dynamic Mobile & Tablet Styling */
+  .slide[data-slide-index="0"] {
+    padding: 10px 10px 24px 10px !important;
+  }
+
   .slide-cover-layout {
     width: 100% !important;
-    min-height: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: calc(100% - 4px) !important;
+    margin: 0 !important;
     padding: 20px 14px 28px 14px !important;
     justify-content: flex-start !important;
     box-sizing: border-box !important;
+    border-radius: 12px !important;
   }
+
+  .cover-corner {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .cover-corner.tl { top: 6px !important; left: 6px !important; }
+  .cover-corner.tr { top: 6px !important; right: 6px !important; }
+  .cover-corner.bl { bottom: 6px !important; left: 6px !important; }
+  .cover-corner.br { bottom: 6px !important; right: 6px !important; }
 
   .cover-logos {
     gap: 16px !important;
@@ -2158,13 +2418,13 @@ body.catalog-mode .slide {
   }
 
   .cover-heading {
-    font-size: 1.8rem !important;
+    font-size: 1.75rem !important;
     line-height: 1.25 !important;
     margin-bottom: 2px !important;
   }
 
   .cover-sub-brand {
-    font-size: 0.85rem !important;
+    font-size: 0.84rem !important;
     margin-bottom: 8px !important;
   }
 
@@ -2174,28 +2434,52 @@ body.catalog-mode .slide {
     margin-bottom: 12px !important;
   }
 
+  .cover-hub-label {
+    font-size: 0.78rem !important;
+    margin-bottom: 10px !important;
+  }
+
   .cover-features-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
     width: 100% !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 14px !important;
   }
 
-  .cover-feature-card {
-    padding: 10px 12px !important;
+  .cover-menu-card {
+    min-height: 158px !important;
+    padding: 10px 12px 12px 12px !important;
   }
 
-  .cover-feature-card .card-title {
+  .cover-menu-card .card-title {
     font-size: 0.88rem !important;
   }
 
-  .cover-feature-card .card-desc {
-    font-size: 0.76rem !important;
+  .cover-menu-card .card-desc {
+    font-size: 0.74rem !important;
   }
 
-  .cover-feature-card .card-action-link {
+  .cover-menu-card .card-action-link {
     font-size: 0.72rem !important;
-    margin-top: 6px !important;
+    margin-top: 4px !important;
+  }
+
+  .cover-menu-card-contact {
+    min-height: auto !important;
+    padding: 12px !important;
+  }
+
+  .cover-contact-row {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .cover-picker-header-actions {
+    gap: 6px !important;
+  }
+  #btnResetCoverHero {
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
   }
 
   .cover-footer-row {
@@ -2352,6 +2636,17 @@ body.catalog-mode .slide {
     bottom: 8px !important;
     padding: 3px 12px !important;
     font-size: 0.82rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .cover-features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .cover-contact-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
   }
 }
 

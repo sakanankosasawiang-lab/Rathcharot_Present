@@ -91,7 +91,7 @@ def parse_slides_from_html():
         title_m = re.search(r'<h2 class="slide-title">([^<]+)</h2>', slide_content)
         title = title_m.group(1) if title_m else f"Slide {slide_idx}"
 
-        hero_m = re.search(r'<img class="hero-img"\s+src="([^"]+)"\s+alt="([^"]*)"', slide_content)
+        hero_m = re.search(r'<img class="[^"]*hero-img[^"]*"\s+src="([^"]+)"\s+alt="([^"]*)"', slide_content)
         hero_src = hero_m.group(1) if hero_m else ""
         hero_alt = hero_m.group(2) if hero_m else ""
 
@@ -275,7 +275,7 @@ class RathcharotServerHandler(SimpleHTTPRequestHandler):
             slide_idx = body.get('slide_index')
             hero_src = body.get('hero_src')
             hero_alt = body.get('hero_alt', 'ภาพบรรยากาศพิธีการ')
-            thumbs = body.get('thumbs', [])
+            thumbs = body.get('thumbs') if 'thumbs' in body else None
             total_count = body.get('total_count')
 
             if slide_idx is None:

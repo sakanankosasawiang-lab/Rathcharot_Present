@@ -90,24 +90,19 @@
     <div class="presentation-stage">
 
       <!-- ====================================================================
-           SLIDE 0: หน้าปกทรงเกียรติ & แนะนำบริการ
+           SLIDE 0: หน้าปกทรงเกียรติ & ศูนย์รวมเมนูพร้อมภาพประกอบ
            ==================================================================== -->
       <section class="slide active" data-slide-index="0" data-category-id="profile">
         <div class="slide-watermark" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png');"></div>
         <div class="slide-watermark-center" style="background-image: url('%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022150_0.png');"></div>
 
-        <!-- 1440x810 Frame -->
-        <svg class="slide-frame-svg" viewBox="0 0 1440 810" preserveAspectRatio="none">
-          <path d="M 77 32 L 1363 32 A 45 45 0 0 0 1408 77 L 1408 733 A 45 45 0 0 0 1363 778 L 77 778 A 45 45 0 0 0 32 733 L 32 77 A 45 45 0 0 0 77 32 Z" 
-                fill="none" stroke="#C5A059" stroke-width="1.8" />
-          <use href="#thai-rosette" x="58" y="58" />
-          <use href="#thai-rosette" x="1382" y="58" />
-          <use href="#thai-rosette" x="1382" y="752" />
-          <use href="#thai-rosette" x="58" y="752" />
-          <use href="#thai-rosette" x="720" y="32" />
-        </svg>
-
         <div class="slide-inner slide-cover-layout">
+          <!-- Dynamic Corner Thai Rosettes (Follow frame dimensions dynamically on all viewports) -->
+          <svg class="cover-corner tl" viewBox="0 0 36 36" aria-hidden="true"><use href="#thai-rosette" x="18" y="18" /></svg>
+          <svg class="cover-corner tr" viewBox="0 0 36 36" aria-hidden="true"><use href="#thai-rosette" x="18" y="18" /></svg>
+          <svg class="cover-corner bl" viewBox="0 0 36 36" aria-hidden="true"><use href="#thai-rosette" x="18" y="18" /></svg>
+          <svg class="cover-corner br" viewBox="0 0 36 36" aria-hidden="true"><use href="#thai-rosette" x="18" y="18" /></svg>
+
           <div class="cover-logos">
             <img class="cover-logo-item" src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022151_0.png" alt="ราชรถ">
             <div style="width: 1px; height: 64px; background: rgba(212,175,55,0.4);"></div>
@@ -121,31 +116,190 @@
             โดยทีมช่างภาพบันทึกประวัติศาสตร์ชาติ ผู้ผ่านงานพิธีหลวงและพระราชพิธีสำคัญ ด้วยมาตรฐานละเอียด สำรวม และสมเกียรติสูงสุด”
           </p>
 
-          <div class="ornate-divider" style="max-width: 440px; margin: 0 auto 16px auto;">
+          <div class="ornate-divider" style="max-width: 440px; margin: 0 auto 14px auto;">
             <div class="ornate-line"></div>
             <span class="ornate-diamond">◇</span>
             <div class="ornate-line"></div>
           </div>
 
-          <!-- 3 Selling Pillars Highlight Cards (Clickable Links) -->
+          <div class="cover-hub-label">เลือกชมผลงานตามหมวดหมู่พิธีกรรม (คลิกการ์ดเพื่อเปิดภาพขยาย หรือเลือกเปลี่ยนภาพหลักของเมนูได้)</div>
+
+          <!-- Visual Category Menu Hub (All Menus with Selectable Real Photography Backdrops) -->
           <div class="cover-features-grid">
-            <div class="cover-feature-card" role="button" tabindex="0" onclick="updateSlideView(2, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(2, { autoExpand: true });}">
-              <div class="card-icon">📷</div>
-              <div class="card-title">1. ถ่ายภาพงานพิธี</div>
-              <div class="card-desc">ช่างภาพมืออาชีพประสบการณ์สูง เก็บบรรยากาศอย่างสมเกียรติ จัดองค์ประกอบภาพอย่างสวยงาม</div>
-              <div class="card-action-link">ดูผลงานถ่ายภาพพิธี ›</div>
+            <!-- ★ Live Stream -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="1" data-cover-cat="streaming" onclick="updateSlideView(1, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(1, { autoExpand: true });}">
+              <img class="cover-card-bg-img" src="streaming%20%E0%B8%AA%E0%B8%94%20%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B2%E0%B8%8a%E0%B8%B5%E0%B8%9E%20%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%84%E0%B8%AE%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A%E0%B9%82%E0%B8%8B%E0%B8%A5%E0%B8%B9%E0%B8%8A%E0%B8%B1%E0%B9%88%E0%B8%99%20%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B8%88%E0%B8%AD%2065%20-75%20%E0%B8%99%E0%B8%B4%E0%B9%89%E0%B8%A7/S__246046734_0.jpg" alt="บริการจอทีวี 65 นิ้ว &amp; Live Stream">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num highlight">★</span>
+                  <span class="cover-card-count">13 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="streaming" data-pick-slide="1" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">บริการจอทีวี 65&quot; &amp; Live Stream</div>
+                <div class="card-desc">ถ่ายทอดสดสัญญาณเสถียร จาก Hollyland และ DJI พร้อมทีมงานเทคนิค</div>
+                <div class="card-action-link">ดูภาพระบบจอ &amp; ถ่ายทอดสด ›</div>
+              </div>
             </div>
-            <div class="cover-feature-card" role="button" tabindex="0" onclick="updateSlideView(4, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(4, { autoExpand: true });}">
-              <div class="card-icon">🎬</div>
-              <div class="card-title">2. ถ่ายวิดีโองานพิธี</div>
-              <div class="card-desc">บันทึกไฟล์คุณภาพสูงระดับ 4K / Full HD คมชัดทุกรายละเอียด ตัดต่ออย่างประณีตโดยมืออาชีพ</div>
-              <div class="card-action-link">ดูภาพบรรยากาศ &amp; วิดีโอ ›</div>
+
+            <!-- 01 พิธีหลวง -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="2" data-cover-cat="royal" onclick="updateSlideView(2, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(2, { autoExpand: true });}">
+              <img class="cover-card-bg-img" src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022154_0.jpg" alt="การถ่ายภาพงานพิธีหลวง">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num">01</span>
+                  <span class="cover-card-count">43 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="royal" data-pick-slide="2" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">การถ่ายภาพงานพิธีหลวง</div>
+                <div class="card-desc">“เกียรติยศสูงสุดแห่งชีวิต” ในพิธีพระราชทานเกียรติยศอย่างสมพระเกียรติ</div>
+                <div class="card-action-link">ดูผลงานพิธีหลวง ›</div>
+              </div>
             </div>
-            <div class="cover-feature-card" role="button" tabindex="0" onclick="updateSlideView(1, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(1, { autoExpand: true });}">
-              <div class="card-icon">📺</div>
-              <div class="card-title">3. จอทีวี 65&quot; &amp; Live Stream</div>
-              <div class="card-desc">ระบบสัญญาณมาตรฐานมืออาชีพ คมชัด เสถียร จาก Hollyland และ DJI พร้อมทีมงานเทคนิคดูแลตลอดงาน</div>
-              <div class="card-action-link">ดูระบบจอ &amp; ถ่ายทอดสด ›</div>
+
+            <!-- 02 พิธีกงเต็ก & พิธีจีน -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="3" data-cover-cat="chinese" onclick="updateSlideView(3, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(3, { autoExpand: true });}">
+              <img class="cover-card-bg-img" src="%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%B5%E0%B8%99%20%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1/S__246030361.jpg" alt="การถ่ายภาพพิธีกงเต็ก &amp; พิธีจีน">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num">02</span>
+                  <span class="cover-card-count">27 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="chinese" data-pick-slide="3" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">การถ่ายภาพพิธีกงเต็ก &amp; พิธีจีน</div>
+                <div class="card-desc">ความหมาย ความศรัทธา และสายสัมพันธ์อันลึกซึ้งของครอบครัว</div>
+                <div class="card-action-link">ดูผลงานพิธีกงเต็ก &amp; พิธีจีน ›</div>
+              </div>
+            </div>
+
+            <!-- 03 พิธีสวดพระอภิธรรม -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="4" data-cover-cat="chanting" onclick="updateSlideView(4, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(4, { autoExpand: true });}">
+              <img class="cover-card-bg-img" src="%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%20%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%84%E0%B8%A3%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%87%E0%B8%B2%E0%B8%99/S__246022190_0.jpg" alt="พิธีสวดพระอภิธรรม &amp; บรรยากาศ">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num">03</span>
+                  <span class="cover-card-count">56 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="chanting" data-pick-slide="4" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">พิธีสวดพระอภิธรรม &amp; บรรยากาศ</div>
+                <div class="card-desc">บันทึก “สายสัมพันธ์ ความรัก และอารมณ์ความรู้สึก” ทุกองค์ประกอบ</div>
+                <div class="card-action-link">ดูภาพพิธีสวดอภิธรรม ›</div>
+              </div>
+            </div>
+
+            <!-- 04 พิธีฌาปนกิจ -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="5" data-cover-cat="cremation" onclick="updateSlideView(5, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(5, { autoExpand: true });}">
+              <img class="cover-card-bg-img" src="%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%A2/S__246022259_0.jpg" alt="พิธีฌาปนกิจ &amp; วันสุดท้าย">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num">04</span>
+                  <span class="cover-card-count">37 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="cremation" data-pick-slide="5" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">พิธีฌาปนกิจ &amp; วันสุดท้าย</div>
+                <div class="card-desc">บันทึกเกียรติยศและประวัติศาสตร์ครั้งสุดท้ายของครอบครัวอย่างสมเกียรติ</div>
+                <div class="card-action-link">ดูภาพวันฌาปนกิจ ›</div>
+              </div>
+            </div>
+
+            <!-- 05 พิธีลอยอังคาร -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="6" data-cover-cat="floating" onclick="updateSlideView(6, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(6, { autoExpand: true });}">
+              <img class="cover-card-bg-img" src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022307_0.jpg" alt="พิธีลอยอังคารสู่สุคติภูมิ">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num">05</span>
+                  <span class="cover-card-count">10 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="floating" data-pick-slide="6" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">พิธีลอยอังคารสู่สุคติภูมิ</div>
+                <div class="card-desc">ส่งดวงวิญญาณสู่สุคติภูมิอันสงบ ร่มเย็น และบริสุทธิ์</div>
+                <div class="card-action-link">ดูภาพพิธีลอยอังคาร ›</div>
+              </div>
+            </div>
+
+            <!-- 06 ทำไมต้องช่างภาพ Professional? -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="7" data-cover-cat="profile" onclick="updateSlideView(7, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(7, { autoExpand: true });}">
+              <img class="cover-card-bg-img portrait-focus" src="Photographer/S__246399020.jpg" alt="ทำไมต้องช่างภาพ Professional">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num">06</span>
+                  <span class="cover-card-count">8 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="profile" data-pick-slide="7" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">ทำไมต้องช่างภาพ Professional?</div>
+                <div class="card-desc">ชุดสูทสุภาพ รู้กาลเทศะ งานพิธีใหญ่ แก้ปัญหาเฉพาะหน้าได้จริง</div>
+                <div class="card-action-link">ชมมาตรฐานทีมช่างภาพ ›</div>
+              </div>
+            </div>
+
+            <!-- 07 หีบศพมาตรฐานราชรถ -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="8" data-cover-cat="coffin" onclick="updateSlideView(8, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(8, { autoExpand: true });}">
+              <img class="cover-card-bg-img" src="coffin/S__248741975_0.jpg" alt="หีบศพมาตรฐานราชรถ 28 รุ่น">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num">07</span>
+                  <span class="cover-card-count">30 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="coffin" data-pick-slide="8" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">หีบศพมาตรฐานราชรถ (28 รุ่น)</div>
+                <div class="card-desc">แบบหีบศพพร้อมสเปกขนาด วัสดุเนื้อไม้ และบริการจัดดอกไม้ครบวงจร</div>
+                <div class="card-action-link">ดูแคตตาล็อกหีบศพ ›</div>
+              </div>
+            </div>
+
+            <!-- 08 โปรโมชั่นแพ็กเกจจัดงานศพ -->
+            <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="9" data-cover-cat="promotion" onclick="updateSlideView(9, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(9, { autoExpand: true });}">
+              <img class="cover-card-bg-img" src="Promotion/S__248742009_0.jpg" alt="โปรโมชั่นแพ็กเกจจัดงานศพ 8 แพ็กเกจ">
+              <div class="cover-card-scrim"></div>
+              <div class="cover-card-top">
+                <div class="cover-card-badges">
+                  <span class="cover-card-num">08</span>
+                  <span class="cover-card-count">8 ภาพ</span>
+                </div>
+                <button type="button" class="btn-cover-pick" data-pick-cat="promotion" data-pick-slide="9" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
+              </div>
+              <div class="cover-card-body">
+                <div class="card-title">โปรโมชั่นแพ็กเกจจัดงานศพ (8 แพ็กเกจ)</div>
+                <div class="card-desc">หีบศพ ดอกไม้ Luxury รถรับร่าง ครบชุด พร้อมฟรีช่างภาพ 1 คืน</div>
+                <div class="card-action-link">ดูรายละเอียดโปรโมชั่น ›</div>
+              </div>
+            </div>
+
+            <!-- 09 ติดต่อเรา & ศูนย์บริการ 24 ชม. -->
+            <div class="cover-menu-card cover-menu-card-contact" role="button" tabindex="0" data-cover-slide="10" onclick="updateSlideView(10)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(10);}">
+              <img class="cover-card-bg-img" src="%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87/S__246022153_0.jpg" alt="ติดต่อเรา ราชรถ 24 ชม.">
+              <div class="cover-card-scrim contact-scrim"></div>
+              <div class="cover-contact-row">
+                <span class="cover-card-num">09</span>
+                <div class="cover-contact-text">
+                  <div class="card-title">ติดต่อเรา &amp; ศูนย์บริการ 24 ชม. (ราชรถ &amp; ช่างภาพงานศพ.com)</div>
+                  <div class="card-desc">โทรด่วน 085-999-2396 • เว็บไซต์ www.ช่างภาพงานศพ.com / www.rathcharot.com • LINE : Rathcharot</div>
+                </div>
+                <div class="card-action-link">ดูข้อมูลติดต่อ &amp; QR ›</div>
+              </div>
             </div>
           </div>
 
@@ -742,7 +896,7 @@
 
           <div class="slide-col-visual">
             <div class="hero-image-frame hero-image-frame-contain" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
-              <img class="hero-img hero-img-contain" src="coffin/S__248741975_0.jpg" alt="แคตตาล็อกหีบศพราชรถ">
+              <img class="hero-img hero-img-contain" src="coffin/S__248741975_0.jpg" alt="ภาพบรรยากาศพิธีการ">
               <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
             </div>
 
@@ -1136,6 +1290,23 @@
           <p>พร้อมให้บริการและคำปรึกษาตลอด 24 ชั่วโมง ทั่วประเทศ</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Cover Image Picker Modal (Select primary background & first image per menu) -->
+  <div class="modal-overlay" id="coverPickerModal">
+    <div class="gallery-modal-content cover-picker-content">
+      <div class="gallery-modal-header">
+        <div>
+          <div class="gallery-modal-title" id="coverPickerTitle">🖼️ เลือกภาพหลักประจำเมนู</div>
+          <div class="cover-picker-subtitle" id="coverPickerSubtitle">คลิกภาพที่ต้องการเพื่อตั้งเป็นภาพหน้าปกและภาพแรกสุดเมื่อเปิดเมนู</div>
+        </div>
+        <div class="cover-picker-header-actions">
+          <button type="button" class="btn-icon" id="btnResetCoverHero" title="คืนค่าภาพเริ่มต้นของเมนูนี้">↺ คืนค่าเริ่มต้น</button>
+          <button type="button" class="modal-close-btn" style="position: static;" onclick="closeCoverPickerModal()" title="ปิด (ESC)">✕</button>
+        </div>
+      </div>
+      <div class="gallery-grid-container cover-picker-grid" id="coverPickerGrid"></div>
     </div>
   </div>
 
