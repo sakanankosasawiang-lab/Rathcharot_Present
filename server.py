@@ -129,7 +129,7 @@ def update_slide_in_html(slide_idx, hero_src, hero_alt, thumbs, total_count=None
         slide_body = re.sub(hero_pattern, hero_repl, slide_body, count=1)
 
     if thumbs is not None:
-        strip_class = 'slide-thumb-strip slide-thumb-strip-portrait' if slide_idx == 7 else 'slide-thumb-strip'
+        strip_class = 'slide-thumb-strip'
         thumbs_html = f'<div class="{strip_class}">\n'
         for i, t in enumerate(thumbs):
             active_cls = ' active' if i == 0 else ''
@@ -148,6 +148,11 @@ def update_slide_in_html(slide_idx, hero_src, hero_alt, thumbs, total_count=None
         f.write(new_html)
     return True, "Slide visual updated successfully"
 
+def natural_sort_key(filename):
+    parts = [int(p) if p.isdigit() else p.lower() for p in re.split(r'(\d+)', filename)]
+    priority = 0 if not filename.startswith('S__') else 1
+    return (priority, parts)
+
 def resync_all_folders():
     categories = get_catalog_categories_from_file()
     total_found = 0
@@ -155,7 +160,10 @@ def resync_all_folders():
         folder_path = os.path.join(BASE_DIR, cat['folder'])
         if not os.path.exists(folder_path):
             continue
-        all_files = sorted([f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))])
+        all_files = sorted(
+            [f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))],
+            key=natural_sort_key
+        )
         if cat['id'] == 'royal':
             all_files = [f for f in all_files if f not in ['S__246022147.jpg', 'S__246022150_0.png', 'S__246022151_0.png']]
         elif cat['id'] == 'coffin':
@@ -266,7 +274,7 @@ class RathcharotServerHandler(SimpleHTTPRequestHandler):
                 self.send_json({
                     'status': 'error',
                     'success': False,
-                    'message': 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง (user: admin, password: admin1234)'
+                    'message': 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'
                 }, code=401)
             return
 

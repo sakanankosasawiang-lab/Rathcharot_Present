@@ -220,14 +220,14 @@ body {
   transform: translateY(-1px);
 }
 
-/* Hamburger Menu Button (Hidden on Desktop, Visible on Mobile & Tablet) */
+/* Hamburger Menu Button (Accessible on All Devices for Nav & Admin Login) */
 .btn-hamburger {
-  display: none;
+  display: inline-flex;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(197, 160, 89, 0.45);
   color: var(--gold-light);
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 6px;
   align-items: center;
   justify-content: center;
@@ -1552,6 +1552,263 @@ body {
   border-radius: 999px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   z-index: 4;
+}
+
+/* ==========================================================================
+   Admin Mode Access Control & Inline Management UI
+   Hidden by default for customers; visible ONLY when body.admin-mode is active!
+   ========================================================================== */
+.admin-only,
+.admin-only-inline,
+.btn-cover-pick,
+.btn-cover-edit,
+.cover-card-admin-btns {
+  display: none !important;
+}
+
+body.admin-mode .admin-only {
+  display: flex !important;
+}
+
+body.admin-mode .admin-only-inline {
+  display: inline-flex !important;
+}
+
+body.admin-mode .cover-card-admin-btns {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 5;
+}
+
+body.admin-mode .btn-cover-pick,
+body.admin-mode .btn-cover-edit {
+  display: inline-flex !important;
+  position: relative;
+  z-index: 5;
+  background: rgba(15, 14, 12, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  color: var(--gold-light);
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-family: var(--font-main);
+  font-weight: 500;
+  cursor: pointer;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+body.admin-mode .btn-cover-pick:hover,
+body.admin-mode .btn-cover-edit:hover {
+  background: var(--gold-gradient);
+  color: #121008;
+  border-color: #FFF;
+  font-weight: 600;
+}
+
+body.admin-mode .admin-logged-out-only {
+  display: none !important;
+}
+
+.admin-home-toolbar {
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto 14px auto;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(28, 24, 16, 0.96) 0%, rgba(18, 16, 12, 0.96) 100%);
+  border: 1px solid var(--gold-primary);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 14px rgba(212, 175, 55, 0.2);
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.admin-toolbar-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.admin-toolbar-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-admin-danger {
+  background: rgba(229, 57, 53, 0.16) !important;
+  border-color: rgba(229, 57, 53, 0.65) !important;
+  color: #FFB4A2 !important;
+}
+
+.btn-admin-danger:hover {
+  background: #E53935 !important;
+  color: #FFF !important;
+  border-color: #FFF !important;
+}
+
+/* Admin buttons inside Drawer */
+.drawer-action-admin {
+  border-color: rgba(212, 175, 55, 0.45) !important;
+  background: rgba(212, 175, 55, 0.08) !important;
+}
+
+.drawer-admin-panel {
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  background: rgba(26, 22, 16, 0.85);
+}
+
+.drawer-admin-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #80ED99;
+  margin-bottom: 2px;
+}
+
+/* Gallery Card Admin Overlay */
+.gallery-card-admin-bar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 6;
+  gap: 6px;
+}
+
+.gallery-admin-btn {
+  background: rgba(12, 11, 10, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  color: var(--gold-light);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-family: var(--font-main);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.gallery-admin-btn:hover {
+  background: var(--gold-gradient);
+  color: #121008;
+}
+
+.gallery-admin-btn.danger {
+  border-color: rgba(229, 57, 53, 0.75);
+  color: #FFB4A2;
+}
+
+.gallery-admin-btn.danger:hover {
+  background: #E53935;
+  color: #FFF;
+}
+
+/* Lightbox Admin Actions */
+.lightbox-admin-bar {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  z-index: 25;
+  gap: 8px;
+}
+
+/* Admin Modals (Login, Upload, Edit Card) */
+#adminLoginModal,
+#adminUploadModal,
+#adminEditModal {
+  z-index: 2700 !important;
+}
+
+.admin-dialog-card {
+  width: 92vw;
+  max-width: 480px;
+  height: auto;
+  max-height: 90vh;
+}
+
+.admin-dialog-body {
+  padding: 20px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.admin-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.admin-field-group label {
+  font-size: 0.84rem;
+  color: var(--gold-light);
+  font-weight: 500;
+}
+
+.admin-input,
+.admin-textarea,
+.admin-select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #FFF;
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  box-sizing: border-box;
+}
+
+.admin-select option {
+  background: #141311;
+  color: #FFF;
+}
+
+.admin-input:focus,
+.admin-textarea:focus,
+.admin-select:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.admin-form-error {
+  font-size: 0.82rem;
+  color: #FF8A80;
+  min-height: 18px;
+}
+
+.admin-upload-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 150px;
+  overflow-y: auto;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.admin-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+  flex-wrap: wrap;
 }
 
 .lightbox-body {

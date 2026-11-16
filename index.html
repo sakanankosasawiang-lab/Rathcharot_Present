@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>ราชรถ & ช่างภาพงานศพ.com - แคตตาล็อกนำเสนองานถ่ายภาพ วิดีโอ และ Live Streaming</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0D0C0B">
   
   <link rel="stylesheet" href="styles.css">
   
@@ -64,7 +69,7 @@
       <button class="nav-pill" data-slide="4">03 สวดอภิธรรม</button>
       <button class="nav-pill" data-slide="5">04 วันฌาปนกิจ</button>
       <button class="nav-pill" data-slide="6">05 ลอยอังคาร</button>
-      <button class="nav-pill" data-slide="7">06 ทีมช่างภาพ</button>
+      <button class="nav-pill" data-slide="7">06 โปรไฟล์ช่างภาพ</button>
       <button class="nav-pill" data-slide="8">07 หีบศพราชรถ</button>
       <button class="nav-pill" data-slide="9">08 โปรโมชั่น</button>
       <button class="nav-pill" data-slide="10">09 ติดต่อเรา</button>
@@ -122,7 +127,20 @@
             <div class="ornate-line"></div>
           </div>
 
-          <div class="cover-hub-label">เลือกชมผลงานตามหมวดหมู่พิธีกรรม (คลิกการ์ดเพื่อเปิดภาพขยาย หรือเลือกเปลี่ยนภาพหลักของเมนูได้)</div>
+          <div class="cover-hub-label">เลือกชมผลงานตามหมวดหมู่พิธีกรรม (คลิกที่การ์ดเพื่อเปิดภาพขยายขนาดใหญ่)</div>
+
+          <!-- Admin Mode Toolbar Banner (Hidden for customers, shown ONLY after Admin login) -->
+          <div class="admin-home-toolbar admin-only" id="adminHomeToolbar">
+            <div class="admin-toolbar-status">
+              <span>🟢 โหมด Admin: สามารถเพิ่ม ลบ แก้ไข และเลือกภาพหลักได้</span>
+            </div>
+            <div class="admin-toolbar-actions">
+              <button type="button" class="btn-icon btn-icon-gold" id="btnHomeAdminUpload">➕ เพิ่มภาพ</button>
+              <button type="button" class="btn-icon" id="btnHomeAdminGallery">🖼️ จัดการ / ลบภาพ</button>
+              <a class="btn-icon" href="/admin" style="text-decoration: none;">⚙️ หน้า Admin เต็ม</a>
+              <button type="button" class="btn-icon btn-admin-danger" id="btnHomeAdminLogout">🚪 ออกจาก Admin</button>
+            </div>
+          </div>
 
           <!-- Visual Category Menu Hub (All Menus with Selectable Real Photography Backdrops) -->
           <div class="cover-features-grid">
@@ -218,12 +236,12 @@
 
             <!-- 05 พิธีลอยอังคาร -->
             <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="6" data-cover-cat="floating" onclick="updateSlideView(6, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(6, { autoExpand: true });}">
-              <img class="cover-card-bg-img" src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022307_0.jpg" alt="พิธีลอยอังคารสู่สุคติภูมิ">
+              <img class="cover-card-bg-img" src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%281%29.jpg" alt="พิธีลอยอังคารสู่สุคติภูมิ">
               <div class="cover-card-scrim"></div>
               <div class="cover-card-top">
                 <div class="cover-card-badges">
                   <span class="cover-card-num">05</span>
-                  <span class="cover-card-count">10 ภาพ</span>
+                  <span class="cover-card-count">13 ภาพ</span>
                 </div>
                 <button type="button" class="btn-cover-pick" data-pick-cat="floating" data-pick-slide="6" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
               </div>
@@ -234,21 +252,21 @@
               </div>
             </div>
 
-            <!-- 06 ทำไมต้องช่างภาพ Professional? -->
+            <!-- 06 โปรไฟล์ช่างภาพ -->
             <div class="cover-feature-card cover-menu-card" role="button" tabindex="0" data-cover-slide="7" data-cover-cat="profile" onclick="updateSlideView(7, { autoExpand: true })" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();updateSlideView(7, { autoExpand: true });}">
-              <img class="cover-card-bg-img portrait-focus" src="Photographer/S__246399020.jpg" alt="ทำไมต้องช่างภาพ Professional">
+              <img class="cover-card-bg-img portrait-focus" src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%281%29.jpg" alt="โปรไฟล์ช่างภาพบันทึกภาพประวัติศาสตร์">
               <div class="cover-card-scrim"></div>
               <div class="cover-card-top">
                 <div class="cover-card-badges">
                   <span class="cover-card-num">06</span>
-                  <span class="cover-card-count">8 ภาพ</span>
+                  <span class="cover-card-count">121 ภาพ</span>
                 </div>
                 <button type="button" class="btn-cover-pick" data-pick-cat="profile" data-pick-slide="7" title="เลือกเปลี่ยนภาพหลักของเมนูนี้">🖼️ เลือกภาพหลัก</button>
               </div>
               <div class="cover-card-body">
-                <div class="card-title">ทำไมต้องช่างภาพ Professional?</div>
-                <div class="card-desc">ชุดสูทสุภาพ รู้กาลเทศะ งานพิธีใหญ่ แก้ปัญหาเฉพาะหน้าได้จริง</div>
-                <div class="card-action-link">ชมมาตรฐานทีมช่างภาพ ›</div>
+                <div class="card-title">โปรไฟล์ช่างภาพ (ทีมช่างภาพพระราชพิธี)</div>
+                <div class="card-desc">ช่างภาพบันทึกภาพประวัติศาสตร์ และพิธีงานสำคัญของสำนักราชวัง โดยสังกัดจาก สมาคมถ่ายภาพแห่งประเทศไทยในพระบรมราชูปถัมภ์</div>
+                <div class="card-action-link">ชมโปรไฟล์ &amp; ผลงานทีมช่างภาพ ›</div>
               </div>
             </div>
 
@@ -312,7 +330,7 @@
                 ▶ เริ่มรับชมแคตตาล็อก
               </button>
               <button class="btn-icon" onclick="openGalleryModal('all')" style="padding: 10px 20px; font-size: 0.95rem;">
-                🖼️ เปิดคลังภาพผลงาน (232 ภาพ)
+                🖼️ เปิดคลังภาพผลงาน (348 ภาพ)
               </button>
             </div>
             <div class="cover-qr-slot" onclick="openQrModal('ช่างภาพงานศพ.com')" title="สแกนเว็บไซต์">
@@ -742,22 +760,22 @@
 
           <div class="slide-col-visual">
             <div class="hero-image-frame" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
-              <img class="hero-img" src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022307_0.jpg" alt="ลอยอังคาร">
+              <img class="hero-img" src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%281%29.jpg" alt="ลอยอังคาร">
               <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
             </div>
 
             <div class="visual-footer-bar">
               <div class="visual-footer-controls">
                 <div class="slide-thumb-strip">
-                  <div class="slide-thumb-item active" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022308_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022308_0.jpg"></div>
-                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022309_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022309_0.jpg"></div>
-                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022310_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022310_0.jpg"></div>
-                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022306_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022306_0.jpg"></div>
-                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022311_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022311_0.jpg"></div>
-                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022312_0.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/S__246022312_0.jpg"></div>
+                  <div class="slide-thumb-item active" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%281%29.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%281%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%282%29.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%282%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%283%29.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%283%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%284%29.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%284%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%285%29.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%285%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%286%29.jpg"><img src="%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3/%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B8%AD%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A3%20%286%29.jpg"></div>
                 </div>
                 <div class="visual-actions-row">
-                  <span class="photo-count-pill">คลังภาพลอยอังคาร: 10 ภาพ</span>
+                  <span class="photo-count-pill">คลังภาพลอยอังคาร: 13 ภาพ</span>
                   <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
                 </div>
               </div>
@@ -795,8 +813,8 @@
             <div class="slide-heading-row">
               <span class="slide-numeral">6</span>
               <div class="slide-title-wrap">
-                <h2 class="slide-title">ทำไมต้องจ้างช่างภาพระดับ Professional?</h2>
-                <p class="slide-subtitle">ผลงานช่างภาพที่ผ่านงานพิธีหลวงและงานสำคัญ พร้อมไหวพริบแก้ปัญหาเฉพาะหน้าและการวางตัวที่เหมาะสมที่สุด</p>
+                <h2 class="slide-title">โปรไฟล์ช่างภาพบันทึกภาพประวัติศาสตร์</h2>
+                <p class="slide-subtitle">ช่างภาพบันทึกภาพประวัติศาสตร์ และพิธีงานสำคัญของสำนักราชวัง<br>โดยสังกัดจาก สมาคมถ่ายภาพแห่งประเทศไทยในพระบรมราชูปถัมภ์</p>
               </div>
             </div>
 
@@ -808,9 +826,9 @@
 
             <span class="selling-section-label">หัวใจของ Professionalism ที่ช่างภาพมืออาชีพต้องมี :</span>
             <ul class="why-us-list">
+              <li><strong>สังกัดสมาคมถ่ายภาพแห่งประเทศไทย ในพระบรมราชูปถัมภ์:</strong> คณะทำงานบันทึกภาพประวัติศาสตร์และพระราชพิธีสำคัญของสำนักราชวัง</li>
               <li><strong>แก้ไขปัญหาเฉพาะหน้าและรับมือได้ทุกสถานการณ์:</strong> ช่างภาพประสบการณ์สูงมีวิธีจัดการปัญหาที่เกิดขึ้นระหว่างการทำงานได้อย่างราบรื่น นี่คือมูลค่าสูงสุดของคำว่า <em>Professionalism</em></li>
               <li><strong>รู้กาลเทศะในงานศพและงานพิธีใหญ่:</strong> รู้ชัดว่าควรทำอะไร ไม่ควรทำอะไรในแต่ละช่วงเวลา และวางตัวอย่างไรให้เหมาะสม สมเกียรติเจ้าภาพและแขกผู้ใหญ่</li>
-              <li><strong>มาตรฐานบันทึกประวัติศาสตร์ชาติ 100%:</strong> ทีมงานแต่งกายสูทสากลสีดำ กิริยาสำรวม นอบน้อม พร้อมอุปกรณ์สำรอง Dual-Slot มั่นใจได้ทุกลำดับพิธี</li>
             </ul>
 
             <div class="info-accent-box">
@@ -819,22 +837,24 @@
             </div>
           </div>
 
-          <div class="slide-col-visual slide-col-visual-portrait">
-            <div class="hero-image-frame hero-image-frame-portrait" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
-              <img class="hero-img hero-img-portrait" src="Photographer/S__246399020.jpg" alt="ภาพบรรยากาศพิธีการ">
+          <div class="slide-col-visual">
+            <div class="hero-image-frame hero-image-frame-contain" title="คลิกเพื่อขยายดูภาพขนาดใหญ่">
+              <img class="hero-img hero-img-contain" src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%281%29.jpg" alt="ช่างภาพงานพระราชพิธี">
               <span class="hero-zoom-badge">🔍 คลิกขยาย</span>
             </div>
 
-            <div class="visual-footer-bar visual-footer-bar-portrait">
+            <div class="visual-footer-bar">
               <div class="visual-footer-controls">
-                <div class="slide-thumb-strip slide-thumb-strip-portrait">
-                  <div class="slide-thumb-item active" data-src="Photographer/F264F5C7-D51A-42F1-ACA3-2B9EBD5D7F95.jpg"><img src="Photographer/F264F5C7-D51A-42F1-ACA3-2B9EBD5D7F95.jpg"></div>
-                  <div class="slide-thumb-item" data-src="Photographer/S__246399003_0.jpg"><img src="Photographer/S__246399003_0.jpg"></div>
-                  <div class="slide-thumb-item" data-src="Photographer/S__246399004_0.jpg"><img src="Photographer/S__246399004_0.jpg"></div>
-                  <div class="slide-thumb-item" data-src="Photographer/S__914374661.jpg"><img src="Photographer/S__914374661.jpg"></div>
+                <div class="slide-thumb-strip">
+                  <div class="slide-thumb-item active" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%281%29.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%281%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%282%29.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%282%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%283%29.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%283%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%284%29.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%284%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%285%29.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%285%29.jpg"></div>
+                  <div class="slide-thumb-item" data-src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%286%29.jpg"><img src="%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E/%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9E%E0%B8%B4%E0%B8%98%E0%B8%B5%20%286%29.jpg"></div>
                 </div>
                 <div class="visual-actions-row">
-                  <span class="photo-count-pill">คลังภาพทีมงาน: 8 ภาพ</span>
+                  <span class="photo-count-pill">คลังภาพทีมงาน: 121 ภาพ</span>
                   <button class="btn-open-folder-gallery">🔍 ดูภาพทั้งหมดในหมวดนี้</button>
                 </div>
               </div>
@@ -1184,8 +1204,8 @@
           <button class="drawer-nav-item" data-slide="7">
             <span class="drawer-num">06</span>
             <div class="drawer-item-text">
-              <span class="drawer-item-main">ทำไมต้องช่างภาพ Professional?</span>
-              <span class="drawer-item-desc">แก้ปัญหาเฉพาะหน้า รู้กาลเทศะ งานพิธีใหญ่</span>
+              <span class="drawer-item-main">โปรไฟล์ช่างภาพ (สำนักราชวัง)</span>
+              <span class="drawer-item-desc">สังกัดสมาคมถ่ายภาพแห่งประเทศไทย ในพระบรมราชูปถัมภ์</span>
             </div>
             <span class="drawer-arrow">›</span>
           </button>
@@ -1217,7 +1237,7 @@
 
         <div class="drawer-quick-actions">
           <button class="drawer-action-btn" id="btnDrawerGallery">
-            🖼️ เปิดคลังภาพผลงาน (232 ภาพ)
+            🖼️ เปิดคลังภาพผลงาน (348 ภาพ)
           </button>
           <button class="drawer-action-btn btn-gold" id="btnDrawerQr">
             📱 สแกน QR / เว็บไซต์
@@ -1225,6 +1245,27 @@
           <a class="drawer-action-btn btn-call" href="tel:0859992396">
             📞 โทรด่วน: 085-999-2396 (24 ชม.)
           </a>
+
+          <!-- Admin Menu in Hamburger Drawer -->
+          <button type="button" class="drawer-action-btn drawer-action-admin admin-logged-out-only" id="btnDrawerAdminLogin">
+            🔐 เข้าสู่ระบบ Admin (จัดการภาพ)
+          </button>
+
+          <div class="drawer-admin-panel admin-only" id="drawerAdminPanel">
+            <div class="drawer-admin-badge">🟢 โหมดผู้ดูแลระบบ (Admin)</div>
+            <button type="button" class="drawer-action-btn btn-gold" id="btnDrawerAdminUpload">
+              ➕ เพิ่มภาพผลงานใหม่
+            </button>
+            <button type="button" class="drawer-action-btn" id="btnDrawerAdminManage">
+              🖼️ ลบ / ตั้งภาพหลักในคลังภาพ
+            </button>
+            <a class="drawer-action-btn" href="/admin" id="btnDrawerAdminFull">
+              ⚙️ หน้าจัดการ Admin เต็มรูปแบบ
+            </a>
+            <button type="button" class="drawer-action-btn btn-admin-danger" id="btnDrawerAdminLogout">
+              🚪 ออกจากระบบ Admin
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1232,6 +1273,10 @@
 
   <!-- Lightbox Single Image Modal -->
   <div class="modal-overlay" id="lightboxModal">
+    <div class="lightbox-admin-bar admin-only" id="lightboxAdminBar">
+      <button type="button" class="btn-icon btn-icon-gold" id="btnLbSetHero" title="ตั้งภาพนี้เป็นภาพหลักของหมวด">⭐ ตั้งภาพหลัก</button>
+      <button type="button" class="btn-icon btn-admin-danger" id="btnLbDeletePhoto" title="ลบภาพนี้ออกจากหมวด">🗑️ ลบภาพ</button>
+    </div>
     <button class="modal-close-btn" onclick="closeLightbox()" title="ปิด (ESC)">✕</button>
     <button class="lightbox-btn-prev" onclick="prevLightboxImage()" title="ภาพก่อนหน้า">◀</button>
     <button class="lightbox-btn-next" onclick="nextLightboxImage()" title="ภาพถัดไป">▶</button>
@@ -1249,7 +1294,10 @@
     <div class="gallery-modal-content">
       <div class="gallery-modal-header">
         <div class="gallery-modal-title">🖼️ คลังภาพผลงานทั้งหมด (แยกตามโฟลเดอร์)</div>
-        <button class="modal-close-btn" style="position: static;" onclick="closeGalleryModal()" title="ปิด (ESC)">✕</button>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" class="btn-icon btn-icon-gold admin-only-inline" id="btnGalleryUpload">➕ เพิ่มภาพ</button>
+          <button class="modal-close-btn" style="position: static;" onclick="closeGalleryModal()" title="ปิด (ESC)">✕</button>
+        </div>
       </div>
       <div class="gallery-tabs-bar" id="galleryTabs"></div>
       <div class="gallery-grid-container" id="galleryGrid"></div>
@@ -1307,6 +1355,82 @@
         </div>
       </div>
       <div class="gallery-grid-container cover-picker-grid" id="coverPickerGrid"></div>
+    </div>
+  </div>
+
+  <!-- Admin Login Modal (Opened from Hamburger Drawer) -->
+  <div class="modal-overlay" id="adminLoginModal">
+    <div class="gallery-modal-content admin-dialog-card">
+      <div class="gallery-modal-header">
+        <div class="gallery-modal-title">🔐 เข้าสู่ระบบ Admin</div>
+        <button type="button" class="modal-close-btn" style="position: static;" onclick="closeAdminLoginModal()" title="ปิด (ESC)">✕</button>
+      </div>
+      <form class="admin-dialog-body" id="adminLoginForm">
+        <div class="admin-field-group">
+          <label for="adminUsernameInput">ชื่อผู้ใช้ (Username)</label>
+          <input type="text" id="adminUsernameInput" class="admin-input" placeholder="กรอกชื่อผู้ใช้" autocomplete="username" required>
+        </div>
+        <div class="admin-field-group">
+          <label for="adminPasswordInput">รหัสผ่าน (Password)</label>
+          <input type="password" id="adminPasswordInput" class="admin-input" placeholder="กรอกรหัสผ่าน" autocomplete="current-password" required>
+        </div>
+        <div class="admin-form-error" id="adminLoginError"></div>
+        <div class="admin-dialog-actions">
+          <button type="button" class="btn-icon" onclick="closeAdminLoginModal()">ยกเลิก</button>
+          <button type="submit" class="btn-icon btn-icon-gold" id="btnAdminLoginSubmit">เข้าสู่ระบบ Admin</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Add/Upload Photo Modal -->
+  <div class="modal-overlay" id="adminUploadModal">
+    <div class="gallery-modal-content admin-dialog-card">
+      <div class="gallery-modal-header">
+        <div class="gallery-modal-title">➕ เพิ่มภาพผลงานใหม่</div>
+        <button type="button" class="modal-close-btn" style="position: static;" onclick="closeAdminUploadModal()" title="ปิด (ESC)">✕</button>
+      </div>
+      <div class="admin-dialog-body">
+        <div class="admin-field-group">
+          <label for="adminUploadCategory">เลือกหมวดหมู่ที่ต้องการเพิ่มภาพ</label>
+          <select id="adminUploadCategory" class="admin-select"></select>
+        </div>
+        <div class="admin-field-group">
+          <label for="adminUploadFiles">เลือกไฟล์ภาพ (รองรับ JPG / PNG หลายไฟล์)</label>
+          <input type="file" id="adminUploadFiles" class="admin-input" accept="image/*" multiple>
+        </div>
+        <div class="admin-upload-preview" id="adminUploadPreviewList"></div>
+        <div class="admin-form-error" id="adminUploadStatus"></div>
+        <div class="admin-dialog-actions">
+          <button type="button" class="btn-icon" onclick="closeAdminUploadModal()">ปิด</button>
+          <button type="button" class="btn-icon btn-icon-gold" id="btnAdminUploadSubmit">🚀 เพิ่มภาพเข้าหมวด</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Edit Menu Card Modal -->
+  <div class="modal-overlay" id="adminEditModal">
+    <div class="gallery-modal-content admin-dialog-card">
+      <div class="gallery-modal-header">
+        <div class="gallery-modal-title" id="adminEditModalTitle">✏️ แก้ไขข้อมูลเมนู</div>
+        <button type="button" class="modal-close-btn" style="position: static;" onclick="closeAdminEditModal()" title="ปิด (ESC)">✕</button>
+      </div>
+      <form class="admin-dialog-body" id="adminEditForm">
+        <div class="admin-field-group">
+          <label for="adminEditTitleInput">ชื่อเมนูบนหน้าแรก</label>
+          <input type="text" id="adminEditTitleInput" class="admin-input" required>
+        </div>
+        <div class="admin-field-group">
+          <label for="adminEditDescInput">คำอธิบายย่อใต้ชื่อเมนู</label>
+          <textarea id="adminEditDescInput" class="admin-textarea" rows="3" required></textarea>
+        </div>
+        <div class="admin-dialog-actions">
+          <button type="button" class="btn-icon" id="btnAdminEditReset">↺ คืนค่าเริ่มต้น</button>
+          <button type="button" class="btn-icon" onclick="closeAdminEditModal()">ยกเลิก</button>
+          <button type="submit" class="btn-icon btn-icon-gold">💾 บันทึกการแก้ไข</button>
+        </div>
+      </form>
     </div>
   </div>
 

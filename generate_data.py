@@ -1,22 +1,29 @@
 import os
+import re
 import json
 import urllib.parse
 
 workspace = r'c:\Apps\Rathcharot_Present'
 
+def natural_sort_key(filename):
+    """Sort numbered ceremony photos (1)..(116) before S__... camera files naturally."""
+    parts = [int(p) if p.isdigit() else p.lower() for p in re.split(r'(\d+)', filename)]
+    priority = 0 if not filename.startswith('S__') else 1
+    return (priority, parts)
+
 categories = [
     {
         'id': 'profile',
-        'folder': 'Photographer',
-        'title': 'ทำไมต้องจ้างช่างภาพระดับ Professional?',
+        'folder': 'โปรไฟล์ช่างภาพ',
+        'title': 'โปรไฟล์ช่างภาพ (ทีมช่างภาพบันทึกประวัติศาสตร์ชาติ)',
         'badge': 'PROFESSIONALISM & EXPERT TEAM',
-        'subtitle': 'ประสบการณ์งานพิธีหลวงและงานสำคัญ พร้อมการแก้ปัญหาเฉพาะหน้าและการวางตัวที่เหมาะสมที่สุด',
+        'subtitle': 'ช่างภาพบันทึกภาพประวัติศาสตร์ และพิธีงานสำคัญของสำนักราชวัง โดยสังกัดจาก สมาคมถ่ายภาพแห่งประเทศไทยในพระบรมราชูปถัมภ์',
         'numeral': '06',
-        'headline': 'ทำไมต้องจ้างช่างภาพระดับ Professional?',
+        'headline': 'โปรไฟล์ช่างภาพ — ช่างภาพบันทึกภาพประวัติศาสตร์ & พิธีสำคัญสำนักราชวัง',
         'why_us': [
-            'Professionalism มูลค่าสูงสุดของช่างภาพ: ช่างภาพประสบการณ์สูงมีไหวพริบในการแก้ไขปัญหาเฉพาะหน้าและรับมือทุกสถานการณ์ระหว่างการทำงานได้อย่างราบรื่น',
-            'รู้กาลเทศะในงานศพและงานพิธีใหญ่: รู้ว่าควรทำอะไร ไม่ควรทำอะไรในแต่ละช่วงเวลา และวางตัวอย่างไรให้เหมาะสม สมเกียรติเจ้าภาพและแขกผู้ใหญ่',
-            'มาตรฐานบันทึกประวัติศาสตร์ชาติ 100%: ทีมงานแต่งกายสูทสากลสีดำ กิริยาสำรวม นอบน้อม พร้อมอุปกรณ์ Dual-Slot สำรองข้อมูลคู่ขนาน'
+            'สังกัดสมาคมถ่ายภาพแห่งประเทศไทย ในพระบรมราชูปถัมภ์: ทีมช่างภาพบันทึกภาพประวัติศาสตร์และพระราชพิธีสำคัญของสำนักพระราชวัง',
+            'รู้กาลเทศะและไหวพริบระดับ Professional: รู้ชัดว่าควรทำอะไร ไม่ควรทำอะไรในแต่ละช่วงพิธี และแก้ไขปัญหาเฉพาะหน้าได้อย่างราบรื่น',
+            'มาตรฐานสุภาพ สำรวม สมเกียรติ 100%: แต่งกายสูทสากลสีดำ กิริยานอบน้อม พร้อมอุปกรณ์สำรอง Dual-Slot มั่นใจทุกลำดับพิธี'
         ]
     },
     {
@@ -136,7 +143,10 @@ categories = [
 total_images = 0
 for cat in categories:
     folder_path = os.path.join(workspace, cat['folder'])
-    all_files = sorted([f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+    all_files = sorted(
+        [f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))],
+        key=natural_sort_key
+    )
     
     # Filter special logo & QR files from royal ceremony gallery
     if cat['id'] == 'royal':
