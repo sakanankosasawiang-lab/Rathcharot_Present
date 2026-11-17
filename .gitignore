@@ -19,3 +19,7 @@ __pycache__/
 
 # Removed/quarantined admin photos
 .deleted_photos/
+
+# Local photo archive & video checks
+_archive_*/
+Video_Check/

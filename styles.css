@@ -1818,6 +1818,30 @@ body.admin-mode .admin-logged-out-only {
   justify-content: center;
   position: relative;
   padding: 60px 40px;
+  touch-action: pan-y manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.lightbox-tap-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 38%;
+  z-index: 8;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.lightbox-tap-prev {
+  left: 0;
+}
+
+.lightbox-tap-next {
+  right: 0;
 }
 
 .lightbox-img-wrap {
@@ -1829,6 +1853,8 @@ body.admin-mode .admin-logged-out-only {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
   overflow: hidden;
   background: #000;
+  z-index: 6;
+  pointer-events: auto;
 }
 
 .lightbox-img {
@@ -1836,6 +1862,8 @@ body.admin-mode .admin-logged-out-only {
   max-height: 82vh;
   object-fit: contain;
   display: block;
+  transition: opacity 0.15s ease-out;
+  will-change: opacity;
 }
 
 .lightbox-caption {
@@ -1856,16 +1884,17 @@ body.admin-mode .admin-logged-out-only {
   white-space: nowrap;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.75);
   pointer-events: none;
+  z-index: 9;
 }
 
 .lightbox-btn-prev, .lightbox-btn-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  background: rgba(20, 20, 24, 0.8);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  width: 50px;
+  height: 50px;
+  background: rgba(20, 20, 24, 0.85);
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
   color: var(--gold-light);
   border-radius: 50%;
   display: flex;
@@ -1873,8 +1902,13 @@ body.admin-mode .admin-logged-out-only {
   justify-content: center;
   cursor: pointer;
   font-size: 1.4rem;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
   z-index: 10;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
 }
 
 .lightbox-btn-prev { left: 24px; }
@@ -1884,32 +1918,43 @@ body.admin-mode .admin-logged-out-only {
   background: var(--gold-gradient);
   color: #121008;
   border-color: #FFF;
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.lightbox-btn-prev:active, .lightbox-btn-next:active {
+  transform: translateY(-50%) scale(0.92);
 }
 
 .modal-close-btn {
   position: absolute;
   top: 18px;
   right: 24px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: rgba(20, 20, 24, 0.85);
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
   color: var(--gold-light);
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   transition: all 0.2s ease;
-  z-index: 20;
+  z-index: 25;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
 }
 
 .modal-close-btn:hover {
   background: #E53935;
   color: #FFF;
   border-color: #FFF;
+}
+
+.modal-close-btn:active {
+  transform: scale(0.92);
 }
 
 /* Full Gallery Browser Modal */
@@ -2867,32 +2912,42 @@ body.catalog-mode .slide {
 
   /* Responsive Mobile Lightbox Styling */
   .lightbox-body {
-    padding: 48px 10px !important;
+    padding: 56px 8px !important;
   }
 
   .lightbox-img-wrap {
     max-width: 96vw !important;
-    max-height: 82vh !important;
+    max-height: 80vh !important;
   }
 
   .lightbox-img {
-    max-height: 82vh !important;
+    max-height: 80vh !important;
   }
 
   .lightbox-btn-prev,
   .lightbox-btn-next {
-    width: 38px !important;
-    height: 38px !important;
-    font-size: 1.1rem !important;
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.25rem !important;
+    background: rgba(14, 14, 18, 0.88) !important;
+    border: 1.5px solid var(--gold-primary) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.85) !important;
   }
 
   .lightbox-btn-prev { left: 8px !important; }
   .lightbox-btn-next { right: 8px !important; }
 
+  .modal-close-btn {
+    top: 12px !important;
+    right: 12px !important;
+    width: 44px !important;
+    height: 44px !important;
+  }
+
   .lightbox-caption {
     bottom: 8px !important;
-    padding: 3px 12px !important;
-    font-size: 0.82rem !important;
+    padding: 4px 14px !important;
+    font-size: 0.85rem !important;
   }
 }
 
