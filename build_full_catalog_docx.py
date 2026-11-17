@@ -662,17 +662,17 @@ def generate_full_catalog():
     add_continuation_gallery_pages(cat3_name, c3_remaining, "การถ่ายภาพพิธีจีน และพิธีกงเต็ก", "CHINESE CEREMONY & KONG TEK")
 
     # =========================================================================
-    # CATEGORY 4: พิธีสวดพระอภิธรรม & บรรยากาศ (Atmosphere & Candid Moments)
+    # CATEGORY 4: ภาพบรรยากาศวันฌาปนกิจ (Cremation Day Atmosphere & Candid)
     # =========================================================================
     cat4_name = "บันทึกทุกบรรยากาศ ให้ครบทุกองค์ประกอบของการจัดงาน"
     cat4_files = manifest[cat4_name]
-    print(f"Building Category 4: Atmosphere & Evening Chanting ({len(cat4_files)} images)...")
+    print(f"Building Category 4: Cremation Day Atmosphere & Candid ({len(cat4_files)} images)...")
 
     c4_showcase_keys = ['S__246022190_0.jpg', 'S__246022191_0.jpg', 'S__246022192_0.jpg', 'S__246022193_0.jpg']
     add_category_showcase_page(
-        badge_text="MAIN PILLAR 03 : ATMOSPHERE & EVENING CHANTING",
-        title_text="การถ่ายภาพพิธีสวดพระอภิธรรม และภาพบรรยากาศงานพิธี",
-        subtitle_text="ภาพบรรยากาศในงานศพ (Atmosphere & Candid Moments) ไม่ใช่แค่การถ่ายภาพคนมาร่วมงาน แต่คือการบันทึก 'สายสัมพันธ์ ความรัก และอารมณ์ความรู้สึก' ของการจากไปชั่วนิรันดร์",
+        badge_text="MAIN PILLAR 03 : CREMATION DAY ATMOSPHERE & CANDID",
+        title_text="ภาพบรรยากาศวันฌาปนกิจ",
+        subtitle_text="การบันทึกภาพบรรยากาศและแคนดิดในวันฌาปนกิจ (Cremation Day Atmosphere & Candid Moments) ถ่ายทอด 'สายสัมพันธ์ ความรัก และอารมณ์ความรู้สึก' ในช่วงเวลาสำคัญที่สุดของพิธีการ",
         hook_title="ทำไมภาพบรรยากาศและแคนดิดถึงมีความหมายสูงสุด :",
         hook_bullets=[
             ("บันทึกสายสัมพันธ์ ความรัก และอารมณ์ความรู้สึก", "ไม่ใช่แค่การถ่ายภาพคนมาร่วมงาน แต่คือการบันทึกสายใย แววตา การให้กำลังใจ และความรักอันบริสุทธิ์"),
@@ -718,7 +718,7 @@ def generate_full_catalog():
     cat5_files = manifest[cat5_name]
     print(f"Building Category 5: Cremation Day & Final Farewell ({len(cat5_files)} images)...")
 
-    c5_showcase_keys = ['S__246022245_0.jpg', 'S__246022246_0.jpg', 'S__246022247_0.jpg', 'S__246022248_0.jpg']
+    c5_showcase_keys = ['S__246022253_0.jpg', 'S__246022254_0.jpg', 'S__246022255_0.jpg', 'S__246022256_0.jpg']
     add_category_showcase_page(
         badge_text="MAIN PILLAR 04 : CREMATION DAY & FAREWELL",
         title_text="พิธีฌาปนกิจ และบันทึกความทรงจำวันสุดท้าย",
@@ -731,12 +731,12 @@ def generate_full_catalog():
             ("ทีมงานมีประสบการณ์เฉพาะทางงานศพ", "ทราบจุดยืนและกาลเทศะในทุกบริเวณฌาปนสถาน ประสานงานกับเจ้าหน้าที่อย่างราบรื่น")
         ],
         accent_box=("มรดกแห่งความทรงจำ", "สืบสานเรื่องราวและคุณงามความดีของผู้วายชนม์ ส่งต่อเป็นประวัติศาสตร์อันทรงคุณค่าแก่วงศ์ตระกูล"),
-        hero_img=os.path.join(cat5_name, 'S__246022245_0.jpg'),
+        hero_img=os.path.join(cat5_name, 'S__246022253_0.jpg'),
         hero_cap="การเคลื่อนขบวนศพเวียนรอบเมรุ 3 รอบเพื่อรำลึกถึงพระอนิจจังอย่างสมเกียรติยศ",
         sub_imgs=[
-            (os.path.join(cat5_name, 'S__246022246_0.jpg'), "พิธีทอดผ้าบังสุกุล", "ประธานในพิธีและบุคคลสำคัญทอดผ้าบังสุกุลหน้าเมรุ"),
-            (os.path.join(cat5_name, 'S__246022247_0.jpg'), "วางดอกไม้จันทน์", "ช่วงเวลาแห่งการกราบลาครั้งสุดท้ายด้วยความอาลัยยิ่ง"),
-            (os.path.join(cat5_name, 'S__246022248_0.jpg'), "พิธีประชุมเพลิง", "ส่งดวงวิญญาณอันเป็นที่รักสู่สุคติภูมิชั่วนิรันดร์")
+            (os.path.join(cat5_name, 'S__246022254_0.jpg'), "พิธีทอดผ้าบังสุกุล", "ประธานในพิธีและบุคคลสำคัญทอดผ้าบังสุกุลหน้าเมรุ"),
+            (os.path.join(cat5_name, 'S__246022255_0.jpg'), "วางดอกไม้จันทน์", "ช่วงเวลาแห่งการกราบลาครั้งสุดท้ายด้วยความอาลัยยิ่ง"),
+            (os.path.join(cat5_name, 'S__246022256_0.jpg'), "พิธีประชุมเพลิง", "ส่งดวงวิญญาณอันเป็นที่รักสู่สุคติภูมิชั่วนิรันดร์")
         ],
         folder_total_count=len(cat5_files)
     )
@@ -848,19 +848,19 @@ def generate_full_catalog():
         add_continuation_gallery_pages(cat7_name, c7_remaining, "โปรไฟล์ช่างภาพบันทึกประวัติศาสตร์ชาติ & พระราชพิธีสำคัญ", "PHOTOGRAPHER PROFILES")
 
     # =========================================================================
-    # CATEGORY 8: แคตตาล็อกหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ (Coffin Catalog)
+    # CATEGORY 8: ราชรถหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ (Rathcharot Coffin)
     # =========================================================================
     cat8_name = "coffin"
     cat8_raw = manifest.get(cat8_name) or sorted([
         f for f in os.listdir(cat8_name) if f.lower().endswith(('.jpg', '.jpeg', '.png'))
     ])
     cat8_files = [f for f in cat8_raw if f != '1794279723605.jpg']
-    print(f"Building Category 8: Rathcharot Coffin & Casket Catalog ({len(cat8_files)} images)...")
+    print(f"Building Category 8: Rathcharot Coffin & Casket ({len(cat8_files)} images)...")
 
     c8_showcase_keys = ['S__248741975_0.jpg', 'S__248741977_0.jpg', 'S__248741978_0.jpg', 'S__248742006_0.jpg']
     add_category_showcase_page(
-        badge_text="FINAL CATALOG : RATHCHAROT COFFIN & CASKET",
-        title_text="แคตตาล็อกหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ",
+        badge_text="RATHCHAROT COFFIN & CASKET",
+        title_text="ราชรถหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ",
         subtitle_text="แบบหีบศพมาตรฐานและหีบศพทรงเกียรติกว่า 28 รุ่น จากแบรนด์ราชรถ พร้อมสเปกขนาดและบริการจัดงานครบวงจร 24 ชม.",
         hook_title="จุดเด่นหีบศพราชรถ & บริการครบวงจร :",
         hook_bullets=[
@@ -870,7 +870,7 @@ def generate_full_catalog():
         ],
         accent_box=("บริการหีบศพและจัดงานศพครบวงจร", "เลือกชมแบบหีบศพมาตรฐานราชรถได้ครบทั้ง 28 รุ่น พร้อมทีมงานให้คำปรึกษาและดูแลตลอด 24 ชั่วโมง โทร 085-999-2396"),
         hero_img=os.path.join(cat8_name, 'S__248741975_0.jpg'),
-        hero_cap="หน้าปกแคตตาล็อกหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ (www.rathcharot.com)",
+        hero_cap="หน้าปกราชรถหีบศพมาตรฐาน & แพ็กเกจหีบศพราชรถ (www.rathcharot.com)",
         sub_imgs=[
             (os.path.join(cat8_name, 'S__248741977_0.jpg'), "รุ่นที่ 1 : หีบเทพพนม ผ้าตาดเงิน", "หีบศพมาตรฐานลายเทพพนม 1 ชั้น พร้อมรายละเอียดขนาดครบถ้วน"),
             (os.path.join(cat8_name, 'S__248741978_0.jpg'), "รุ่นที่ 2 : หีบเทพพนม ผ้าตาดทอง", "หีบเทพพนม 1 ชั้น ผ้าตาดทองฝานูน ทรงเกียรติและประณีตงดงาม"),
@@ -885,7 +885,7 @@ def generate_full_catalog():
         for f in cat8_files if f not in c8_showcase_keys
     ]
     if c8_remaining:
-        add_continuation_gallery_pages(cat8_name, c8_remaining, "แคตตาล็อกหีบศพมาตรฐาน & หีบศพราชรถ (28 รุ่น)", "RATHCHAROT COFFIN CATALOG")
+        add_continuation_gallery_pages(cat8_name, c8_remaining, "ราชรถหีบศพมาตรฐาน (28 รุ่น)", "RATHCHAROT COFFIN & CASKET")
 
     # =========================================================================
     # CATEGORY 9: โปรโมชั่นแพ็กเกจจัดงานศพครบวงจร ราชรถ (Promotion Packages)
