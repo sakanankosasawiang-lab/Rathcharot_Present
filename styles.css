@@ -1957,6 +1957,76 @@ body.admin-mode .admin-logged-out-only {
   transform: scale(0.92);
 }
 
+/* Lightbox Fullscreen Toggle Button & Mode */
+.lightbox-fullscreen-btn {
+  position: absolute;
+  top: 18px;
+  right: 80px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 22px;
+  background: rgba(20, 20, 24, 0.88);
+  border: 1.5px solid rgba(212, 175, 55, 0.72);
+  color: var(--gold-light);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 30;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+}
+
+.lightbox-fullscreen-btn:hover {
+  background: var(--gold-primary);
+  color: #12100E;
+  border-color: #FFF;
+}
+
+.lightbox-fullscreen-btn:active {
+  transform: scale(0.94);
+}
+
+#lightboxModal.lightbox-fullscreen {
+  background: #000 !important;
+}
+
+#lightboxModal.lightbox-fullscreen .lightbox-body {
+  padding: 0 !important;
+}
+
+#lightboxModal.lightbox-fullscreen .lightbox-img-wrap {
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: 100vw !important;
+  max-height: 100dvh !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#lightboxModal.lightbox-fullscreen .lightbox-img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100vw !important;
+  max-height: 100dvh !important;
+  object-fit: contain !important;
+}
+
+#lightboxModal.lightbox-fullscreen .lightbox-fullscreen-btn {
+  background: rgba(212, 175, 55, 0.92);
+  color: #12100E;
+  border-color: #FFF;
+}
+
 /* Full Gallery Browser Modal */
 .gallery-modal-content {
   width: 92vw;
@@ -2945,6 +3015,14 @@ body.catalog-mode .slide {
     right: 12px !important;
     width: 44px !important;
     height: 44px !important;
+  }
+
+  .lightbox-fullscreen-btn {
+    top: 12px !important;
+    right: 66px !important;
+    height: 44px !important;
+    padding: 0 14px !important;
+    font-size: 0.88rem !important;
   }
 
   .lightbox-caption {

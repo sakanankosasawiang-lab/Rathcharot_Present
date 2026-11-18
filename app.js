@@ -568,8 +568,45 @@ function openLightbox(imagesList, startIndex = 0, _title = '', catId = '') {
   preloadLightboxNeighbors();
 }
 
+function toggleLightboxFullscreen(forceState) {
+  const modal = document.getElementById('lightboxModal');
+  const btn = document.getElementById('btnLbFullscreen');
+  if (!modal) return;
+  const shouldEnter = typeof forceState === 'boolean'
+    ? forceState
+    : !modal.classList.contains('lightbox-fullscreen');
+
+  modal.classList.toggle('lightbox-fullscreen', shouldEnter);
+  if (btn) {
+    btn.textContent = shouldEnter ? '⛶ ย่อจอ' : '⛶ เต็มจอ';
+    btn.title = shouldEnter ? 'ออกจากโหมดเต็มจอ' : 'ขยายเต็มจอ (Fullscreen)';
+  }
+
+  try {
+    if (shouldEnter) {
+      if (!document.fullscreenElement && modal.requestFullscreen) {
+        modal.requestFullscreen().catch(() => {});
+      } else if (!document.webkitFullscreenElement && modal.webkitRequestFullscreen) {
+        modal.webkitRequestFullscreen();
+      }
+    } else {
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  } catch (err) {
+    // Fallback to CSS viewport fullscreen on devices/browsers without native Fullscreen API
+  }
+}
+
 function closeLightbox() {
-  document.getElementById('lightboxModal')?.classList.remove('active');
+  const modal = document.getElementById('lightboxModal');
+  if (modal?.classList.contains('lightbox-fullscreen')) {
+    toggleLightboxFullscreen(false);
+  }
+  modal?.classList.remove('active');
 }
 
 function nextLightboxImage() {
@@ -1490,6 +1527,7 @@ window.nextSlide = nextSlide;
 window.prevSlide = prevSlide;
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
+window.toggleLightboxFullscreen = toggleLightboxFullscreen;
 window.nextLightboxImage = nextLightboxImage;
 window.prevLightboxImage = prevLightboxImage;
 window.closeGalleryModal = closeGalleryModal;
