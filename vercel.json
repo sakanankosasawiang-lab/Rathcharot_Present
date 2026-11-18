@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/admin/", "destination": "/admin.html" }
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 30,
+      "includeFiles": "catalog_data.js"
+    }
+  }
+}

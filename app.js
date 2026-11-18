@@ -48,6 +48,7 @@ function initApp() {
   applySavedAdminData();
   buildGalleryModal();
   refreshAllCategoryCounters();
+  syncCategoriesFromServerApi(true);
   
   // Canva-style Auto-scaling on load & resize
   fitStageToScreen();
@@ -1226,12 +1227,107 @@ function handleAdminUploadFilePreview(e) {
     .join('');
 }
 
+function getAdminAuthHeaders() {
+  const token = sessionStorage.getItem(ADMIN_SESSION_TOKEN_KEY) || '';
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  return headers;
+}
+
+let adminToastTimer = null;
+function showAdminToast(message, type = 'success') {
+  let el = document.getElementById('adminToastBanner');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'adminToastBanner';
+    el.className = 'admin-toast';
+    document.body.appendChild(el);
+  }
+  el.textContent = message;
+  el.className = `admin-toast ${type} show`;
+  clearTimeout(adminToastTimer);
+  adminToastTimer = setTimeout(() => {
+    el.classList.remove('show');
+  }, 3500);
+}
+
 function readFileAsDataUrl(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
     reader.readAsDataURL(file);
+  });
+}
+
+function compressImageForUpload(file, maxDim = 1600, quality = 0.85) {
+  return new Promise((resolve) => {
+    readFileAsDataUrl(file).then((rawDataUrl) => {
+      const img = new Image();
+      img.onload = () => {
+        try {
+          let { width, height } = img;
+          if (width > maxDim || height > maxDim) {
+            if (width >= height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          const outMime = file.type === 'image/png' && file.size < 250000 ? 'image/png' : 'image/jpeg';
+          const compressed = canvas.toDataURL(outMime, quality);
+          resolve(compressed.length < rawDataUrl.length ? compressed : rawDataUrl);
+        } catch {
+          resolve(rawDataUrl);
+        }
+      };
+      img.onerror = () => resolve(rawDataUrl);
+      img.src = rawDataUrl;
+    }).catch(() => resolve(''));
+  });
+}
+
+function rebuildSlideThumbnailStrip(catId) {
+  const slideEl = document.querySelector(`section.slide[data-category-id="${catId}"]:not([data-slide-index="0"])`);
+  if (!slideEl) return;
+  const strip = slideEl.querySelector('.slide-thumb-strip');
+  const heroImg = slideEl.querySelector('.hero-img');
+  const cat = CATALOG_CATEGORIES.find(c => c.id === catId);
+  if (!strip || !cat || !Array.isArray(cat.images)) return;
+
+  const activeSrc = heroImg ? heroImg.getAttribute('src') : '';
+  const thumbs = cat.images.slice(0, 6);
+  strip.innerHTML = '';
+  thumbs.forEach((im, idx) => {
+    const item = document.createElement('div');
+    const isMatch = im.encoded_path === activeSrc || (idx === 0 && !activeSrc);
+    item.className = `slide-thumb-item${isMatch ? ' active' : ''}`;
+    item.dataset.src = im.encoded_path;
+    const imgEl = document.createElement('img');
+    imgEl.src = im.encoded_path;
+    imgEl.alt = im.filename || '';
+    imgEl.loading = 'lazy';
+    item.appendChild(imgEl);
+    item.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (heroImg) {
+        heroImg.style.opacity = '0.4';
+        setTimeout(() => {
+          heroImg.src = im.encoded_path;
+          heroImg.style.opacity = '1';
+        }, 120);
+      }
+      strip.querySelectorAll('.slide-thumb-item').forEach(t => t.classList.remove('active'));
+      item.classList.add('active');
+    });
+    strip.appendChild(item);
   });
 }
 
@@ -1249,18 +1345,21 @@ async function handleAdminUploadSubmit() {
   if (!cat) return;
 
   if (btn) btn.disabled = true;
-  if (statusEl) statusEl.textContent = 'กำลังเพิ่มภาพ...';
+  if (statusEl) statusEl.textContent = `กำลังบีบอัดและอัปโหลด ${pendingAdminUploadFiles.length} ภาพ...`;
 
+  let uploadedCount = 0;
   let uploadedViaApi = false;
+  let lastError = '';
   const customUploads = readJsonStorage(ADMIN_CUSTOM_UPLOADS_KEY, []);
 
   for (const file of pendingAdminUploadFiles) {
-    const dataUrl = await readFileAsDataUrl(file);
+    const dataUrl = await compressImageForUpload(file);
+    if (!dataUrl) continue;
     let savedToServer = false;
     try {
       const res = await fetch('/api/upload-photo', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAdminAuthHeaders(),
         body: JSON.stringify({
           category_id: catId,
           filename: file.name,
@@ -1272,10 +1371,20 @@ async function handleAdminUploadSubmit() {
         if (resData.success) {
           savedToServer = true;
           uploadedViaApi = true;
+          uploadedCount++;
+          if (resData.image) {
+            const exists = cat.images.some(im => im.filename === resData.image.filename);
+            if (!exists) cat.images.push(resData.image);
+          }
+        } else {
+          lastError = resData.message || 'อัปโหลดไม่สำเร็จ';
         }
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        lastError = errData.message || `HTTP ${res.status}`;
       }
     } catch (err) {
-      // Static mode fallback below
+      lastError = err.message || 'เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ';
     }
 
     if (!savedToServer) {
@@ -1286,27 +1395,37 @@ async function handleAdminUploadSubmit() {
       };
       cat.images.push(staticImg);
       customUploads.push({ catId, image: staticImg });
+      uploadedCount++;
     }
   }
 
   if (uploadedViaApi) {
-    await syncCategoriesFromServerApi();
+    await syncCategoriesFromServerApi(false);
   } else {
     writeJsonStorage(ADMIN_CUSTOM_UPLOADS_KEY, customUploads);
   }
 
   if (btn) btn.disabled = false;
+  rebuildSlideThumbnailStrip(catId);
   buildGalleryModal();
   refreshAllCategoryCounters();
   if (document.getElementById('galleryModal')?.classList.contains('active')) {
     openGalleryModal(catId);
   }
   closeAdminUploadModal();
+
+  if (uploadedViaApi) {
+    showAdminToast(`✅ เพิ่มภาพสำเร็จ ${uploadedCount} ภาพแล้ว`, 'success');
+  } else if (uploadedCount > 0) {
+    showAdminToast(`⚠️ เพิ่มภาพชั่วคราว ${uploadedCount} ภาพ (${lastError || 'โหมดออฟไลน์'})`, 'error');
+  } else {
+    showAdminToast(`❌ เพิ่มภาพไม่สำเร็จ: ${lastError}`, 'error');
+  }
 }
 
-async function syncCategoriesFromServerApi() {
+async function syncCategoriesFromServerApi(applyUi = true) {
   try {
-    const res = await fetch('/api/catalog-data');
+    const res = await fetch('/api/catalog-data', { cache: 'no-store' });
     if (!res.ok) return;
     const data = await res.json();
     if (Array.isArray(data.categories)) {
@@ -1318,8 +1437,25 @@ async function syncCategoriesFromServerApi() {
         }
       });
     }
+    if (data.card_edits && typeof data.card_edits === 'object') {
+      Object.entries(data.card_edits).forEach(([catId, val]) => {
+        if (val && (val.title || val.desc)) {
+          applyCardTextEdit(catId, val.title, val.desc);
+        }
+      });
+    }
+    if (data.cover_heroes && typeof data.cover_heroes === 'object') {
+      Object.entries(data.cover_heroes).forEach(([catId, path]) => {
+        if (path) applyCoverHeroForCategory(catId, path);
+      });
+    }
+    if (applyUi) {
+      CATALOG_CATEGORIES.forEach(c => rebuildSlideThumbnailStrip(c.id));
+      buildGalleryModal();
+      refreshAllCategoryCounters();
+    }
   } catch (e) {
-    // Ignore when static
+    // Ignore when offline
   }
 }
 
@@ -1344,28 +1480,61 @@ function closeAdminEditModal() {
   activeEditCatId = '';
 }
 
-function handleAdminEditSubmit(e) {
+async function handleAdminEditSubmit(e) {
   e.preventDefault();
   if (!isAdminMode() || !activeEditCatId) return;
+  const catId = activeEditCatId;
   const title = document.getElementById('adminEditTitleInput').value.trim();
   const desc = document.getElementById('adminEditDescInput').value.trim();
+
+  let savedToServer = false;
+  try {
+    const res = await fetch('/api/save-slide', {
+      method: 'POST',
+      headers: getAdminAuthHeaders(),
+      body: JSON.stringify({
+        category_id: catId,
+        card_title: title,
+        card_desc: desc
+      })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success) savedToServer = true;
+    }
+  } catch (err) {
+    // fallback below
+  }
+
   const edits = readJsonStorage(ADMIN_CARD_EDITS_KEY, {});
-  edits[activeEditCatId] = { title, desc };
+  edits[catId] = { title, desc };
   writeJsonStorage(ADMIN_CARD_EDITS_KEY, edits);
-  applyCardTextEdit(activeEditCatId, title, desc);
+  applyCardTextEdit(catId, title, desc);
   closeAdminEditModal();
+  showAdminToast(savedToServer ? '✅ บันทึกการแก้ไขเรียบร้อยแล้ว' : '✅ บันทึกการแก้ไขในเครื่องแล้ว', 'success');
 }
 
-function handleAdminEditReset() {
+async function handleAdminEditReset() {
   if (!isAdminMode() || !activeEditCatId) return;
-  const def = DEFAULT_CARD_TEXTS[activeEditCatId];
+  const catId = activeEditCatId;
+  try {
+    await fetch('/api/save-slide', {
+      method: 'POST',
+      headers: getAdminAuthHeaders(),
+      body: JSON.stringify({ category_id: catId, reset_card_edit: true })
+    });
+  } catch (err) {
+    // ignore
+  }
+  const def = DEFAULT_CARD_TEXTS[catId];
   const edits = readJsonStorage(ADMIN_CARD_EDITS_KEY, {});
-  delete edits[activeEditCatId];
+  delete edits[catId];
   writeJsonStorage(ADMIN_CARD_EDITS_KEY, edits);
   if (def) {
-    applyCardTextEdit(activeEditCatId, def.title, def.desc);
+    applyCardTextEdit(catId, def.title, def.desc);
   }
   closeAdminEditModal();
+  showAdminToast('↺ คืนค่าข้อความเริ่มต้นเรียบร้อยแล้ว', 'success');
 }
 
 async function deleteCatalogPhoto(catId, filename, relPath, encodedPath) {
@@ -1376,7 +1545,7 @@ async function deleteCatalogPhoto(catId, filename, relPath, encodedPath) {
   try {
     const res = await fetch('/api/delete-photo', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAdminAuthHeaders(),
       body: JSON.stringify({ category_id: catId, filename })
     });
     if (res.ok) {
@@ -1384,7 +1553,7 @@ async function deleteCatalogPhoto(catId, filename, relPath, encodedPath) {
       if (data.success) deletedOnServer = true;
     }
   } catch (err) {
-    // Fallback for static Vercel mode
+    // Fallback for offline mode
   }
 
   const cat = CATALOG_CATEGORIES.find(c => c.id === catId);
@@ -1415,8 +1584,10 @@ async function deleteCatalogPhoto(catId, filename, relPath, encodedPath) {
     selectCoverHeroImage(catId, slideIdx, cat.images[0].encoded_path);
   }
 
+  rebuildSlideThumbnailStrip(catId);
   buildGalleryModal();
   refreshAllCategoryCounters();
+  showAdminToast(`🗑️ ลบภาพ "${filename}" เรียบร้อยแล้ว`, 'success');
 
   if (document.getElementById('galleryModal')?.classList.contains('active')) {
     openGalleryModal(currentGalleryCat || 'all');

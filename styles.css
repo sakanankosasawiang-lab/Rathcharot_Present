@@ -1811,6 +1811,44 @@ body.admin-mode .admin-logged-out-only {
   flex-wrap: wrap;
 }
 
+/* Admin Toast Feedback Notification */
+.admin-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  z-index: 9999;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: rgba(16, 15, 13, 0.96);
+  border: 1.5px solid var(--gold-primary);
+  color: #FFF;
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  font-weight: 500;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  max-width: 92vw;
+  text-align: center;
+}
+
+.admin-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.admin-toast.success {
+  border-color: #2A9D8F;
+  background: rgba(12, 28, 25, 0.96);
+}
+
+.admin-toast.error {
+  border-color: #E53935;
+  background: rgba(38, 12, 12, 0.96);
+}
+
 .lightbox-body {
   flex: 1;
   display: flex;
@@ -2899,12 +2937,21 @@ body.catalog-mode .slide {
   }
 
   /* Gallery Modal on Mobile (Full Screen, 2 Columns, No WebKit Crash) */
-  .gallery-modal-content {
+  .gallery-modal-content:not(.admin-dialog-card) {
     width: 100vw !important;
     height: 100vh !important;
     max-width: 100vw !important;
     border-radius: 0 !important;
     border: none !important;
+  }
+
+  .admin-dialog-card {
+    width: 94vw !important;
+    max-width: 460px !important;
+    height: auto !important;
+    max-height: 88dvh !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--gold-border) !important;
   }
 
   .gallery-modal-header {
