@@ -1349,6 +1349,7 @@ async function handleAdminUploadSubmit() {
 
   let uploadedCount = 0;
   let uploadedViaApi = false;
+  let serverStorageMode = '';
   let lastError = '';
   const customUploads = readJsonStorage(ADMIN_CUSTOM_UPLOADS_KEY, []);
 
@@ -1371,10 +1372,14 @@ async function handleAdminUploadSubmit() {
         if (resData.success) {
           savedToServer = true;
           uploadedViaApi = true;
+          serverStorageMode = resData.storage_mode || '';
           uploadedCount++;
           if (resData.image) {
             const exists = cat.images.some(im => im.filename === resData.image.filename);
             if (!exists) cat.images.push(resData.image);
+            if (serverStorageMode === 'ephemeral') {
+              customUploads.push({ catId, image: resData.image });
+            }
           }
         } else {
           lastError = resData.message || 'อัปโหลดไม่สำเร็จ';
@@ -1399,7 +1404,7 @@ async function handleAdminUploadSubmit() {
     }
   }
 
-  if (uploadedViaApi) {
+  if (uploadedViaApi && serverStorageMode && serverStorageMode !== 'ephemeral') {
     await syncCategoriesFromServerApi(false);
   } else {
     writeJsonStorage(ADMIN_CUSTOM_UPLOADS_KEY, customUploads);
@@ -1448,6 +1453,9 @@ async function syncCategoriesFromServerApi(applyUi = true) {
       Object.entries(data.cover_heroes).forEach(([catId, path]) => {
         if (path) applyCoverHeroForCategory(catId, path);
       });
+    }
+    if (data.storage_mode === 'ephemeral') {
+      applySavedAdminData();
     }
     if (applyUi) {
       CATALOG_CATEGORIES.forEach(c => rebuildSlideThumbnailStrip(c.id));
@@ -1542,6 +1550,7 @@ async function deleteCatalogPhoto(catId, filename, relPath, encodedPath) {
   if (!window.confirm(`ต้องการลบภาพ "${filename}" ออกจากหมวดนี้หรือไม่?`)) return;
 
   let deletedOnServer = false;
+  let serverStorageMode = '';
   try {
     const res = await fetch('/api/delete-photo', {
       method: 'POST',
@@ -1550,7 +1559,10 @@ async function deleteCatalogPhoto(catId, filename, relPath, encodedPath) {
     });
     if (res.ok) {
       const data = await res.json();
-      if (data.success) deletedOnServer = true;
+      if (data.success) {
+        deletedOnServer = true;
+        serverStorageMode = data.storage_mode || '';
+      }
     }
   } catch (err) {
     // Fallback for offline mode
@@ -1562,7 +1574,7 @@ async function deleteCatalogPhoto(catId, filename, relPath, encodedPath) {
     if (idx >= 0) cat.images.splice(idx, 1);
   }
 
-  if (!deletedOnServer) {
+  if (!deletedOnServer || serverStorageMode === 'ephemeral') {
     const customUploads = readJsonStorage(ADMIN_CUSTOM_UPLOADS_KEY, []);
     const filteredCustom = customUploads.filter(u => !(u.catId === catId && u.image?.filename === filename));
     if (filteredCustom.length !== customUploads.length) {
